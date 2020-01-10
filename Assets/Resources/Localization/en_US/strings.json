@@ -1,0 +1,22 @@
+{
+  "ERROS": {
+    "empty_field": "Field is empty.",
+    "error": "Error",
+    "invalid_text": "Not valid data format",
+    "non_matching_passwords": "The password and password confirmation field must match"
+  },
+  "UI": {
+    "alert": "Alert!",
+    "email_label": "Email",
+    "form_label": "Form",
+    "label": "Field",
+    "loading_label": "Loading",
+    "password_confirmation_label": "Password confirmation",
+    "password_label": "Password",
+    "password_placeholder": "Insert your password here",
+    "placeholder": "Type here",
+    "submit": "Submit",
+    "username_label": "Username",
+    "username_placeholder": "Insert username here"
+  }
+}

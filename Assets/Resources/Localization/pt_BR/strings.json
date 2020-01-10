@@ -1,0 +1,22 @@
+{
+  "ERROS": {
+    "empty_field": "O campo esta vazio.",
+    "error": "Erro",
+    "invalid_text": "Formato de dados inválido",
+    "non_matching_passwords": "O campo de senha e campo de confirmação de senha devem corresponder"
+  },
+  "UI": {
+    "alert": "Alerta!",
+    "email_label": "E-mail",
+    "form_label": "Formulário",
+    "label": "Campo",
+    "loading_label": "Carregando",
+    "password_confirmation_label": "Confirmação de senha",
+    "password_label": "Senha",
+    "password_placeholder": "Insira aqui sua senha",
+    "placeholder": "Digite aqui",
+    "submit": "Enviar",
+    "username_label": "Nome de usuário",
+    "username_placeholder": "Insira seu nome de usuário aqui"
+  }
+}
