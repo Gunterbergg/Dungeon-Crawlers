@@ -2,14 +2,14 @@
 
 namespace DungeonCrawlers.Data
 { 
-	public class DialogBoxOutputData
+	public class DialogBoxOutput
 	{
-		public DialogBoxOutputData(string message) {
+		public DialogBoxOutput(string message) {
 			Title = LanguagePack.GetString("alert");
 			Message = message;
 		}
 
-		public DialogBoxOutputData(string title, string message) {
+		public DialogBoxOutput(string title, string message) {
 			Title = title;
 			Message = message;
 		}

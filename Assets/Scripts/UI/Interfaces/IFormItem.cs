@@ -5,7 +5,6 @@ namespace DungeonCrawlers.UI
 	public interface IFormItem
 	{
 		string EntryName { get; }
-		string LabelName { get; }
 		object EntryData { get; }
 		bool Enabled { get; set; }
 

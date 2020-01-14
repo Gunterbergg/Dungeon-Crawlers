@@ -11,23 +11,33 @@ namespace DungeonCrawlers.UI
 		public Text titleTextBox;
 		public Text messageTextBox;
 
-		private List<DialogBoxOutputData> dialogQuery = new List<DialogBoxOutputData>();
+		private List<DialogBoxOutput> dialogQuery = new List<DialogBoxOutput>();
 		private bool isActive = false;
 
 		protected override void Awake() {
 			base.Awake();
-			closeButton.onClick.AddListener(() => UserInput?.Invoke(this, EventArgs.Empty));
-			UserInput += (sender, eventArgs) => NextAlert();
+			if (closeButton != null) { 
+				closeButton.onClick.AddListener(() => UserInput?.Invoke(this, EventArgs.Empty));
+				UserInput += (sender, eventArgs) => NextAlert();
+			}
 		}
 
 		public event EventHandler<EventArgs> Closed;
 		public event EventHandler<EventArgs> UserInput;
 
-		public void Output(DialogBoxOutputData output) {
+		public void Output(DialogBoxOutput output) {
 			dialogQuery.Add(output);
 			if (!isActive) { 
 				NextAlert();
 			}
+		}
+
+		public void OutputDefault() {
+			Output(
+				new DialogBoxOutput(
+					LanguagePack.GetString("alert"),
+					LanguagePack.GetString("error")
+				));
 		}
 
 		public void Clear() {
@@ -44,7 +54,7 @@ namespace DungeonCrawlers.UI
 
 		public void NextAlert() {
 			if (dialogQuery.Count > 0) {
-				DialogBoxOutputData nextDialog = dialogQuery[0];
+				DialogBoxOutput nextDialog = dialogQuery[0];
 				titleTextBox.text = nextDialog.Title;
 				messageTextBox.text = nextDialog.Message;
 				dialogQuery.RemoveAt(0);

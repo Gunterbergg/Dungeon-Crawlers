@@ -1,8 +1,8 @@
 ﻿namespace DungeonCrawlers.Data.Output
 {
-	public class OutputData<Type>
+	public class Output<Type>
 	{
-		public OutputData(Type data) {
+		public Output(Type data) {
 			Data = data;
 		}
 

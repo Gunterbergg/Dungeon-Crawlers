@@ -36,7 +36,7 @@ namespace DungeonCrawlers.UI
 			Closed?.Invoke(this, EventArgs.Empty);
 		}
 
-		public void Output(DialogBoxOutputData output) {
+		public void Output(DialogBoxOutput output) {
 			UserView newDialogBox = Instantiate(dialogPrefab, dialogsContainer) as UserView;
 			newDialogBox.GetInterface<IDialogBox<EventArgs>>()?.Output(output);
 			AddDialog(newDialogBox);

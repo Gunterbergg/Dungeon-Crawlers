@@ -9,14 +9,11 @@ namespace DungeonCrawlers.UI
 	public class TextInput : UserView, IFormItem, IUserInput<EventArgs<string>>
 	{
 		public string entryName;
-		public Text label;
-		public string labelString = "label";
 		public InputField input;
-		public string placeholderString = "Field";
+		public string placeholderDefault = "Field";
 		public string regularExpression = string.Empty;
 
 		public string EntryName { get => entryName; private set => entryName = value; }
-		public string LabelName { get => label.text; }
 		public object EntryData { get; private set; }
 		public bool Enabled { get => input.interactable; set => input.interactable = value; }
 
@@ -28,8 +25,7 @@ namespace DungeonCrawlers.UI
 		}
 
 		public void UpdateLabels() {
-			label.text = labelString.StartsWith("@") ? LanguagePack.GetString(labelString.Substring(1)) : labelString;
-			input.placeholder.GetComponent<Text>().text = placeholderString.StartsWith("@") ? LanguagePack.GetString(placeholderString.Substring(1)) : placeholderString;
+			input.placeholder.GetComponent<Text>().text = placeholderDefault.StartsWith("@") ? LanguagePack.GetString(placeholderDefault.Substring(1)) : placeholderDefault;
 		}
 
 		public bool IsEmpty() {
