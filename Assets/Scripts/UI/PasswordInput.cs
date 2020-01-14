@@ -12,7 +12,6 @@ namespace DungeonCrawlers.UI
 		public TextInput confirmationInput;
 
 		public string EntryName { get => entryName; private set => entryName = value; }
-		public string LabelName { get => input.LabelName; }
 		public object EntryData { get => input.EntryData; }
 		public bool Enabled { 
 			get => confirmationInput.Enabled && input.Enabled; 

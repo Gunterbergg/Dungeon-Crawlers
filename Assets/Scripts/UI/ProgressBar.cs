@@ -1,5 +1,4 @@
-﻿using DungeonCrawlers.Data;
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,6 +38,10 @@ namespace DungeonCrawlers.UI
 				StopAllCoroutines();
 				StartCoroutine("LerpOutput");
 			}
+		}
+
+		public void OutputDefault() {
+			Output(0f);
 		}
 
 		protected IEnumerator LerpOutput() {

@@ -43,6 +43,14 @@ namespace DungeonCrawlers.UI
 			Activate();
 		}
 
+		public void OutputDefault() {
+			Output(
+				new DialogBoxOutput(
+					LanguagePack.GetString("alert"),
+					LanguagePack.GetString("error")
+				));
+		}
+
 		public void AddDialog(UserView newDialog) {
 			IDialogBox<EventArgs> castDialog = newDialog.GetInterface<IDialogBox<EventArgs>>();
 			if (castDialog == null)
@@ -64,5 +72,6 @@ namespace DungeonCrawlers.UI
 			if (dialogs.Count == 0)
 				Close();
 		}
+
 	}
 }

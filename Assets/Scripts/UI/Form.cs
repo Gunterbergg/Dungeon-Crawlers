@@ -75,7 +75,7 @@ namespace DungeonCrawlers.UI
 			foreach (IFormItem formItem in GetFormItems()) {
 				if (!formItem.IsValid())
 					foreach (string message in formItem.GetStatusMessages())
-						statusMessages.Add(formItem.LabelName + ": " + message);
+						statusMessages.Add(formItem.EntryName + ": " + message);
 			}
 			return statusMessages;
 		}
