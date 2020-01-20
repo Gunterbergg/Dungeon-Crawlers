@@ -6,12 +6,9 @@ using UnityEngine.UI;
 
 namespace DungeonCrawlers.UI
 {
-	public class Form : UserView, IForm, IUserInput<FormEventArgs>
+	public class Form : UserView, IForm
 	{
-		public string titleString;
-		public Text titleTextBox;
 		public GameObject container;
-		public string submitString = "@form_label";
 		public Button submitButton;
 
 		public bool Enabled { 
@@ -19,7 +16,7 @@ namespace DungeonCrawlers.UI
 			set 
 			{
 				enabled = value;
-				foreach (IFormItem formItem in GetFormItems()) {
+				foreach (IDataEntry formItem in GetFormItems()) {
 					formItem.Enabled = enabled;
 				}
 			}
@@ -29,22 +26,16 @@ namespace DungeonCrawlers.UI
 
 		protected override void Awake() {
 			base.Awake();
-			submitButton.onClick.AddListener(() => Submit());
+			submitButton?.onClick.AddListener(() => Submit());
 		}
 
 		public virtual void Submit() {
 			UserInput?.Invoke(this, new FormEventArgs(GetEntries(), GetStatusMessages(), IsValid()));
-		}
-
-		public void UpdateLabels() {
-			if (!string.IsNullOrEmpty(titleString) && titleTextBox != null)
-				titleTextBox.text = titleString.StartsWith("@") ? LanguagePack.GetString(titleString.Substring(1)) : titleString ;
-			if (!string.IsNullOrEmpty(submitString) && submitButton != null)
-				submitButton.GetComponentInChildren<Text>().text = submitString.StartsWith("@") ? LanguagePack.GetString(submitString.Substring(1)) : submitString;
+			new FormEventArgs(GetEntries(), GetStatusMessages(), IsValid());
 		}
 
 		public bool IsValid() {
-			foreach (IFormItem formItem in GetFormItems()) {
+			foreach (IDataEntry formItem in GetFormItems()) {
 				if (!formItem.IsValid())
 					return false;
 			}
@@ -61,18 +52,22 @@ namespace DungeonCrawlers.UI
 			return true;
 		}
 
-		public IEnumerable<IFormItem> GetFormItems() {
+		public List<IDataEntry> GetFormItems() {
+			List<IDataEntry> entryList = new List<IDataEntry>();
 			foreach (UserView view in container.GetComponentsInChildren<UserView>()) {
-				IFormItem formItem = view.GetInterface<IFormItem>();
-				if (formItem == null || view.transform.parent != container.transform)
-					continue;
-				yield return formItem;
+				if (!(view is IDataEntry)) continue; 
+				if (view.transform.parent != container.transform) continue;
+
+				IDataEntry formItem = view.GetInterface<IDataEntry>();
+				if (!entryList.Exists((entry) => formItem.EntryName == entry.EntryName))
+					entryList.Add(formItem);				
 			}
+			return entryList;
 		}
 
 		public List<string> GetStatusMessages() {
 			List<string> statusMessages = new List<string>();
-			foreach (IFormItem formItem in GetFormItems()) {
+			foreach (IDataEntry formItem in GetFormItems()) {
 				if (!formItem.IsValid())
 					foreach (string message in formItem.GetStatusMessages())
 						statusMessages.Add(formItem.EntryName + ": " + message);
@@ -80,16 +75,13 @@ namespace DungeonCrawlers.UI
 			return statusMessages;
 		}
 
-		protected Dictionary<string, object> GetEntries() {
+		public Dictionary<string, object> GetEntries() {
 			Dictionary<string, object> entries = new Dictionary<string, object>();
-			foreach (IFormItem formItem in GetFormItems()) {
+			foreach (IDataEntry formItem in GetFormItems()) {
 				entries.Add(formItem.EntryName,formItem.EntryData);
 			}
 			return entries;
 		}
 
-		private void OnValidate() {
-			UpdateLabels();
-		}
 	}
 }

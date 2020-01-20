@@ -64,7 +64,6 @@ namespace DungeonCrawlers.UI
 				return;
 			dialog.Destroy();
 			dialogs.Remove(dialog);
-			Logger.Register(dialog.name);
 		}
 
 		protected void OnDialogClose(UserView closedDialog) {

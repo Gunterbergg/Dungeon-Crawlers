@@ -2,7 +2,7 @@
 
 namespace DungeonCrawlers.UI 
 {
-	public interface IFormItem
+	public interface IDataEntry
 	{
 		string EntryName { get; }
 		object EntryData { get; }

@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 namespace DungeonCrawlers.UI
 {
-	public class TextInput : UserView, IFormItem, IUserInput<EventArgs<string>>
+	public class TextInput : UserView, IDataEntry, IUserInput<EventArgs<string>>
 	{
 		public string entryName;
 		public InputField input;
-		public string placeholderDefault = "Field";
+		public string defaultText = string.Empty;
 		public string regularExpression = string.Empty;
 
 		public string EntryName { get => entryName; private set => entryName = value; }
@@ -21,11 +21,15 @@ namespace DungeonCrawlers.UI
 
 		protected override void Awake() {
 			base.Awake();
-			input?.onEndEdit.AddListener((text) => UserInput?.Invoke(this, new EventArgs<string>(text)));
+			input?.onEndEdit.AddListener(
+				(text) => {
+					EntryData = (object)text;
+					UserInput?.Invoke(this, new EventArgs<string>(text)); 
+				});
 		}
 
 		public void UpdateLabels() {
-			input.placeholder.GetComponent<Text>().text = placeholderDefault.StartsWith("@") ? LanguagePack.GetString(placeholderDefault.Substring(1)) : placeholderDefault;
+			input.text = defaultText.StartsWith("@") ? LanguagePack.GetString(defaultText.Substring(1)) : defaultText;
 		}
 
 		public bool IsEmpty() {
