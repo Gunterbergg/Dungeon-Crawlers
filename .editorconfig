@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0184: 'A expressão 'is' determinada nunca é do tipo fornecido
+dotnet_diagnostic.CS0184.severity = none
