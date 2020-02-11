@@ -8,7 +8,7 @@ namespace DungeonCrawlers.UI
 	public class ProgressBar : UserView, IProgressBar
 	{
 		public Image fillImage;
-		public float lerptTime = 0.3f;
+		public float lerptTime = 1.4f;
 
 		private float progress = 0;
 
