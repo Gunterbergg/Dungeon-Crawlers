@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Basic IO.unity
+    guid: 1de78d725d7ee7d49844d9a048dd6ae2
+  - enabled: 1
+    path: Assets/Scenes/DialogBoxes.unity
+    guid: 89f218e599f76ad44b6ff29a5f44d0d3
+  - enabled: 1
+    path: Assets/Scenes/Progress Bar.unity
+    guid: 0287a3b507cdd5d4ab5b89d200d83e7b
   m_configObjects: {}
