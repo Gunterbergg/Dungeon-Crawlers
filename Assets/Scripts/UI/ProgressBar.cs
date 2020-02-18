@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using DungeonCrawlers.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,25 +8,24 @@ namespace DungeonCrawlers.UI
 {
 	public class ProgressBar : UserView, IProgressBar
 	{
-		public Image fillImage;
-		public float lerptTime = 1.4f;
+		public Image progressImage;
+		public float lerptTime = 0.5f;
 
 		private float progress = 0;
+		private Coroutine lerpCoroutine;
 
 		public bool Enabled { get; set; } = true;
 		public float Progress {
 			get => progress;
-			set {
-				progress = value;
-				Output(progress);
-			}
+			set => Output(value);
 		}
 
 		public event EventHandler OnCompleted;
+		public event EventHandler<EventArgs<float>> OnValueChanged;
 
 		protected override void Awake() {
 			base.Awake();
-			fillImage.type = Image.Type.Filled;
+			progressImage.type = Image.Type.Filled;
 		}
 
 		public void Clear() {
@@ -33,28 +33,29 @@ namespace DungeonCrawlers.UI
 		}
 
 		public void Output(float output) {
-			if (Enabled) { 
-				progress = Mathf.Clamp(output, 0f, 1f);
-				StopAllCoroutines();
-				StartCoroutine("LerpOutput");
-			}
+			if (!Enabled) return; 
+			progress = Mathf.Clamp01(output);
+			if (lerpCoroutine != null) StopCoroutine(lerpCoroutine);
+			lerpCoroutine = StartCoroutine(LerpOutput());
 		}
 
 		public void OutputDefault() {
-			Output(0f);
+			Clear();
 		}
 
 		protected IEnumerator LerpOutput() {
 			float elapsedTime = 0f;
-			float intialValue = fillImage.fillAmount;
+			float intialValue = progressImage.fillAmount;
+			float lerpTime = this.lerptTime;
 			while (elapsedTime < lerptTime) {
-				fillImage.fillAmount = Mathf.Lerp(intialValue, progress, elapsedTime/lerptTime);
-				elapsedTime += Time.deltaTime;
+				if (Enabled) {
+					progressImage.fillAmount = Mathf.Lerp(intialValue, progress, elapsedTime / lerptTime);
+					elapsedTime += Time.deltaTime;
+				}
 				yield return null;
 			}
 
-			if (progress >= 1)
-				OnCompleted?.Invoke(this, EventArgs.Empty);
+			OnValueChanged?.Invoke(this, new EventArgs<float>(progress));
 		}
 	}
 }

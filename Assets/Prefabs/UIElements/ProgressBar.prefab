@@ -251,5 +251,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a95d7e8f3fc7d341b0e39c76c43142a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillImage: {fileID: 3148421917936547672}
+  progressImage: {fileID: 3148421917936547672}
   lerptTime: 0.3
