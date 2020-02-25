@@ -1,24 +1,21 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using DungeonCrawlers.UI;
-using System.Collections;
-
 
 public class ProgressBarTestingSystem : MonoBehaviour
 {
 	public ProgressBar progressBar;
 	public Slider lerpController;
+	public Toggle toggleController;
 
 	public void Start() {
-		StartCoroutine(Reload());
-		progressBar.OnCompleted += (sernder, args) => StartCoroutine(Reload());
-		lerpController.onValueChanged.AddListener((lerp) => progressBar.lerptTime = lerp);
-	}
+		progressBar.OnValueChanged += (sender, args) => {
+			if (args.Data == 0) ((IProgressBar)sender).Output(1f);
+			if (args.Data == 1) ((IProgressBar)sender).Output(0f);
+		};
 
-	private IEnumerator Reload() {
+		lerpController.onValueChanged.AddListener((newValue) => progressBar.lerptTime = newValue);
+		toggleController.onValueChanged.AddListener((newValue) => progressBar.Enabled = newValue);
 		progressBar.Clear();
-		yield return new WaitForSeconds(progressBar.lerptTime);
-		progressBar.Output(1f);
 	}
-
 }

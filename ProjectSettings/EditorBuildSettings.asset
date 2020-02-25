@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Progress Bar.unity
     guid: 0287a3b507cdd5d4ab5b89d200d83e7b
+  - enabled: 1
+    path: Assets/Scenes/Direction IO.unity
+    guid: 22145530f70290040be6dff7de170e32
   m_configObjects: {}
