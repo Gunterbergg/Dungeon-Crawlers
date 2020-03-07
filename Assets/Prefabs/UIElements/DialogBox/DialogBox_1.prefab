@@ -322,7 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   closeButton: {fileID: 7113454587102210311}
   titleTextBox: {fileID: 7113454587646738297}
-  messageTextBox: {fileID: 0}
+  messageTextBox: {fileID: 8353546602166253380}
 --- !u!1 &7113454587102210308
 GameObject:
   m_ObjectHideFlags: 0
