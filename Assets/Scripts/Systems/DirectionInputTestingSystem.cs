@@ -1,7 +1,7 @@
 ﻿using DungeonCrawlers.UI;
 using UnityEngine;
 
-namespace DungeonCrawlers
+namespace DungeonCrawlers.Systems
 {
 	public class DirectionInputTestingSystem : MonoBehaviour 
 	{
