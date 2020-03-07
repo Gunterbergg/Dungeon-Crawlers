@@ -21,6 +21,7 @@ namespace DungeonCrawlers.UI
 
 		protected override void Awake() {
 			base.Awake();
+			EntryData = input?.text;
 			input?.onEndEdit.AddListener(
 				(text) => {
 					EntryData = (object)text;

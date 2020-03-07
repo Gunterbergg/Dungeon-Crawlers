@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using DungeonCrawlers.Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,12 +9,13 @@ namespace DungeonCrawlers.UI
 	public class TouchDirectionInput : UserView, IDirectionInput, IPointerDownHandler, IPointerUpHandler, IDragHandler
 	{
 		public bool useInvertedInput = true;
-
 		private Vector2 currentDir = Vector2.zero;
-		private bool isHandlingPointer = false;
 		private Vector2 pointerDownPos;
 
 		public event EventHandler<EventArgs<Vector2>> UserInput;
+		public event EventHandler<EventArgs<Vector2>> InputRelease;
+
+		public bool IsHandlingInput { get; private set; } = false;
 
 		public Vector2 CurrentDir { 
 			get { return useInvertedInput ? currentDir * -1 : currentDir; }
@@ -34,19 +36,26 @@ namespace DungeonCrawlers.UI
 
 		public void OnDrag(PointerEventData eventData) {
 			CurrentDir = pointerDownPos - eventData.position;
-			UserInput?.Invoke(this, new EventArgs<Vector2>(CurrentDir));
 		}
 
 		public void OnPointerDown(PointerEventData eventData) {
-			if (isHandlingPointer) return;
+			if (IsHandlingInput) return;
 			pointerDownPos = eventData.position;
-			isHandlingPointer = true;
+			IsHandlingInput = true;
+			StartCoroutine(OnDirectionInput());
 		}
 
 		public void OnPointerUp(PointerEventData eventData) {
+			InputRelease?.Invoke(this, new EventArgs<Vector2>(CurrentDir));
 			CurrentDir = Vector2.zero;
-			UserInput?.Invoke(this, new EventArgs<Vector2>(CurrentDir));
-			isHandlingPointer = false;
+			IsHandlingInput = false;
+		}
+
+		private IEnumerator OnDirectionInput() {
+			while (IsHandlingInput) {
+				UserInput?.Invoke(this, new EventArgs<Vector2>(GetInput()));
+				yield return null;
+			}
 		}
 	}
 }

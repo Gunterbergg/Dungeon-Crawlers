@@ -20,7 +20,6 @@ namespace DungeonCrawlers.UI
 			set => Output(value);
 		}
 
-		public event EventHandler OnCompleted;
 		public event EventHandler<EventArgs<float>> OnValueChanged;
 
 		protected override void Awake() {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using DungeonCrawlers.Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,34 +8,42 @@ namespace DungeonCrawlers.UI
 { 
     public class AnalogDirectionInput : UserView, IDirectionInput, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
-        public float handleAreaRadius;
         public bool clampInput = true;
         public RectTransform handle;
 
+        private float handleAreaRadius;
         private Vector3 defaultPosition;
+        private RectTransform handleParent;
 
         public event EventHandler<EventArgs<Vector2>> UserInput;
+        public event EventHandler<EventArgs<Vector2>> InputRelease;
+
+        public bool IsHandlingInput { get; private set; } = false;
 
         protected override void Awake(){
             base.Awake();
+            handleParent = (RectTransform)handle.transform.parent;
             handleAreaRadius = Mathf.Min(
-                ((RectTransform)transform).rect.width /2f,
-                ((RectTransform)transform).rect.height /2f);
+                handleParent.rect.width /2f,
+                handleParent.rect.height /2f);
     }
 
         public void OnPointerDown(PointerEventData pointerData) {
+            if (IsHandlingInput) return;
             defaultPosition = handle.localPosition;
+            IsHandlingInput = true;
+            StartCoroutine(OnDirectionInput());
             OnDrag(pointerData);
         }
 
         public void OnDrag(PointerEventData pointerData) {
             handle.position = clampInput ? GetHandlePosClamped(pointerData.position) : pointerData.position;
-            UserInput?.Invoke(this, new EventArgs<Vector2>(GetInput()));
         }
 
         public void OnPointerUp(PointerEventData pointerData) {
+            InputRelease?.Invoke(this, new EventArgs<Vector2>(GetInput()));
             handle.localPosition = defaultPosition;
-            UserInput?.Invoke(this, new EventArgs<Vector2>(GetInput()));
+            IsHandlingInput = false;
         }
 
         public Vector2 GetInput() {
@@ -43,17 +52,24 @@ namespace DungeonCrawlers.UI
 
         public Vector2 GetInputUnclamped() {
             if (handle == null) return Vector2.zero;
-            return (handle.position - ((RectTransform)transform).position) / handleAreaRadius;
+            return (handle.position - handleParent.position) / handleAreaRadius;
         }
 
         public Vector2 GetInputRaw() {
             if (handle == null) return Vector2.zero;
-            return (handle.position - ((RectTransform)transform).position);
+            return (handle.position - handleParent.position);
         }
 
         private Vector2 GetHandlePosClamped(Vector2 pointerPos) {
-            Vector2 analogCenter = ((RectTransform)transform).position;
+            Vector2 analogCenter = handleParent.position;
             return analogCenter + Vector2.ClampMagnitude(pointerPos - analogCenter, handleAreaRadius);
+        }
+        
+        private IEnumerator OnDirectionInput() {
+            while (IsHandlingInput) {
+                UserInput?.Invoke(this, new EventArgs<Vector2>(GetInput()));
+                yield return null;
+            }
         }
     }
 }
