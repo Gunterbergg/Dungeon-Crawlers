@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DungeonCrawlers.Data
+﻿namespace DungeonCrawlers.Data
 { 
 	public class DialogBoxOutput
 	{
