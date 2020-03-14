@@ -1,0 +1,450 @@
+fileFormatVersion: 2
+guid: 6c1439548811e0e48b73dda2b314b8ee
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: dungeon_tileset_0
+    21300002: dungeon_tileset_1
+    21300004: dungeon_tileset_2
+    21300006: dungeon_tileset_3
+    21300008: dungeon_tileset_4
+    21300010: dungeon_tileset_5
+    21300012: dungeon_tileset_6
+    21300014: dungeon_tileset_7
+    21300016: dungeon_tileset_8
+    21300018: dungeon_tileset_9
+    21300020: dungeon_tileset_10
+    21300022: upper_left_floor_1
+    21300024: upper_floor_1
+    21300026: upper_floor_2
+    21300028: upper_right_floor_1
+    21300030: dungeon_tileset_15
+    21300032: dungeon_tileset_16
+    21300034: dungeon_tileset_17
+    21300036: dungeon_tileset_18
+    21300038: dungeon_tileset_19
+    21300040: dungeon_tileset_20
+    21300042: left_floor_1
+    21300044: floor_1
+    21300046: floor_2
+    21300048: right_floor_1
+    21300050: dungeon_tileset_25
+    21300052: dungeon_tileset_26
+    21300054: dungeon_tileset_27
+    21300056: dungeon_tileset_28
+    21300058: dungeon_tileset_29
+    21300060: dungeon_tileset_30
+    21300062: lower_left_floor_1
+    21300064: lower_floor_1
+    21300066: lower_floor_2
+    21300068: lower_right_floor_1
+    21300070: dungeon_tileset_35
+    21300072: dungeon_tileset_36
+    21300074: dungeon_tileset_37
+    21300076: dungeon_tileset_38
+    21300078: dungeon_tileset_39
+    21300080: dungeon_tileset_40
+    21300082: dungeon_tileset_41
+    21300084: dungeon_tileset_42
+    21300086: dungeon_tileset_43
+    21300088: dungeon_tileset_44
+    21300090: dungeon_tileset_45
+    21300092: dungeon_tileset_46
+    21300094: dungeon_tileset_47
+    21300096: dungeon_tileset_48
+    21300098: dungeon_tileset_49
+    21300100: dungeon_tileset_50
+    21300102: dungeon_tileset_51
+    21300104: dungeon_tileset_52
+    21300106: dungeon_tileset_53
+    21300108: dungeon_tileset_54
+    21300110: dungeon_tileset_55
+    21300112: dungeon_tileset_56
+    21300114: dungeon_tileset_57
+    21300116: dungeon_tileset_58
+    21300118: dungeon_tileset_59
+    21300120: dungeon_tileset_60
+    21300122: dungeon_tileset_61
+    21300124: dungeon_tileset_62
+    21300126: dungeon_tileset_63
+    21300128: dungeon_tileset_64
+    21300130: dungeon_tileset_65
+    21300132: dungeon_tileset_66
+    21300134: dungeon_tileset_67
+    21300136: dungeon_tileset_68
+    21300138: dungeon_tileset_69
+    21300140: dungeon_tileset_70
+    21300142: dungeon_tileset_71
+    21300144: dungeon_tileset_72
+    21300146: dungeon_tileset_73
+    21300148: dungeon_tileset_74
+    21300150: dungeon_tileset_75
+    21300152: dungeon_tileset_76
+    21300154: dungeon_tileset_77
+    21300156: dungeon_tileset_78
+    21300158: dungeon_tileset_79
+    21300160: dungeon_tileset_80
+    21300162: dungeon_tileset_81
+    21300164: dungeon_tileset_82
+    21300166: dungeon_tileset_83
+    21300168: dungeon_tileset_84
+    21300170: dungeon_tileset_85
+    21300172: dungeon_tileset_86
+    21300174: dungeon_tileset_87
+    21300176: dungeon_tileset_88
+    21300178: dungeon_tileset_89
+    21300180: dungeon_tileset_90
+    21300182: dungeon_tileset_91
+    21300184: dungeon_tileset_92
+    21300186: dungeon_tileset_93
+    21300188: dungeon_tileset_94
+    21300190: dungeon_tileset_95
+    21300192: dungeon_tileset_96
+    21300194: dungeon_tileset_97
+    21300196: dungeon_tileset_98
+    21300198: dungeon_tileset_99
+  externalObjects: {}
+  serializedVersion: 9
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: upper_left_floor_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b34304c41cbd20488dc72a25cdc8a70
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: upper_floor_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f792857c5f96ad040bf6a9a210af69ae
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: upper_floor_2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57175b972372c4047bff7c4a42dc8b99
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: upper_right_floor_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a039b82a5e66c6041a400c2af6e483fd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: left_floor_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1841e5c399d348c47a8a7f64c46261ba
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97f76b21fc84b464da510eb641907168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62f1f57332d880f478e30b1d21668c2e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: right_floor_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b36380f01cfb96644804be9331017755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lower_left_floor_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c76bfac81c40034e9865f902519cd0d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lower_floor_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1fbb83033df0af4d8d2f894054a93fd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lower_floor_2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 664e6bf43d63c004fb05550568e651fd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lower_right_floor_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40988529e0dd3a3489aee00d7617b24f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: a005dca53890c9b46b0d1dc49b59ffd9
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
