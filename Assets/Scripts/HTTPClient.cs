@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DungeonCrawlers.Data;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -7,16 +8,28 @@ namespace DungeonCrawlers
 {
 	public static class HTTPClient  
 	{
-		public static AsyncOperation GetRequest(string requestURL) {
-			UnityWebRequest serverRequest = UnityWebRequest.Get(requestURL);
-			UnityWebRequestAsyncOperation requestOperation = serverRequest.SendWebRequest();
-			return requestOperation;
-		}
+		public static AsyncOperation GetRequest(
+			string requestURL,
+			Dictionary<string, string> requestHeaders = null,
+			Dictionary<string, string> requestParams = null,
+			EventHandler<EventArgs<UnityWebRequest>> requestHandler = null)
+		{
+			string url = requestURL + "?";
+			if (requestParams != null)
+				foreach (KeyValuePair<string, string> keyValue in requestParams)
+					url += keyValue.Key + "=" + keyValue.Value + "&";
+			url.Remove(url.Length - 1);
 
-		public static AsyncOperation GetRequest(string requestURL, EventHandler<HTTPResponseEventArgs> requestHandler) {
-			AsyncOperation requestOperation = GetRequest(requestURL);
-			requestOperation.completed +=
-				(operation) => requestHandler(operation, new HTTPResponseEventArgs(((UnityWebRequestAsyncOperation)operation).webRequest.downloadHandler.text));
+			UnityWebRequest serverRequest = UnityWebRequest.Get(url);
+			if (requestHeaders != null)
+				foreach (KeyValuePair<string, string> keyValue in requestHeaders)
+					serverRequest.SetRequestHeader(keyValue.Key, keyValue.Value);
+
+			UnityWebRequestAsyncOperation requestOperation = serverRequest.SendWebRequest();
+			if (requestHandler != null)
+				requestOperation.completed +=
+					(operation) => requestHandler(operation, new EventArgs<UnityWebRequest>(((UnityWebRequestAsyncOperation)operation).webRequest));
+
 			return requestOperation;
 		}
 	}
