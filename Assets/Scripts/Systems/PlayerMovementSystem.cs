@@ -11,8 +11,7 @@ namespace DungeonCrawlers.Systems
 		private void Awake() => directionInput.GetInterface<IDirectionInput>().UserInput += (sneder, args) => Move(args.Data);
 
 		private void Move(Vector2 dir) {
-			if (dir.x > 0) GetComponent<SpriteRenderer>().flipX = false;
-			else
+			if (dir.x > 0) GetComponent<SpriteRenderer>().flipX = false; else
 			if (dir.x < 0) GetComponent<SpriteRenderer>().flipX = true;
 			GetComponent<Rigidbody2D>().MovePosition((Vector2)transform.position + (dir * Time.deltaTime * speed));
 		}
