@@ -12,20 +12,27 @@ namespace DungeonCrawlers.Systems
 		public float cameraMinSize = 2f;
 		public float cameraMaxSize = 30f;
 		public float cameraSpeedModifier = 1.05f;
-		public RectInt limitBounds;
+		public Rect limitBounds;
+
+		public RoomCollectionInfo userRooms;
 		public bool automaticLimitBounds = true;
+		public Vector2 automaticBoundsPadding = Vector2.zero;
 
 		protected void Awake() {
-			if (automaticLimitBounds) RedefineBounds();
+			if (automaticLimitBounds)
+				userRooms.OnValueChanged += (sender, args) => {
+					RedefineBounds();
+					CenterCamera();
+				};
 
-			ClampToLimitBox();
 			ZoomCamera(cameraMaxSize);
-			touchInput.GetInterface<IUserInput<EventArgs<List<Touch>>>>().UserInput += 
+			touchInput.GetInterface<IUserInput<EventArgs<List<Touch>>>>().UserInput +=
 				(sender, args) => CameraController(args.Data);
 		}
 
 		private void CameraController(List<Touch> touches) {
-			if (touches.Count == 1) CameraMovementController(touches[0]); else
+			if (touches.Count == 1) CameraMovementController(touches[0]);
+			else
 			if (touches.Count == 2) CameraZoomController(touches[0], touches[1]);
 		}
 
@@ -38,7 +45,9 @@ namespace DungeonCrawlers.Systems
 		}
 
 		private void CameraMovementController(Touch touch) {
-			Vector2 cameraMoveVector = touch.deltaPosition * Time.deltaTime * cameraSpeedModifier * -1;
+			//TODO implement camera movement based on the percentual the delta vector traveled on screen
+			Vector2 cameraMoveVector =
+				touch.deltaPosition * Time.deltaTime * cameraSpeedModifier * -1 * (Camera.main.orthographicSize / 5f);
 			Camera.main.transform.position += (Vector3)cameraMoveVector;
 			ClampToLimitBox();
 		}
@@ -54,6 +63,8 @@ namespace DungeonCrawlers.Systems
 		}
 
 		private void ZoomCamera(float size) {
+			Camera.main.orthographicSize = Camera.main.orthographicSize + size;
+			ClampToLimitBox();
 			Camera.main.orthographicSize =
 				Mathf.Clamp(
 					Camera.main.orthographicSize + size, cameraMinSize,
@@ -61,7 +72,6 @@ namespace DungeonCrawlers.Systems
 						cameraMaxSize,
 						limitBounds.height / 2f,
 						(limitBounds.width / 2f) / Camera.main.aspect));
-			ClampToLimitBox();
 		}
 
 		private void ClampToLimitBox() {
@@ -73,10 +83,36 @@ namespace DungeonCrawlers.Systems
 		}
 
 		private void RedefineBounds() {
-			limitBounds.x = 0;
-			limitBounds.y = -(int)RoomsInfo.roomSize.y;
-			limitBounds.width = (RoomsInfo.maxRoomCount * (int)RoomsInfo.roomSize.x) + ((RoomsInfo.maxRoomCount-1) * RoomLoaderSystem.roomSpacing);
-			limitBounds.height = (int)RoomsInfo.roomSize.y * 2;
+			if (userRooms.Count <= 0) return;
+			float xMin, yMin, xMax, yMax, comparative;
+			xMin = xMax = userRooms[0].roomObject.transform.position.x;
+			yMin = yMax = userRooms[0].roomObject.transform.position.y;
+			foreach (RoomInfo room in userRooms.activeCollection.Values) {
+				if (room.roomObject == null) continue;
+
+				comparative = room.roomObject.transform.position.x - room.roomSize.x / 2;
+				if (comparative < xMin) xMin = comparative;
+				
+				comparative = room.roomObject.transform.position.y - room.roomSize.y / 2;
+				if (comparative < yMin) yMin = comparative;
+				
+				comparative = room.roomObject.transform.position.x + room.roomSize.x / 2;
+				if (comparative > xMax) xMax = comparative;
+				
+				comparative = room.roomObject.transform.position.y + room.roomSize.y / 2;
+				if (comparative > yMax) yMax = comparative;
+			}
+
+			limitBounds = new Rect(
+				xMin - automaticBoundsPadding.x,
+				yMin - automaticBoundsPadding.y,
+				xMax - xMin + automaticBoundsPadding.x * 2,
+				yMax - yMin + automaticBoundsPadding.y * 2);
+		}
+
+		public void CenterCamera() {
+			Camera.main.transform.position = new Vector3(limitBounds.center.x, limitBounds.center.y, Camera.main.transform.position.z);
+			ZoomCamera(0);
 		}
 	}
 }
