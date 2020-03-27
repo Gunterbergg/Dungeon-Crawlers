@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DungeonCrawlers.Data.Struct;
+using System;
 using UnityEngine;
 
 namespace DungeonCrawlers.Data
@@ -31,7 +32,7 @@ namespace DungeonCrawlers.Data
 				bool hasChanged = false;
 				if (value != Position) hasChanged = true;
 				RoomObject.transform.position = value;
-				rect.position = Position;
+				rect.center = Position;
 				if (hasChanged) onPositionChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
@@ -41,19 +42,16 @@ namespace DungeonCrawlers.Data
 		public void CalculateSize() {
 			if (RoomObject == null) return;
 
-			Vector3 minPos = Vector3.zero;
-			Vector3 maxPos = Vector3.zero;
+			RectBuilder rectBuilder = new RectBuilder();
 			SpriteRenderer[] rendererCollection = RoomObject.GetComponentsInChildren<SpriteRenderer>();
 
 			foreach (SpriteRenderer sprite in rendererCollection) {
-				if (sprite.bounds.min.x < minPos.x) minPos.x = sprite.bounds.min.x;
-				if (sprite.bounds.min.y < minPos.y) minPos.y = sprite.bounds.min.y;
-				if (sprite.bounds.max.x > maxPos.x) maxPos.x = sprite.bounds.max.x;
-				if (sprite.bounds.max.y > maxPos.y) maxPos.y = sprite.bounds.max.y;
+				rectBuilder.AddHorizontal(sprite.bounds.min.x, sprite.bounds.max.x);
+				rectBuilder.AddVertical(sprite.bounds.min.y, sprite.bounds.max.y);
 			}
 
-			size.x = maxPos.x - minPos.x;
-			size.y = maxPos.y - minPos.y;
+			size.x = rectBuilder.Width;
+			size.y = rectBuilder.Height;
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DungeonCrawlers.Data;
+using DungeonCrawlers.Data.Struct;
 using DungeonCrawlers.UI;
 using UnityEngine;
 
@@ -83,30 +84,18 @@ namespace DungeonCrawlers.Systems
 
 		private void RedefineBounds() {
 			if (userRooms.Count <= 0) return;
-			float xMin, yMin, xMax, yMax, comparative;
-			xMin = xMax = userRooms[0].Position.x;
-			yMin = yMax = userRooms[0].Position.y;
-			foreach (RoomInfo room in userRooms) {
-				if (room.RoomObject == null) continue;
+			RectBuilder rectBuilder = new RectBuilder(userRooms[0].Position.x, userRooms[0].Position.y);
 
-				comparative = room.Position.x - room.Size.x / 2;
-				if (comparative < xMin) xMin = comparative;
-				
-				comparative = room.Position.y - room.Size.y / 2;
-				if (comparative < yMin) yMin = comparative;
-				
-				comparative = room.Position.x + room.Size.x / 2;
-				if (comparative > xMax) xMax = comparative;
-				
-				comparative = room.Position.y + room.Size.y / 2;
-				if (comparative > yMax) yMax = comparative;
+			foreach (RoomInfo room in userRooms) {
+				rectBuilder.AddHorizontal(room.Position.x - room.Size.x / 2, room.Position.x + room.Size.x / 2);				
+				rectBuilder.AddVertical(room.Position.y - room.Size.y / 2, room.Position.y + room.Size.y / 2);
 			}
 
-			limitBounds = new Rect(
-				xMin - automaticBoundsPadding.x,
-				yMin - automaticBoundsPadding.y,
-				xMax - xMin + automaticBoundsPadding.x * 2,
-				yMax - yMin + automaticBoundsPadding.y * 2);
+			limitBounds = rectBuilder.Rect;
+			limitBounds.xMin -= automaticBoundsPadding.x;
+			limitBounds.yMin -= automaticBoundsPadding.y;
+			limitBounds.xMax += automaticBoundsPadding.x;
+			limitBounds.yMax += automaticBoundsPadding.y;
 		}
 
 		public void CenterCamera() {
