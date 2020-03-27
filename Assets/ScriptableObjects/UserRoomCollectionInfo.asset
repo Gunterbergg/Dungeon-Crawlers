@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f86af2ed222db4e900fdc52681a603, type: 3}
   m_Name: UserRoomCollectionInfo
   m_EditorClassIdentifier: 
-  collection: []
+  initialCollection: []

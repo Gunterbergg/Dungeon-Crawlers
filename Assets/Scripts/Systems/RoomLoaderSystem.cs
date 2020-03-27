@@ -7,8 +7,8 @@ namespace DungeonCrawlers.Systems
 {
 	public class RoomLoaderSystem : MonoBehaviour
 	{
-		public int roomGap = 3;
-		public Vector3 roomDirection = Vector3.right;
+		public Vector3 roomGap = Vector3.right * 5;
+		public Vector3 direction = Vector3.right;
 
 		public RoomCollectionInfo roomPrefabs;
 		public RoomCollectionInfo userRooms;
@@ -16,40 +16,38 @@ namespace DungeonCrawlers.Systems
 		public UserInfo userInfo;
 		
 		private void Awake() {
-			ReloadUserRooms();
+			LoadUserRooms();
 		}
 
-		public void ReloadUserRooms() {
+		public void LoadUserRooms() {
 			HTTPClient.GetRequest(
 				roomRequestInfo.RequestURL,
-				new Dictionary<string, string> { { userInfo.id.ToString(), "0" } }, null,
-				(sender, args) => {
-					JArray loadedRooms = JSON.ParseString(args.Data.downloadHandler.text).GetJArray("rooms");
-					RoomCollectionInfo deserializedRooms = ScriptableObject.CreateInstance<RoomCollectionInfo>();
-					foreach (JSON loadedRoom in loadedRooms.Values) {
-						RoomInfo deserializedRoom = (RoomInfo)ScriptableObject.CreateInstance(typeof(RoomInfo));
-						deserializedRoom.type = loadedRoom.GetString("type");
-						BuildRoom(deserializedRoom);
-						deserializedRooms[loadedRoom.GetInt("index")] = deserializedRoom;
-					}
-					SetRooms(deserializedRooms);
-				});
+				new Dictionary<string, string> { { userInfo.Id.ToString(), "0" } }, null,
+				(sender, args) => BuildRooms(JSON.ParseString(args.Data.downloadHandler.text))
+			);
 		}
 
-		private void BuildRoom(RoomInfo roomData) {
-			roomData.roomSize = roomPrefabs[roomData.type].roomSize;
-			roomData.roomObject = 
-				Instantiate(roomPrefabs[roomData.type].roomObject, Vector3.zero, Quaternion.identity, transform);
-		}
+		private void BuildRooms(JSON roomData) {
+			JArray loadedRoomsInfo = roomData.GetJArray("rooms");
+			Vector3 roomPos = transform.position;
 
-		private void SetRooms(RoomCollectionInfo roomList) {
-			Vector3 roomPos = transform.position - Vector3.left * roomGap;
-			for (int index = 0; index < roomList.Count; index++) {
-				if (roomList[index] == null) continue;
-				roomPos += Vector3.right * (roomGap + roomList[index].roomSize.x);
-				roomList[index].roomObject.transform.position = roomPos - (roomList[index].roomSize.x / 2f) * Vector3.right;
-				userRooms[index] = roomList[index];
+			foreach (JSON roomInfo in loadedRoomsInfo.Values) {
+				RoomInfo newRoom = BuildRoom(roomInfo);
+				roomPos += new Vector3(
+					(newRoom.Size.x * direction.x),
+					(newRoom.Size.y * direction.y)
+				) + roomGap;
+				newRoom.Position = roomPos;
+				userRooms.Add(newRoom);
 			}
+		}
+
+		private RoomInfo BuildRoom(JSON roomInfo) {
+			RoomInfo newRoom = (RoomInfo)ScriptableObject.CreateInstance(typeof(RoomInfo));
+			newRoom.type = roomInfo.GetString("type");
+			newRoom.RoomObject =
+				Instantiate(roomPrefabs[newRoom.type].RoomObject, Vector3.zero, Quaternion.identity, transform);
+			return newRoom;
 		}
 	}
 }

@@ -1156,8 +1156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1fada4020efb641bb4ff76b83a7e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomGap: 4
-  roomDirection: {x: 1, y: 0, z: 0}
+  roomGap: {x: 5, y: 0, z: 0}
+  direction: {x: 1, y: 0, z: 0}
   roomPrefabs: {fileID: 11400000, guid: 0cefe5992073c9f4687d7e4efe6e8c0b, type: 2}
   userRooms: {fileID: 11400000, guid: f14a27df438407643a24c69380d1d17f, type: 2}
   roomRequestInfo: {fileID: 11400000, guid: 0f8aa0b0c3e39cb478d16a34b04f06c5, type: 2}

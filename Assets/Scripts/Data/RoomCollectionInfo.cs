@@ -1,52 +1,48 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DungeonCrawlers.Data
 {
 	[CreateAssetMenu(fileName = "RoomCollectionInfo", menuName = "InfoContainer/RoomCollectionInfo")]
-	public class RoomCollectionInfo : ScriptableObject
+	public class RoomCollectionInfo : ScriptableObject, IEnumerable
 	{
 		[SerializeField]
+		private List<RoomInfo> initialCollection = new List<RoomInfo>();
 		private List<RoomInfo> collection = new List<RoomInfo>();
 
 		public event EventHandler<EventArgs<RoomInfo>> OnValueChanged;
-		public Dictionary<int, RoomInfo> activeCollection = new Dictionary<int, RoomInfo>();
 
 		public RoomInfo this [int roomIndex] {
-			get => activeCollection[roomIndex];
+			get => collection[roomIndex];
 			set {
-				if (activeCollection.ContainsKey(roomIndex)) {
-					Destroy(activeCollection[roomIndex].roomObject);
-					activeCollection[roomIndex] = value;
-				} else {
-					activeCollection.Add(roomIndex, value);
-				}
+				if (collection.Count <= roomIndex) collection.Add(value);
+				else collection.Insert(roomIndex, value);
 				OnValueChanged?.Invoke(this, new EventArgs<RoomInfo>(value));
 			}
 		}
 
 		public RoomInfo this[string roomType] {
-			get {
-				foreach (RoomInfo room in activeCollection.Values)
-					if (room.type == roomType)
-						return room;
-				return null;
-			}
+			get => collection.Find((room) => room.type == roomType);
 		}
 
-		public int GetRoomIndex(RoomInfo roomInfo) {
-			foreach (KeyValuePair<int, RoomInfo> a in activeCollection)
-				if (a.Value == roomInfo)
-					return a.Key;
-			throw new Exception();
+		public int Count { get => collection.Count; }
+	
+		private void OnEnable() => collection = new List<RoomInfo>(initialCollection);
+		
+		public IEnumerator GetEnumerator() {
+			return ((IEnumerable<RoomInfo>)collection).GetEnumerator();
 		}
 
-		public int Count { get => activeCollection.Count; }
-
-		private void OnEnable() {
-			for (int i = 0; i < collection.Count; i++)
-				activeCollection[i] = collection[i];
+		public void Add(RoomInfo room) {
+			collection.Add(room);
+			OnValueChanged?.Invoke(this, new EventArgs<RoomInfo>(room));
 		}
+
+		public void SwapOrder(RoomInfo target1, RoomInfo target2) { 
+			//TODO implement swap and swap event
+		}
+
 	}
 }

@@ -31,8 +31,7 @@ namespace DungeonCrawlers.Systems
 		}
 
 		private void CameraController(List<Touch> touches) {
-			if (touches.Count == 1) CameraMovementController(touches[0]);
-			else
+			if (touches.Count == 1) CameraMovementController(touches[0]); else
 			if (touches.Count == 2) CameraZoomController(touches[0], touches[1]);
 		}
 
@@ -85,21 +84,21 @@ namespace DungeonCrawlers.Systems
 		private void RedefineBounds() {
 			if (userRooms.Count <= 0) return;
 			float xMin, yMin, xMax, yMax, comparative;
-			xMin = xMax = userRooms[0].roomObject.transform.position.x;
-			yMin = yMax = userRooms[0].roomObject.transform.position.y;
-			foreach (RoomInfo room in userRooms.activeCollection.Values) {
-				if (room.roomObject == null) continue;
+			xMin = xMax = userRooms[0].Position.x;
+			yMin = yMax = userRooms[0].Position.y;
+			foreach (RoomInfo room in userRooms) {
+				if (room.RoomObject == null) continue;
 
-				comparative = room.roomObject.transform.position.x - room.roomSize.x / 2;
+				comparative = room.Position.x - room.Size.x / 2;
 				if (comparative < xMin) xMin = comparative;
 				
-				comparative = room.roomObject.transform.position.y - room.roomSize.y / 2;
+				comparative = room.Position.y - room.Size.y / 2;
 				if (comparative < yMin) yMin = comparative;
 				
-				comparative = room.roomObject.transform.position.x + room.roomSize.x / 2;
+				comparative = room.Position.x + room.Size.x / 2;
 				if (comparative > xMax) xMax = comparative;
 				
-				comparative = room.roomObject.transform.position.y + room.roomSize.y / 2;
+				comparative = room.Position.y + room.Size.y / 2;
 				if (comparative > yMax) yMax = comparative;
 			}
 
