@@ -7,9 +7,20 @@ using UnityEngine.EventSystems;
 
 namespace DungeonCrawlers.UI
 {
-	public class TouchInput : UserView, IUserInput<EventArgs<List<Touch>>>, IPointerDownHandler
+	public class TouchInput : UserView, IUserInput<EventArgs<Touch>>, IUserInput<EventArgs<List<Touch>>>, IPointerDownHandler
 	{
-		public event EventHandler<EventArgs<List<Touch>>> UserInput;
+		public event EventHandler<EventArgs<Touch>> OnTouchInput;
+		public event EventHandler<EventArgs<List<Touch>>> OnTouchesInput;
+
+		event EventHandler<EventArgs<List<Touch>>> IUserInput<EventArgs<List<Touch>>>.UserInput {
+			add => OnTouchesInput += value;
+			remove => OnTouchesInput -= value;
+		}
+
+		event EventHandler<EventArgs<Touch>> IUserInput<EventArgs<Touch>>.UserInput { 
+			add => OnTouchInput += value;
+			remove => OnTouchInput -= value;
+		}
 
 		public bool IsHandlingInput { get; private set; }
 
@@ -32,7 +43,8 @@ namespace DungeonCrawlers.UI
 					continue;
 				}
 
-				UserInput?.Invoke(this, new EventArgs<List<Touch>>(touchesInBounds));
+				OnTouchInput?.Invoke(this, new EventArgs<Touch>(touchesInBounds[0]));
+				OnTouchesInput?.Invoke(this, new EventArgs<List<Touch>>(touchesInBounds));
 				yield return null;
 			}
 		}

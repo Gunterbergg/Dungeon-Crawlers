@@ -52,6 +52,11 @@ namespace DungeonCrawlers.Data
 
 			size.x = rectBuilder.Width;
 			size.y = rectBuilder.Height;
+			rect.size = Size;
+		}
+
+		public bool OverlapsPoint(Vector2 point) {
+			return rect.Contains(point);
 		}
 	}
 }
