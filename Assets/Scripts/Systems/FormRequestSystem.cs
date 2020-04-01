@@ -14,10 +14,10 @@ namespace DungeonCrawlers.Systems
 		public WebRequestInfo requestInfo;
 
 		private void Awake() {
-			formInput.GetInterface<IForm>().UserInput += (sender, args) => FormRequest(args);
+			formInput.GetInterface<IForm>().Input += (sender, args) => FormRequest(args.Data);
 		}
 
-		private void FormRequest(FormEventArgs formData) {
+		private void FormRequest(FormData formData) {
 			requestInfo.requestParams.FindAll((param) => !formData.Entries.ContainsKey(param)).ForEach(
 				(param) => Logger.Register("Form " + formInput.name + " does not contain the '" + param + "' paramater", debug: true)
 			);
@@ -29,7 +29,7 @@ namespace DungeonCrawlers.Systems
 
 			if (!formData.IsValidInput) {
 				foreach (string message in formData.StatusMessages)
-					outputView.GetInterface<IDialogBox<EventArgs>>().Output(new DialogBoxOutput(LanguagePack.GetString("error"), message));
+					outputView.GetInterface<IOutputHandler<TextMessage>>().Output(new TextMessage(LanguagePack.GetString("error"), message));
 				return;
 			}
 
@@ -45,7 +45,7 @@ namespace DungeonCrawlers.Systems
 					"Error: " + webRequest.error + "\n" +
 					"Response code:" + webRequest.responseCode + "\n" +
 					"Response: \n" + webRequest.downloadHandler.text;
-				outputView.GetInterface<IDialogBox<EventArgs>>().Output(new DialogBoxOutput("Request",requestResponseData));
+				outputView.GetInterface<IOutputHandler<TextMessage>>().Output(new TextMessage("Request",requestResponseData));
 			});
 		}
 	}

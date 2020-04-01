@@ -21,8 +21,9 @@ namespace DungeonCrawlers.UI
 				}
 			}
 		}
+		public bool InputEnabled { get; set; } = true;
 
-		public event EventHandler<FormEventArgs> UserInput;
+		public event EventHandler<EventArgs<FormData>> Input;
 
 		protected override void Awake() {
 			base.Awake();
@@ -30,8 +31,10 @@ namespace DungeonCrawlers.UI
 		}
 
 		public virtual void Submit() {
-			UserInput?.Invoke(this, new FormEventArgs(GetEntries(), GetStatusMessages(), IsValid()));
-			new FormEventArgs(GetEntries(), GetStatusMessages(), IsValid());
+			if (!InputEnabled) return;
+			Input?.Invoke(this, new EventArgs<FormData>(
+				new FormData(GetEntries(), GetStatusMessages(), IsValid())));
+			new FormData(GetEntries(), GetStatusMessages(), IsValid());
 		}
 
 		public bool IsValid() {

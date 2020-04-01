@@ -15,10 +15,11 @@ namespace DungeonCrawlers.UI
         private Vector3 defaultPosition;
         private RectTransform handleParent;
 
-        public event EventHandler<EventArgs<Vector2>> UserInput;
+        public event EventHandler<EventArgs<Vector2>> Input;
         public event EventHandler<EventArgs<Vector2>> InputRelease;
 
         public bool IsHandlingInput { get; private set; } = false;
+        public bool InputEnabled { get; set; } = true;
 
         protected override void Awake(){
             base.Awake();
@@ -29,7 +30,7 @@ namespace DungeonCrawlers.UI
     }
 
         public void OnPointerDown(PointerEventData pointerData) {
-            if (IsHandlingInput) return;
+            if (IsHandlingInput || !InputEnabled) return;
             defaultPosition = handle.localPosition;
             IsHandlingInput = true;
             StartCoroutine(OnDirectionInput());
@@ -67,7 +68,7 @@ namespace DungeonCrawlers.UI
         
         private IEnumerator OnDirectionInput() {
             while (IsHandlingInput) {
-                UserInput?.Invoke(this, new EventArgs<Vector2>(GetInput()));
+                Input?.Invoke(this, new EventArgs<Vector2>(GetInput()));
                 yield return null;
             }
         }

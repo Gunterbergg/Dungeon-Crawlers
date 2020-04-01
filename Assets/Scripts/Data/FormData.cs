@@ -2,9 +2,9 @@
 
 namespace DungeonCrawlers.Data 
 {
-	public class FormEventArgs : System.EventArgs 
+	public struct FormData
 	{
-		public FormEventArgs(Dictionary<string, object> entries, List<string> statusMessages, bool isValid = true) {
+		public FormData(Dictionary<string, object> entries, List<string> statusMessages, bool isValid = true) {
 			Entries = entries;
 			StatusMessages = statusMessages;
 			IsValidInput = isValid;	

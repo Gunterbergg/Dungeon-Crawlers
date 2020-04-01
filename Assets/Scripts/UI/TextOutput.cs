@@ -2,7 +2,8 @@
 
 namespace DungeonCrawlers.UI
 {
-	public class TextOutput : UserView, IUserOutput<string> {
+	public class TextOutput : UserView, IOutputHandler<string> 
+	{
 		public string defaultText = string.Empty;
 		public string DisplayText {get => GetComponent<Text>().text; set => GetComponent<Text>().text = value; }
 
@@ -28,6 +29,5 @@ namespace DungeonCrawlers.UI
 		public void OnValidate() {
 			UpdateLabels();
 		}
-
 	}
 }

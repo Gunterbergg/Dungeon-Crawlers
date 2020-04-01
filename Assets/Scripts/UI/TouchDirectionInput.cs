@@ -12,10 +12,11 @@ namespace DungeonCrawlers.UI
 		private Vector2 currentDir = Vector2.zero;
 		private Vector2 pointerDownPos;
 
-		public event EventHandler<EventArgs<Vector2>> UserInput;
+		public event EventHandler<EventArgs<Vector2>> Input;
 		public event EventHandler<EventArgs<Vector2>> InputRelease;
 
 		public bool IsHandlingInput { get; private set; } = false;
+		public bool InputEnabled { get; set; } = true;
 
 		public Vector2 CurrentDir { 
 			get { return useInvertedInput ? currentDir * -1 : currentDir; }
@@ -53,7 +54,7 @@ namespace DungeonCrawlers.UI
 
 		private IEnumerator OnDirectionInput() {
 			while (IsHandlingInput) {
-				UserInput?.Invoke(this, new EventArgs<Vector2>(GetInput()));
+				Input?.Invoke(this, new EventArgs<Vector2>(GetInput()));
 				yield return null;
 			}
 		}

@@ -1,17 +1,17 @@
-﻿	using System;
+﻿using System;
 using System.Collections.Generic;
 using DungeonCrawlers.Data;
 using UnityEngine.UI;
 
 namespace DungeonCrawlers.UI 
 {
-	public class DialogBox : UserView, IDialogBox<EventArgs>
+	public class DialogBox : UserView, IClosable, IOutputHandler<TextMessage>
 	{
 		public Button closeButton;
 		public Text titleTextBox;
 		public Text messageTextBox;
 
-		private List<DialogBoxOutput> dialogQuery = new List<DialogBoxOutput>();
+		private List<TextMessage> dialogQuery = new List<TextMessage>();
 		private bool isActive = false;
 
 		protected override void Awake() {
@@ -22,10 +22,10 @@ namespace DungeonCrawlers.UI
 			}
 		}
 
-		public event EventHandler<EventArgs> Closed;
+		public event EventHandler Closed;
 		public event EventHandler<EventArgs> UserInput;
 
-		public void Output(DialogBoxOutput output) {
+		public void Output(TextMessage output) {
 			dialogQuery.Add(output);
 			if (!isActive) { 
 				NextAlert();
@@ -34,7 +34,7 @@ namespace DungeonCrawlers.UI
 
 		public void OutputDefault() {
 			Output(
-				new DialogBoxOutput(
+				new TextMessage(
 					LanguagePack.GetString("alert"),
 					LanguagePack.GetString("error")
 				));
@@ -54,9 +54,9 @@ namespace DungeonCrawlers.UI
 
 		public void NextAlert() {
 			if (dialogQuery.Count > 0) {
-				DialogBoxOutput nextDialog = dialogQuery[0];
+				TextMessage nextDialog = dialogQuery[0];
 				titleTextBox.text = nextDialog.Title;
-				messageTextBox.text = nextDialog.Message;
+				messageTextBox.text = nextDialog.Content;
 				dialogQuery.RemoveAt(0);
 				isActive = true;
 				Activate();

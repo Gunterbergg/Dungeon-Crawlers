@@ -27,7 +27,7 @@ namespace DungeonCrawlers.Systems
 				};
 
 			ZoomCamera(cameraMaxSize);
-			touchInput.GetInterface<IUserInput<EventArgs<List<Touch>>>>().UserInput +=
+			touchInput.GetInterface<IInputHandler<List<Touch>>>().Input +=
 				(sender, args) => CameraController(args.Data);
 		}
 
@@ -84,7 +84,7 @@ namespace DungeonCrawlers.Systems
 
 		private void RedefineBounds() {
 			if (userRooms.Count <= 0) return;
-			RectBuilder rectBuilder = new RectBuilder(userRooms[0].Position.x, userRooms[0].Position.y);
+			ConstructedRect rectBuilder = new ConstructedRect(userRooms[0].Position.x, userRooms[0].Position.y);
 
 			foreach (RoomInfo room in userRooms) {
 				rectBuilder.AddHorizontal(room.Position.x - room.Size.x / 2, room.Position.x + room.Size.x / 2);				

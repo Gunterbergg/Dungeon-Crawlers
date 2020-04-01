@@ -3,7 +3,7 @@ using System;
 
 namespace DungeonCrawlers.UI 
 {
-	public interface IProgressBar : IUserOutput<float>
+	public interface IProgressBar : IOutputHandler<float>
 	{
 		bool Enabled { get; set; }
 		float Progress { get; set; }

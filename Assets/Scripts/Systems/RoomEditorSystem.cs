@@ -11,7 +11,7 @@ namespace DungeonCrawlers.Systems
 
 		private void Awake() {
 			highlight.SetActive(false);
-			roomSelector.GetInterface<IUserInput<EventArgs<RoomInfo>>>().UserInput +=
+			roomSelector.GetInterface<IInputHandler<RoomInfo>>().Input +=
 				(sender, args) => OnRoomSelected(args.Data);
 		}
 

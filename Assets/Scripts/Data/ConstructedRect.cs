@@ -2,15 +2,15 @@
 
 namespace DungeonCrawlers.Data.Struct
 {
-	public struct RectBuilder
+	public struct ConstructedRect
 	{
 		public float xMin, yMin, xMax, yMax;
 
-		public RectBuilder(float defaultValue = 0) {
+		public ConstructedRect(float defaultValue = 0) {
 			xMin = yMin = xMax = yMax = defaultValue;
 		}
 
-		public RectBuilder(float xDefault, float yDefault) {
+		public ConstructedRect(float xDefault, float yDefault) {
 			xMin = xMax = xDefault;
 			yMin = yMax = yDefault;
 		}

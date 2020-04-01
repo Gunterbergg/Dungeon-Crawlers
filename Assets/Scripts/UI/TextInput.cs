@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace DungeonCrawlers.UI
 {
-	public class TextInput : UserView, IDataEntry, IUserInput<EventArgs<string>>
+	public class TextInput : UserView, IDataEntry, IInputHandler<string>
 	{
 		public string entryName;
 		public InputField input;
@@ -16,16 +16,21 @@ namespace DungeonCrawlers.UI
 		public string EntryName { get => entryName; private set => entryName = value; }
 		public object EntryData { get; private set; }
 		public bool Enabled { get => input.interactable; set => input.interactable = value; }
+		public bool InputEnabled { get; set; } = true;
 
-		public event EventHandler<EventArgs<string>> UserInput;
+		public event EventHandler<EventArgs<string>> Input;
 
 		protected override void Awake() {
 			base.Awake();
 			EntryData = input?.text;
 			input?.onEndEdit.AddListener(
 				(text) => {
-					EntryData = (object)text;
-					UserInput?.Invoke(this, new EventArgs<string>(text)); 
+					if (!InputEnabled) {
+						input.text = (string)EntryData;
+					} else {  
+						EntryData = (object)text;
+						Input?.Invoke(this, new EventArgs<string>(text));
+					}
 				});
 		}
 

@@ -4,7 +4,7 @@ using DungeonCrawlers.Data;
 
 namespace DungeonCrawlers.UI
 {
-	public class TextConfirmationInput : UserView, IDataEntry, IUserInput<EventArgs<string>> 
+	public class TextConfirmationInput : UserView, IDataEntry, IInputHandler<string> 
 	{
 		public string entryName = string.Empty;
 		public bool constantExpression;
@@ -32,17 +32,19 @@ namespace DungeonCrawlers.UI
 				textConfirmation.ForEach((textInput) => textInput.GetInterface<IDataEntry>().Enabled = false);
 			}
 		}
-		
-		public event EventHandler<EventArgs<string>> UserInput;
+
+		public bool InputEnabled { get; set; } = true;
+
+		public event EventHandler<EventArgs<string>> Input;
 
 		protected override void Awake() {
 			base.Awake();
-			Action<string> raiseEvent = (text) => { if (IsValid()) UserInput?.Invoke(this, new EventArgs<string>(text)); };
+			Action<string> raiseEvent = (text) => { if (IsValid()) Input?.Invoke(this, new EventArgs<string>(text)); };
 			if (!constantExpression)
-				inputExpression.GetInterface<IUserInput<EventArgs<string>>>().UserInput +=
+				inputExpression.GetInterface<IInputHandler<string>>().Input +=
 					(sender, eventArgs) => raiseEvent.Invoke(eventArgs.Data);
 			textConfirmation.ForEach(
-				(textInput) => textInput.GetInterface<IUserInput<EventArgs<string>>>().UserInput +=
+				(textInput) => textInput.GetInterface<IInputHandler<string>>().Input +=
 					(sender, eventArgs) => raiseEvent.Invoke(eventArgs.Data));
 		}
 

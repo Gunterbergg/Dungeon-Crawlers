@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DungeonCrawlers.UI
 {
-	public interface IDirectionInput : IUserInput<EventArgs<Vector2>>
+	public interface IDirectionInput : IInputHandler<Vector2>
 	{
 		event EventHandler<EventArgs<Vector2>> InputRelease;
 

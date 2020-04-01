@@ -6,20 +6,18 @@ using UnityEngine.UI;
 
 namespace DungeonCrawlers.UI
 {
-	public class DialogBoxDisplay : UserView, IDialogBox<EventArgs>
+	public class DialogBoxDisplay : UserView, IClosable, IOutputHandler<TextMessage>
 	{
 		public UserView dialogPrefab;
 		public Transform dialogsContainer;
 		public Button closeButton;
 		public List<UserView> dialogs = new List<UserView>();
 
-		public event EventHandler<EventArgs> Closed;
-		public event EventHandler<EventArgs> UserInput;
+		public event EventHandler Closed;
 
 		protected override void Awake() {
 			base.Awake();
-			closeButton.onClick.AddListener(() => UserInput?.Invoke(this, EventArgs.Empty));
-			UserInput += (sender, eventArgs) => Close();
+			closeButton.onClick.AddListener(Close);
 			foreach (UserView dialog in dialogsContainer.GetComponentsInChildren<UserView>())
 				AddDialog(dialog);
 		}
@@ -27,7 +25,7 @@ namespace DungeonCrawlers.UI
 		public void Clear() {
 			List<UserView> copyList = new List<UserView>(dialogs);
 			foreach (UserView dialogReference in copyList)
-				dialogReference.GetInterface<IDialogBox<EventArgs>>().Close();
+				dialogReference.GetInterface<IClosable>().Close();
 		}
 
 		public void Close() {
@@ -36,23 +34,23 @@ namespace DungeonCrawlers.UI
 			Closed?.Invoke(this, EventArgs.Empty);
 		}
 
-		public void Output(DialogBoxOutput output) {
+		public void Output(TextMessage output) {
 			UserView newDialogBox = Instantiate(dialogPrefab, dialogsContainer) as UserView;
-			newDialogBox.GetInterface<IDialogBox<EventArgs>>()?.Output(output);
+			newDialogBox.GetInterface<IOutputHandler<TextMessage>>()?.Output(output);
 			AddDialog(newDialogBox);
 			Activate();
 		}
 
 		public void OutputDefault() {
 			Output(
-				new DialogBoxOutput(
+				new TextMessage(
 					LanguagePack.GetString("alert"),
 					LanguagePack.GetString("error")
 				));
 		}
 
 		public void AddDialog(UserView newDialog) {
-			IDialogBox<EventArgs> castDialog = newDialog.GetInterface<IDialogBox<EventArgs>>();
+			IClosable castDialog = newDialog.GetInterface<IClosable>();
 			if (castDialog == null)
 				return;
 			dialogs.Add(newDialog);

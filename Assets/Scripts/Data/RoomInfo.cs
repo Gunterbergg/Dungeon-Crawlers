@@ -42,7 +42,7 @@ namespace DungeonCrawlers.Data
 		public void CalculateSize() {
 			if (RoomObject == null) return;
 
-			RectBuilder rectBuilder = new RectBuilder();
+			ConstructedRect rectBuilder = new ConstructedRect();
 			SpriteRenderer[] rendererCollection = RoomObject.GetComponentsInChildren<SpriteRenderer>();
 
 			foreach (SpriteRenderer sprite in rendererCollection) {

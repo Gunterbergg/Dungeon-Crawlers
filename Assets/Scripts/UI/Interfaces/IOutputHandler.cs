@@ -1,6 +1,6 @@
 ﻿namespace DungeonCrawlers.UI 
 {
-	public interface IUserOutput<OutputFormat>
+	public interface IOutputHandler<OutputFormat>
 	{
 		void OutputDefault();
 		void Output(OutputFormat output);
