@@ -1931,12 +1931,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1110080151709772987}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19458d3b84b92aa438f6952194c87fc7, type: 3}
+  m_Script: {fileID: 11500000, guid: 10e110c63ea36d74e9753d4c15015edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  formInput: {fileID: 2297833598316721063}
-  outputView: {fileID: 1738982618168333227}
-  requestInfo: {fileID: 11400000, guid: fe964345943488445aed0191ee5d3a66, type: 2}
+  userDataRequest: {fileID: 11400000, guid: fe964345943488445aed0191ee5d3a66, type: 2}
+  userData: {fileID: 11400000, guid: 4d2cf3243d8fbaa4d9f3cb5353642a3d, type: 2}
+  credentialsForm: {fileID: 2297833598316721063}
+  statusOutputView: {fileID: 1738982618168333227}
 --- !u!224 &1135313948451129490
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2741,7 +2742,7 @@ GameObject:
   - component: {fileID: 2706575660495588044}
   - component: {fileID: 1738982618168333227}
   m_Layer: 5
-  m_Name: DialogBox_1
+  m_Name: Request Status Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2816,11 +2817,11 @@ RectTransform:
   m_Father: {fileID: 1738456112}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 320}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2706575660671519537
 MonoBehaviour:
   m_ObjectHideFlags: 0

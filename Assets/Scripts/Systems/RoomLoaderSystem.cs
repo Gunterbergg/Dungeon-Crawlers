@@ -12,8 +12,8 @@ namespace DungeonCrawlers.Systems
 
 		public RoomCollectionInfo roomPrefabs;
 		public RoomCollectionInfo userRooms;
-		public WebRequestInfo roomRequestInfo;
-		public UserInfo userInfo;
+		public WebRequestInfo roomRequest;
+		public UserInfo userData;
 		
 		private void Awake() {
 			LoadUserRooms();
@@ -21,8 +21,8 @@ namespace DungeonCrawlers.Systems
 
 		public void LoadUserRooms() {
 			HTTPClient.GetRequest(
-				roomRequestInfo.RequestURL,
-				new Dictionary<string, string> { { userInfo.Id.ToString(), "0" } }, null,
+				roomRequest.RequestURL,
+				new Dictionary<string, string> { { "user_id", userData.user_id.ToString() } }, null,
 				(sender, args) => BuildRooms(JSON.ParseString(args.Data.downloadHandler.text))
 			);
 		}
