@@ -19,6 +19,7 @@ namespace DungeonCrawlers.UI
 			get => progress;
 			set => Output(value);
 		}
+		public float CurrentOutput { get; private set; }
 
 		public event EventHandler<EventArgs<float>> OnValueChanged;
 
@@ -34,6 +35,7 @@ namespace DungeonCrawlers.UI
 		public void Output(float output) {
 			if (!Enabled) return; 
 			progress = Mathf.Clamp01(output);
+			CurrentOutput = progress;
 			if (lerpCoroutine != null) StopCoroutine(lerpCoroutine);
 			lerpCoroutine = StartCoroutine(LerpOutput());
 		}

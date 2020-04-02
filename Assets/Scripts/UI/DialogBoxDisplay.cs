@@ -13,6 +13,8 @@ namespace DungeonCrawlers.UI
 		public Button closeButton;
 		public List<UserView> dialogs = new List<UserView>();
 
+		public TextMessage CurrentOutput { get; private set; }
+
 		public event EventHandler Closed;
 
 		protected override void Awake() {
@@ -38,6 +40,7 @@ namespace DungeonCrawlers.UI
 			UserView newDialogBox = Instantiate(dialogPrefab, dialogsContainer) as UserView;
 			newDialogBox.GetInterface<IOutputHandler<TextMessage>>()?.Output(output);
 			AddDialog(newDialogBox);
+			CurrentOutput = output;
 			Activate();
 		}
 

@@ -5,8 +5,9 @@ namespace DungeonCrawlers.UI
 	public class TextOutput : UserView, IOutputHandler<string> 
 	{
 		public string defaultText = string.Empty;
-		public string DisplayText {get => GetComponent<Text>().text; set => GetComponent<Text>().text = value; }
 
+		public string CurrentOutput { get => GetComponent<Text>().text; set => GetComponent<Text>().text = value; }
+		
 		public void Clear() {
 			gameObject.GetComponent<Text>().text = string.Empty;
 		}
@@ -20,7 +21,7 @@ namespace DungeonCrawlers.UI
 		}
 
 		public void UpdateLabels() {
-			DisplayText = 
+			CurrentOutput = 
 				defaultText.StartsWith("@") ?
 					LanguagePack.GetString(defaultText.Substring(1)) :
 					defaultText;

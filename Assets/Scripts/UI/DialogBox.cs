@@ -12,22 +12,22 @@ namespace DungeonCrawlers.UI
 		public Text messageTextBox;
 
 		private List<TextMessage> dialogQuery = new List<TextMessage>();
-		private bool isActive = false;
+		private bool isDisplayingMessage = false;
+
+		public TextMessage CurrentOutput { get; private set; }
 
 		protected override void Awake() {
 			base.Awake();
-			if (closeButton != null) { 
-				closeButton.onClick.AddListener(() => UserInput?.Invoke(this, EventArgs.Empty));
-				UserInput += (sender, eventArgs) => NextAlert();
+			if (closeButton != null) {
+				closeButton.onClick.AddListener(NextAlert);
 			}
 		}
 
 		public event EventHandler Closed;
-		public event EventHandler<EventArgs> UserInput;
 
 		public void Output(TextMessage output) {
 			dialogQuery.Add(output);
-			if (!isActive) { 
+			if (!isDisplayingMessage) { 
 				NextAlert();
 			}
 		}
@@ -43,7 +43,7 @@ namespace DungeonCrawlers.UI
 		public void Clear() {
 			titleTextBox.text = string.Empty;
 			messageTextBox.text = string.Empty;
-			isActive = false;
+			isDisplayingMessage = false;
 		}
 
 		public void Close() {
@@ -54,11 +54,11 @@ namespace DungeonCrawlers.UI
 
 		public void NextAlert() {
 			if (dialogQuery.Count > 0) {
-				TextMessage nextDialog = dialogQuery[0];
-				titleTextBox.text = nextDialog.Title;
-				messageTextBox.text = nextDialog.Content;
+				CurrentOutput = dialogQuery[0];
+				titleTextBox.text = CurrentOutput.Title;
+				messageTextBox.text = CurrentOutput.Content;
 				dialogQuery.RemoveAt(0);
-				isActive = true;
+				isDisplayingMessage = true;
 				Activate();
 			} else {
 				Close();
