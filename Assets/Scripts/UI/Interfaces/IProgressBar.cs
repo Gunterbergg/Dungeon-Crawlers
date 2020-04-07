@@ -1,5 +1,4 @@
-﻿using DungeonCrawlers.Data;
-using System;
+﻿using System;
 
 namespace DungeonCrawlers.UI 
 {
@@ -8,6 +7,6 @@ namespace DungeonCrawlers.UI
 		bool Enabled { get; set; }
 		float Progress { get; set; }
 
-		event EventHandler<EventArgs<float>> OnValueChanged; 
+		event Action<float> OnValueChanged; 
 	}
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using DungeonCrawlers.Data;
+﻿using DungeonCrawlers.Data;
 using UnityEngine;
 using Leguar.TotalJSON;
 
@@ -24,7 +23,6 @@ namespace DungeonCrawlers.Systems
 
 		private void OnDestroy() => userRooms.OnLoadedRoomSet -= BuildRooms;
 
-		private void BuildRooms(object sender, EventArgs args) => BuildRooms(userRooms.LoadedRooms);
 		private void BuildRooms(JSON roomData) {
 			if (roomData == null) return;
 			Debug.Log("Building...");

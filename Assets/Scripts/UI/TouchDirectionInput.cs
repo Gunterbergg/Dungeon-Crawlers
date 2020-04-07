@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using DungeonCrawlers.Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
 	
@@ -12,8 +11,8 @@ namespace DungeonCrawlers.UI
 		private Vector2 currentDir = Vector2.zero;
 		private Vector2 pointerDownPos;
 
-		public event EventHandler<EventArgs<Vector2>> Input;
-		public event EventHandler<EventArgs<Vector2>> InputRelease;
+		public event Action<Vector2> Input;
+		public event Action<Vector2> InputRelease;
 
 		public bool IsHandlingInput { get; private set; } = false;
 		public bool InputEnabled { get; set; } = true;
@@ -47,14 +46,14 @@ namespace DungeonCrawlers.UI
 		}
 
 		public void OnPointerUp(PointerEventData eventData) {
-			InputRelease?.Invoke(this, new EventArgs<Vector2>(CurrentDir));
+			InputRelease?.Invoke(CurrentDir);
 			CurrentDir = Vector2.zero;
 			IsHandlingInput = false;
 		}
 
 		private IEnumerator OnDirectionInput() {
 			while (IsHandlingInput) {
-				Input?.Invoke(this, new EventArgs<Vector2>(GetInput()));
+				Input?.Invoke(GetInput());
 				yield return null;
 			}
 		}

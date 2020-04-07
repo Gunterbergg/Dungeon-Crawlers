@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using DungeonCrawlers.Data;
 using UnityEngine.UI;
 
 namespace DungeonCrawlers.UI
@@ -18,7 +17,7 @@ namespace DungeonCrawlers.UI
 		public bool Enabled { get => input.interactable; set => input.interactable = value; }
 		public bool InputEnabled { get; set; } = true;
 
-		public event EventHandler<EventArgs<string>> Input;
+		public event Action<string> Input;
 
 		protected override void Awake() {
 			base.Awake();
@@ -29,7 +28,7 @@ namespace DungeonCrawlers.UI
 						input.text = (string)EntryData;
 					} else {  
 						EntryData = (object)text;
-						Input?.Invoke(this, new EventArgs<string>(text));
+						Input?.Invoke(text);
 					}
 				});
 		}

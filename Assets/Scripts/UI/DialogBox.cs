@@ -23,7 +23,7 @@ namespace DungeonCrawlers.UI
 			}
 		}
 
-		public event EventHandler Closed;
+		public event Action Closed;
 
 		public void Output(TextMessage output) {
 			dialogQuery.Add(output);
@@ -49,7 +49,7 @@ namespace DungeonCrawlers.UI
 		public void Close() {
 			DeActivate();
 			Clear();
-			Closed?.Invoke(this, EventArgs.Empty);
+			Closed?.Invoke();
 		}
 
 		public void NextAlert() {

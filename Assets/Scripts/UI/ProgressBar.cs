@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using DungeonCrawlers.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +20,7 @@ namespace DungeonCrawlers.UI
 		}
 		public float CurrentOutput { get; private set; }
 
-		public event EventHandler<EventArgs<float>> OnValueChanged;
+		public event Action<float> OnValueChanged;
 
 		protected override void Awake() {
 			base.Awake();
@@ -56,7 +55,7 @@ namespace DungeonCrawlers.UI
 				yield return null;
 			}
 
-			OnValueChanged?.Invoke(this, new EventArgs<float>(progress));
+			OnValueChanged?.Invoke(progress);
 		}
 	}
 }

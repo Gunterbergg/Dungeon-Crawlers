@@ -15,7 +15,7 @@ namespace DungeonCrawlers.UI
 
 		public TextMessage CurrentOutput { get; private set; }
 
-		public event EventHandler Closed;
+		public event Action Closed;
 
 		protected override void Awake() {
 			base.Awake();
@@ -33,7 +33,7 @@ namespace DungeonCrawlers.UI
 		public void Close() {
 			Clear();	
 			DeActivate();
-			Closed?.Invoke(this, EventArgs.Empty);
+			Closed?.Invoke();
 		}
 
 		public void Output(TextMessage output) {
@@ -57,7 +57,7 @@ namespace DungeonCrawlers.UI
 			if (castDialog == null)
 				return;
 			dialogs.Add(newDialog);
-			castDialog.Closed += (sender, eventArgs) => OnDialogClose(sender as UserView);
+			castDialog.Closed += () => OnDialogClose(castDialog as UserView);
 		}
 
 		public void RemoveDialog(UserView dialog) {
@@ -68,6 +68,7 @@ namespace DungeonCrawlers.UI
 		}
 
 		protected void OnDialogClose(UserView closedDialog) {
+			if (closedDialog == null) return;
 			RemoveDialog(closedDialog);
 			if (dialogs.Count == 0)
 				Close();

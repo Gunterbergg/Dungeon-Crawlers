@@ -11,9 +11,10 @@ namespace DungeonCrawlers.Systems
 		public Toggle toggleController;
 
 		public void Start() {
-			progressBar.OnValueChanged += (sender, args) => {
-				if (args.Data == 0) ((IProgressBar)sender).Output(1f);
-				if (args.Data == 1) ((IProgressBar)sender).Output(0f);
+			progressBar.OnValueChanged += (progress) => {
+				IProgressBar progressHandler = progressBar.GetInterface<IProgressBar>();
+				if (progress == 0) progressHandler.Output(1f);
+				if (progress == 1) progressHandler.Output(0f);
 			};
 
 			lerpController.onValueChanged.AddListener((newValue) => progressBar.lerptTime = newValue);

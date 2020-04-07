@@ -21,7 +21,7 @@ namespace DungeonCrawlers.Systems
 		private void Awake() {
 			formInput = credentialsForm.GetInterface<IForm>();
 			outputView = statusOutputView.GetInterface<IOutputHandler<TextMessage>>();
-			formInput.Input += (sender, args) => LoginRequest(args.Data);
+			formInput.Input += LoginRequest;
 		}
 
 		private void LoginRequest(FormData formData) {
@@ -56,7 +56,7 @@ namespace DungeonCrawlers.Systems
 
 			//Sends request and outputs results
 			HTTPClient.GetRequest(
-				userDataRequest.RequestURL, requestParams, requestHeaders, (sender, args) => LoginCallback(args.Data));
+				userDataRequest.RequestURL, requestParams, requestHeaders, LoginCallback);
 
 		}
 
@@ -76,7 +76,7 @@ namespace DungeonCrawlers.Systems
 			outputView.Output(new TextMessage("Request", requestResponseData));
 			outputView.Output(new TextMessage("Resulting object", userData.ToString()));
 			
-			statusOutputView.GetInterface<IClosable>().Closed += (sender, args) => {
+			statusOutputView.GetInterface<IClosable>().Closed += () => {
 				if (nextScene != null) SceneLoader.LoadSceneAsync(nextScene.SceneIndex).allowSceneActivation = true;
 			};
 		}

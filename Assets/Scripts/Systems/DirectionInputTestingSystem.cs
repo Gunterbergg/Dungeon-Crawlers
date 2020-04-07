@@ -10,11 +10,11 @@ namespace DungeonCrawlers.Systems
 
 		public void Start() {
 			directionInput.GetInterface<IDirectionInput>().Input +=
-				(sender, args) => {
+				(direction) => {
 					string data =
-						args.Data.ToString() + "\n" +
-						DirectionInputHelper.GetEightDirection(args.Data).ToString() + "\n" +
-						"Right angle diff:\n" + Mathf.Atan2(Mathf.Abs(args.Data.x), Mathf.Abs(args.Data.y)) * Mathf.Rad2Deg;
+						direction.ToString() + "\n" +
+						DirectionInputHelper.GetEightDirection(direction).ToString() + "\n" +
+						"Right angle diff:\n" + Mathf.Atan2(Mathf.Abs(direction.x), Mathf.Abs(direction.y)) * Mathf.Rad2Deg;
 					directionOutput.GetInterface<IOutputHandler<string>>().Output(data);
 				};
 		}

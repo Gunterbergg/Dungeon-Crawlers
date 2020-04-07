@@ -83,8 +83,8 @@ namespace DungeonCrawlers.Data
 			}
 		}
 
-		public EventHandler OnChanged;
-		public EventHandler<string> OnPropertyChanged;
+		public Action OnChanged;
+		public Action<string> OnPropertyChanged;
 
 		public void Copy(UserInfo other) {
 			if (other == null) return;
@@ -101,11 +101,11 @@ namespace DungeonCrawlers.Data
 		}
 
 		private void RaiseChangedEvent() {
-			OnChanged?.Invoke(this, EventArgs.Empty);
+			OnChanged?.Invoke();
 		}
 
 		private void RaiseChangedEvent(string propertyName) {
-			OnPropertyChanged?.Invoke(this, propertyName);
+			OnPropertyChanged?.Invoke(propertyName);
 			RaiseChangedEvent();
 		}
 

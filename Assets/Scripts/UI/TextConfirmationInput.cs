@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DungeonCrawlers.Data;
 
 namespace DungeonCrawlers.UI
 {
@@ -35,17 +34,16 @@ namespace DungeonCrawlers.UI
 
 		public bool InputEnabled { get; set; } = true;
 
-		public event EventHandler<EventArgs<string>> Input;
+		public event Action<string> Input;
 
 		protected override void Awake() {
 			base.Awake();
-			Action<string> raiseEvent = (text) => { if (IsValid()) Input?.Invoke(this, new EventArgs<string>(text)); };
+			Action<string> raiseEvent = (text) => { if (IsValid()) Input?.Invoke(text); };
 			if (!constantExpression)
-				inputExpression.GetInterface<IInputHandler<string>>().Input +=
-					(sender, eventArgs) => raiseEvent.Invoke(eventArgs.Data);
-			textConfirmation.ForEach(
-				(textInput) => textInput.GetInterface<IInputHandler<string>>().Input +=
-					(sender, eventArgs) => raiseEvent.Invoke(eventArgs.Data));
+				inputExpression.GetInterface<IInputHandler<string>>().Input += raiseEvent.Invoke;
+			textConfirmation.ForEach((textInput) =>
+				textInput.GetInterface<IInputHandler<string>>().Input += raiseEvent.Invoke
+			);
 		}
 
 		public bool IsEmpty() {

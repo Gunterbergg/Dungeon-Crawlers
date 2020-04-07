@@ -1,6 +1,5 @@
 ﻿using DungeonCrawlers.Data;
 using Leguar.TotalJSON;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,7 +24,7 @@ namespace DungeonCrawlers.Systems
 			HTTPClient.GetRequest(
 				roomRequest.RequestURL,
 				new Dictionary<string, string> { { "user_id", userId } }, null,
-				(sender, args) => loadedRooms.LoadedRooms = JSON.ParseString(args.Data.downloadHandler.text)
+				(request) => loadedRooms.LoadedRooms = JSON.ParseString(request.downloadHandler.text)
 			);
 		}
 	}

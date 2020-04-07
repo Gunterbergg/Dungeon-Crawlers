@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using DungeonCrawlers.Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,15 +10,15 @@ namespace DungeonCrawlers.UI
 	{
 		private bool inputEnabled = true;
 
-		public event EventHandler<EventArgs<Touch>> OnTouchInput;
-		public event EventHandler<EventArgs<List<Touch>>> OnTouchesInput;
+		public event Action<Touch> OnTouchInput;
+		public event Action<List<Touch>> OnTouchesInput;
 
-		event EventHandler<EventArgs<List<Touch>>> IInputHandler<List<Touch>>.Input {
+		event Action<List<Touch>> IInputHandler<List<Touch>>.Input {
 			add => OnTouchesInput += value;
 			remove => OnTouchesInput -= value;
 		}
 
-		event EventHandler<EventArgs<Touch>> IInputHandler<Touch>.Input { 
+		event Action<Touch> IInputHandler<Touch>.Input { 
 			add => OnTouchInput += value;
 			remove => OnTouchInput -= value;
 		}
@@ -47,8 +46,8 @@ namespace DungeonCrawlers.UI
 					continue;
 				}
 
-				OnTouchInput?.Invoke(this, new EventArgs<Touch>(touchesInBounds[0]));
-				OnTouchesInput?.Invoke(this, new EventArgs<List<Touch>>(touchesInBounds));
+				OnTouchInput?.Invoke(touchesInBounds[0]);
+				OnTouchesInput?.Invoke(touchesInBounds);
 				yield return null;
 			}
 		}

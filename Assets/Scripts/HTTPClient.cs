@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DungeonCrawlers.Data;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -12,7 +11,7 @@ namespace DungeonCrawlers
 			string requestURL,
 			Dictionary<string, string> requestHeaders = null,
 			Dictionary<string, string> requestParams = null,
-			EventHandler<EventArgs<UnityWebRequest>> requestHandler = null)
+			Action<UnityWebRequest> requestHandler = null)
 		{
 			string url = requestURL + "?";
 			if (requestParams != null)
@@ -28,7 +27,7 @@ namespace DungeonCrawlers
 			UnityWebRequestAsyncOperation requestOperation = serverRequest.SendWebRequest();
 			if (requestHandler != null)
 				requestOperation.completed +=
-					(operation) => requestHandler(operation, new EventArgs<UnityWebRequest>(((UnityWebRequestAsyncOperation)operation).webRequest));
+					(operation) => requestHandler(((UnityWebRequestAsyncOperation)operation).webRequest);
 
 			return requestOperation;
 		}

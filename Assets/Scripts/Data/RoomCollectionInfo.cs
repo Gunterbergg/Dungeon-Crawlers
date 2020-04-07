@@ -15,14 +15,14 @@ namespace DungeonCrawlers.Data
 		private List<RoomInfo> collection = new List<RoomInfo>();
 		private JSON loadedRooms;
 
-		public event EventHandler<EventArgs<RoomInfo>> OnValueChanged;
-		public event EventHandler OnLoadedRoomSet;
+		public event Action<RoomInfo> OnValueChanged;
+		public event Action<JSON> OnLoadedRoomSet;
 
 		public JSON LoadedRooms {
 			get => loadedRooms;
 			set {
 				loadedRooms = value;
-				OnLoadedRoomSet?.Invoke(this, EventArgs.Empty);
+				OnLoadedRoomSet?.Invoke(value);
 				collection.Clear();
 			}
 		}
@@ -32,7 +32,7 @@ namespace DungeonCrawlers.Data
 			set {
 				if (collection.Count <= roomIndex) collection.Add(value);
 				else collection.Insert(roomIndex, value);
-				OnValueChanged?.Invoke(this, new EventArgs<RoomInfo>(value));
+				OnValueChanged?.Invoke(value);
 			}
 		}
 
@@ -58,7 +58,7 @@ namespace DungeonCrawlers.Data
 
 		public void Add(RoomInfo room) {
 			collection.Add(room);
-			OnValueChanged?.Invoke(this, new EventArgs<RoomInfo>(room));
+			OnValueChanged?.Invoke(room);
 		}
 
 		public void SwapOrder(RoomInfo target1, RoomInfo target2) { 

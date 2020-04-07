@@ -4,7 +4,7 @@ namespace DungeonCrawlers.UI
 {
 	public interface IClosable
 	{
-		event EventHandler Closed;
+		event Action Closed;
 		void Close();
 	}
 }

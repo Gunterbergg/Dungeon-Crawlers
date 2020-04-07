@@ -17,7 +17,7 @@ namespace DungeonCrawlers
 			Logger.Register("Localization initialized with default language " + DefaultLanguage);
 		}
 
-		public static event EventHandler LocalizationChanged;
+		public static event Action LocalizationChanged;
 
 		public static string GetString(params string[] keys) {
 			string result = string.Empty;
@@ -44,7 +44,7 @@ namespace DungeonCrawlers
 			}
 
 			Logger.Register("Successfully loaded strings file for lang code " + langCode, "LANGUAGE");
-			LocalizationChanged?.Invoke(null ,EventArgs.Empty);
+			LocalizationChanged?.Invoke();
 		}
 	}
 }

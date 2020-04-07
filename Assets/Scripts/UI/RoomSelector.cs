@@ -6,7 +6,7 @@ namespace DungeonCrawlers.UI
 {
 	public class RoomSelector : UserView, IInputHandler<RoomInfo>
 	{
-		public event EventHandler<EventArgs<RoomInfo>> Input;
+		public event Action<RoomInfo> Input;
 		public UserView touchInput;
 		public RoomCollectionInfo userRooms;
 
@@ -16,8 +16,7 @@ namespace DungeonCrawlers.UI
 
 		protected override void Awake() {
 			base.Awake();
-			touchInput.GetInterface<IInputHandler<Touch>>().Input +=
-				(sender, args) => OnTouchInput(args.Data);
+			touchInput.GetInterface<IInputHandler<Touch>>().Input += OnTouchInput;
 		}
 
 		protected void OnTouchInput(Touch touch) {
@@ -26,7 +25,7 @@ namespace DungeonCrawlers.UI
 			foreach (RoomInfo room in userRooms) { 
 				if (room.OverlapsPoint(touchPos) && room != lastSelected) { 
 					lastSelected = room;
-					Input?.Invoke(this, new EventArgs<RoomInfo>(room));
+					Input?.Invoke(room);
 					break;
 				}
 			}

@@ -14,15 +14,15 @@ namespace DungeonCrawlers.Data
 		protected Vector2 size;
 		protected Rect rect;
 
-		public event EventHandler onTypeChanged;
-		public event EventHandler onPositionChanged;
+		public event Action onTypeChanged;
+		public event Action onPositionChanged;
 
 		public GameObject RoomObject {
 			get { return roomObject; }
 			set { 
 				roomObject = value;
 				CalculateSize();
-				onTypeChanged?.Invoke(this, EventArgs.Empty);
+				onTypeChanged?.Invoke();
 			}
 		}
 
@@ -33,7 +33,7 @@ namespace DungeonCrawlers.Data
 				if (value != Position) hasChanged = true;
 				RoomObject.transform.position = value;
 				rect.center = Position;
-				if (hasChanged) onPositionChanged?.Invoke(this, EventArgs.Empty);
+				if (hasChanged) onPositionChanged?.Invoke();
 			}
 		}
 
