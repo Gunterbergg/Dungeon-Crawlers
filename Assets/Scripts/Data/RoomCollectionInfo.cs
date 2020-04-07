@@ -3,18 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Events;
+using Leguar.TotalJSON;
 
 namespace DungeonCrawlers.Data
 {
 	[CreateAssetMenu(fileName = "RoomCollectionInfo", menuName = "InfoContainer/RoomCollectionInfo")]
-	public class RoomCollectionInfo : ScriptableObject, IEnumerable
+	public class RoomCollectionInfo : ScriptableObject, IEnumerable 
 	{
 		[SerializeField]
 		private List<RoomInfo> initialCollection = new List<RoomInfo>();
 		private List<RoomInfo> collection = new List<RoomInfo>();
+		private JSON loadedRooms;
 
 		public event EventHandler<EventArgs<RoomInfo>> OnValueChanged;
+		public event EventHandler OnLoadedRoomSet;
+
+		public JSON LoadedRooms {
+			get => loadedRooms;
+			set {
+				loadedRooms = value;
+				OnLoadedRoomSet?.Invoke(this, EventArgs.Empty);
+				collection.Clear();
+			}
+		}
 
 		public RoomInfo this [int roomIndex] {
 			get => collection[roomIndex];

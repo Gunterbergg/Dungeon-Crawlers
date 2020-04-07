@@ -1,33 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using DungeonCrawlers.Data;
 using UnityEngine;
 using Leguar.TotalJSON;
 
 namespace DungeonCrawlers.Systems
 {
-	public class RoomLoaderSystem : MonoBehaviour
+	public class UserRoomsBuilderSystem : MonoBehaviour
 	{
 		public Vector3 roomGap = Vector3.right * 5;
 		public Vector3 direction = Vector3.right;
 
 		public RoomCollectionInfo roomPrefabs;
 		public RoomCollectionInfo userRooms;
-		public WebRequestInfo roomRequest;
-		public UserInfo userData;
 		
 		private void Awake() {
-			LoadUserRooms();
+			userRooms.OnLoadedRoomSet += BuildRooms;
 		}
 
-		public void LoadUserRooms() {
-			HTTPClient.GetRequest(
-				roomRequest.RequestURL,
-				new Dictionary<string, string> { { "user_id", userData.User_id.ToString() } }, null,
-				(sender, args) => BuildRooms(JSON.ParseString(args.Data.downloadHandler.text))
-			);
+		private void Start() {
+			if (userRooms.LoadedRooms != null)
+				BuildRooms(userRooms.LoadedRooms);
 		}
 
+		private void OnDestroy() => userRooms.OnLoadedRoomSet -= BuildRooms;
+
+		private void BuildRooms(object sender, EventArgs args) => BuildRooms(userRooms.LoadedRooms);
 		private void BuildRooms(JSON roomData) {
+			if (roomData == null) return;
+			Debug.Log("Building...");
 			JArray loadedRoomsInfo = roomData.GetJArray("rooms");
 			Vector3 roomPos = transform.position;
 

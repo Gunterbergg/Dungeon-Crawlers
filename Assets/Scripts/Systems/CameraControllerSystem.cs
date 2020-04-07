@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DungeonCrawlers.Data;
 using DungeonCrawlers.Data.Struct;
 using DungeonCrawlers.UI;
@@ -21,14 +22,18 @@ namespace DungeonCrawlers.Systems
 
 		protected void Awake() {
 			if (automaticLimitBounds)
-				userRooms.OnValueChanged += (sender, args) => {
-					RedefineBounds();
-					CenterCamera();
-				};
+				userRooms.OnValueChanged += RefreshCamera;
 
 			ZoomCamera(cameraMaxSize);
 			touchInput.GetInterface<IInputHandler<List<Touch>>>().Input +=
 				(sender, args) => CameraController(args.Data);
+		}
+
+		private void OnDestroy() => userRooms.OnValueChanged -= RefreshCamera;
+
+		private void RefreshCamera(object sender, EventArgs args) {
+			RedefineBounds();
+			CenterCamera();
 		}
 
 		private void CameraController(List<Touch> touches) {
