@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 namespace DungeonCrawlers.Data
 {
@@ -28,9 +30,17 @@ namespace DungeonCrawlers.Data
 		}
 
 		public int Count { get => collection.Count; }
-	
-		private void OnEnable() => collection = new List<RoomInfo>(initialCollection);
-		
+
+		private void OnEnable() {
+			collection = new List<RoomInfo>(initialCollection);
+			SceneManager.activeSceneChanged += (init, target) => {
+				List<RoomInfo> newCollection = new List<RoomInfo>();
+				foreach (RoomInfo data in collection)
+					if (data.RoomObject != null) newCollection.Add(data);
+				collection = newCollection;
+			};
+		}
+
 		public IEnumerator GetEnumerator() {
 			return ((IEnumerable<RoomInfo>)collection).GetEnumerator();
 		}

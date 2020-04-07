@@ -22,7 +22,7 @@ namespace DungeonCrawlers.Systems
 		public void LoadUserRooms() {
 			HTTPClient.GetRequest(
 				roomRequest.RequestURL,
-				new Dictionary<string, string> { { "user_id", userData.user_id.ToString() } }, null,
+				new Dictionary<string, string> { { "user_id", userData.User_id.ToString() } }, null,
 				(sender, args) => BuildRooms(JSON.ParseString(args.Data.downloadHandler.text))
 			);
 		}

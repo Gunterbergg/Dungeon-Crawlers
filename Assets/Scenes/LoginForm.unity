@@ -1938,6 +1938,7 @@ MonoBehaviour:
   userData: {fileID: 11400000, guid: 4d2cf3243d8fbaa4d9f3cb5353642a3d, type: 2}
   credentialsForm: {fileID: 2297833598316721063}
   statusOutputView: {fileID: 1738982618168333227}
+  nextScene: {fileID: 11400000, guid: 1a1a202dea805064f9e82cb75d924ebf, type: 2}
 --- !u!224 &1135313948451129490
 RectTransform:
   m_ObjectHideFlags: 0

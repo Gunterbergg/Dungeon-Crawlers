@@ -13,18 +13,19 @@ namespace DungeonCrawlers.Systems
 		public UserInfo userData;
 		public UserView credentialsForm;
 		public UserView statusOutputView;
+		public SceneInfo nextScene;
 
 		private IForm formInput;
-		private IOutputHandler<TextMessage> statusDisplay;
+		private IOutputHandler<TextMessage> outputView;
 
 		private void Awake() {
 			formInput = credentialsForm.GetInterface<IForm>();
-			statusDisplay = statusOutputView.GetInterface<IOutputHandler<TextMessage>>();
-			formInput.Input += (sender, args) => FormRequest(args.Data);
+			outputView = statusOutputView.GetInterface<IOutputHandler<TextMessage>>();
+			formInput.Input += (sender, args) => LoginRequest(args.Data);
 		}
 
-		private void FormRequest(FormData formData) {
-			
+		private void LoginRequest(FormData formData) {
+
 			//Logs any missing form input
 			userDataRequest.requestParams.FindAll((param) => !formData.Entries.ContainsKey(param)).ForEach(
 				(param) => Logger.Register(
@@ -42,7 +43,7 @@ namespace DungeonCrawlers.Systems
 			//Display form input errors to user
 			if (!formData.IsValidInput) {
 				foreach (string message in formData.StatusMessages)
-					statusDisplay.Output(new TextMessage(LanguagePack.GetString("error"), message));
+					outputView.Output(new TextMessage(LanguagePack.GetString("error"), message));
 				return;
 			}
 
@@ -54,19 +55,30 @@ namespace DungeonCrawlers.Systems
 			userDataRequest.requestHeaders.ForEach((param) => requestParams.Add(param, formData.Entries[param].ToString()));
 
 			//Sends request and outputs results
-			HTTPClient.GetRequest(userDataRequest.RequestURL, requestParams, requestHeaders, (sender,args) => {
-							
-				UnityWebRequest webRequest = args.Data;
-				JSON loaderUserData = JSON.ParseString(webRequest.downloadHandler.text);
-				userData.Copy(loaderUserData.Deserialize<UserInfo>());
+			HTTPClient.GetRequest(
+				userDataRequest.RequestURL, requestParams, requestHeaders, (sender, args) => LoginCallback(args.Data));
 
-				string requestResponseData =
-					"Error: " + webRequest.error + "\n" +
-					"Response code:" + webRequest.responseCode + "\n" +
-					"Response: \n" + webRequest.downloadHandler.text;
-				statusDisplay.Output(new TextMessage("Request", requestResponseData));
-				statusDisplay.Output(new TextMessage("Resulting object", userData.ToString()));
-			});
+		}
+
+		private void LoginCallback(UnityWebRequest webRequest) {
+			
+			JSON loaderUserData = JSON.ParseString(webRequest.downloadHandler.text);
+			userData.Copy(
+				loaderUserData.Deserialize<UserInfo>( new DeserializeSettings() {
+					RequireAllFieldsArePopulated = false
+				})
+			);
+
+			string requestResponseData =
+				"Error: " + webRequest.error + "\n" +
+				"Response code:" + webRequest.responseCode + "\n" +
+				"Response: \n" + webRequest.downloadHandler.text;
+			outputView.Output(new TextMessage("Request", requestResponseData));
+			outputView.Output(new TextMessage("Resulting object", userData.ToString()));
+			
+			statusOutputView.GetInterface<IClosable>().Closed += (sender, args) => {
+				if (nextScene != null) SceneLoader.LoadSceneAsync(nextScene.SceneIndex).allowSceneActivation = true;
+			};
 		}
 	}
 }
