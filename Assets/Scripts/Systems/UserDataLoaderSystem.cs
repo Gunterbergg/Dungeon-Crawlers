@@ -10,21 +10,21 @@ namespace DungeonCrawlers.Systems
 	public class UserDataLoaderSystem : MonoBehaviour
 	{
 		public WebRequestInfo userDataRequest;
-		public UserInfo userData;
+		public UserData userData;
 		public UserView credentialsForm;
 		public UserView statusOutputView;
-		public SceneInfo nextScene;
+		public int nextSceneIndex;
 
-		private IForm formInput;
-		private IOutputHandler<TextMessage> outputView;
+		protected IForm formInput;
+		protected IOutputHandler<TextInfo> outputView;
 
-		private void Awake() {
+		protected virtual void Awake() {
 			formInput = credentialsForm.GetInterface<IForm>();
-			outputView = statusOutputView.GetInterface<IOutputHandler<TextMessage>>();
+			outputView = statusOutputView.GetInterface<IOutputHandler<TextInfo>>();
 			formInput.Input += LoginRequest;
 		}
 
-		private void LoginRequest(FormData formData) {
+		protected void LoginRequest(FormInputInfo formData) {
 
 			//Logs any missing form input
 			userDataRequest.requestParams.FindAll((param) => !formData.Entries.ContainsKey(param)).ForEach(
@@ -43,7 +43,7 @@ namespace DungeonCrawlers.Systems
 			//Display form input errors to user
 			if (!formData.IsValidInput) {
 				foreach (string message in formData.StatusMessages)
-					outputView.Output(new TextMessage(LanguagePack.GetString("error"), message));
+					outputView.Output(new TextInfo(LanguagePack.GetString("error"), message));
 				return;
 			}
 
@@ -60,11 +60,11 @@ namespace DungeonCrawlers.Systems
 
 		}
 
-		private void LoginCallback(UnityWebRequest webRequest) {
+		protected virtual void LoginCallback(UnityWebRequest webRequest) {
 			
 			JSON loaderUserData = JSON.ParseString(webRequest.downloadHandler.text);
 			userData.Copy(
-				loaderUserData.Deserialize<UserInfo>( new DeserializeSettings() {
+				loaderUserData.Deserialize<UserData>( new DeserializeSettings() {
 					RequireAllFieldsArePopulated = false
 				})
 			);
@@ -73,11 +73,11 @@ namespace DungeonCrawlers.Systems
 				"Error: " + webRequest.error + "\n" +
 				"Response code:" + webRequest.responseCode + "\n" +
 				"Response: \n" + webRequest.downloadHandler.text;
-			outputView.Output(new TextMessage("Request", requestResponseData));
-			outputView.Output(new TextMessage("Resulting object", userData.ToString()));
+			outputView.Output(new TextInfo("Request", requestResponseData));
+			outputView.Output(new TextInfo("Resulting object", userData.ToString()));
 			
 			statusOutputView.GetInterface<IClosable>().Closed += () => {
-				if (nextScene != null) SceneLoader.LoadSceneAsync(nextScene.SceneIndex).allowSceneActivation = true;
+				SceneLoader.LoadSceneAsync(nextSceneIndex).allowSceneActivation = true;
 			};
 		}
 	}

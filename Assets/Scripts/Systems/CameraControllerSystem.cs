@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DungeonCrawlers.Data;
-using DungeonCrawlers.Data.Struct;
 using DungeonCrawlers.UI;
 using UnityEngine;
 
@@ -15,11 +14,11 @@ namespace DungeonCrawlers.Systems
 		public float cameraSpeedModifier = 1.05f;
 		public Rect limitBounds;
 
-		public RoomCollectionInfo userRooms;
+		public RoomCollectionData userRooms;
 		public bool automaticLimitBounds = true;
 		public Vector2 automaticBoundsPadding = Vector2.zero;
 
-		protected void Awake() {
+		protected virtual void Awake() {
 			if (automaticLimitBounds)
 				userRooms.OnValueChanged += RefreshCamera;
 
@@ -28,15 +27,20 @@ namespace DungeonCrawlers.Systems
 				CameraController;
 		}
 
-		private void OnDestroy() => userRooms.OnValueChanged -= RefreshCamera;
+		protected void OnDestroy() => userRooms.OnValueChanged -= RefreshCamera;
 
-		private void RefreshCamera(RoomInfo obj) => RefreshCamera();
-		private void RefreshCamera() {
+		public void CenterCamera() {
+			Camera.main.transform.position = new Vector3(limitBounds.center.x, limitBounds.center.y, Camera.main.transform.position.z);
+			ZoomCamera(0);
+		}
+
+		protected void RefreshCamera(RoomData obj) => RefreshCamera();
+		protected void RefreshCamera() {
 			RedefineBounds();
 			CenterCamera();
 		}
 
-		private void CameraController(List<Touch> touches) {
+		protected void CameraController(List<Touch> touches) {
 			if (touches.Count == 1) CameraMovementController(touches[0]); else
 			if (touches.Count == 2) CameraZoomController(touches[0], touches[1]);
 		}
@@ -49,7 +53,7 @@ namespace DungeonCrawlers.Systems
 			Gizmos.DrawLine(new Vector2(limitBounds.xMax, limitBounds.y), new Vector2(limitBounds.xMax, limitBounds.yMax));
 		}
 
-		private void CameraMovementController(Touch touch) {
+		protected void CameraMovementController(Touch touch) {
 			//TODO implement camera movement based on the percentual the delta vector traveled on screen
 			Vector2 cameraMoveVector =
 				touch.deltaPosition * Time.deltaTime * cameraSpeedModifier * -1 * (Camera.main.orthographicSize / 5f);
@@ -57,7 +61,7 @@ namespace DungeonCrawlers.Systems
 			ClampToLimitBox();
 		}
 
-		private void CameraZoomController(Touch touchZero, Touch touchOne) {
+		protected void CameraZoomController(Touch touchZero, Touch touchOne) {
 			float prevTouchDistance = (
 				(touchZero.position - touchZero.deltaPosition) -
 				(touchOne.position - touchOne.deltaPosition)).magnitude;
@@ -67,7 +71,7 @@ namespace DungeonCrawlers.Systems
 			ZoomCamera(deltaDistance * Time.deltaTime);
 		}
 
-		private void ZoomCamera(float size) {
+		protected void ZoomCamera(float size) {
 			Camera.main.orthographicSize = Camera.main.orthographicSize + size;
 			ClampToLimitBox();
 			Camera.main.orthographicSize =
@@ -79,7 +83,7 @@ namespace DungeonCrawlers.Systems
 						(limitBounds.width / 2f) / Camera.main.aspect));
 		}
 
-		private void ClampToLimitBox() {
+		protected void ClampToLimitBox() {
 			Transform camTransform = Camera.main.transform;
 			camTransform.position = new Vector3(
 				Mathf.Clamp(camTransform.position.x, limitBounds.xMin + Camera.main.orthographicSize * Camera.main.aspect, limitBounds.xMax - Camera.main.orthographicSize * Camera.main.aspect),
@@ -87,13 +91,13 @@ namespace DungeonCrawlers.Systems
 				camTransform.position.z);
 		}
 
-		private void RedefineBounds() {
+		protected void RedefineBounds() {
 			if (userRooms.Count <= 0) return;
-			ConstructedRect rectBuilder = new ConstructedRect(userRooms[0].Position.x, userRooms[0].Position.y);
+			BoundsRectInfo rectBuilder = new BoundsRectInfo(userRooms[0].Position.x, userRooms[0].Position.y);
 
-			foreach (RoomInfo room in userRooms) {
-				rectBuilder.AddHorizontal(room.Position.x - room.Size.x / 2, room.Position.x + room.Size.x / 2);				
-				rectBuilder.AddVertical(room.Position.y - room.Size.y / 2, room.Position.y + room.Size.y / 2);
+			foreach (RoomData room in userRooms) {
+				rectBuilder.ClampHorizontalBounds(room.Position.x - room.Size.x / 2, room.Position.x + room.Size.x / 2);				
+				rectBuilder.ClampVerticalBounds(room.Position.y - room.Size.y / 2, room.Position.y + room.Size.y / 2);
 			}
 
 			limitBounds = rectBuilder.Rect;
@@ -101,11 +105,6 @@ namespace DungeonCrawlers.Systems
 			limitBounds.yMin -= automaticBoundsPadding.y;
 			limitBounds.xMax += automaticBoundsPadding.x;
 			limitBounds.yMax += automaticBoundsPadding.y;
-		}
-
-		public void CenterCamera() {
-			Camera.main.transform.position = new Vector3(limitBounds.center.x, limitBounds.center.y, Camera.main.transform.position.z);
-			ZoomCamera(0);
 		}
 	}
 }

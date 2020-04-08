@@ -3,7 +3,7 @@ using DungeonCrawlers.Data;
 
 namespace DungeonCrawlers.UI 
 {
-	public interface IForm : IInputHandler<FormData> 
+	public interface IForm : IInputHandler<FormInputInfo> 
 	{
 		bool Enabled { get; set; }
 

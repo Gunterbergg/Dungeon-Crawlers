@@ -10,8 +10,8 @@ namespace DungeonCrawlers.UI
 		public Image progressImage;
 		public float lerptTime = 0.5f;
 
-		private float progress = 0;
-		private Coroutine lerpCoroutine;
+		protected float progress = 0;
+		protected Coroutine lerpCoroutine;
 
 		public bool Enabled { get; set; } = true;
 		public float Progress {

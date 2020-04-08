@@ -3,7 +3,7 @@
 namespace DungeonCrawlers.Systems
 {
 	[ExecuteInEditMode]
-	public class RoomGridSystem : MonoBehaviour
+	public sealed class RoomGridSystem : MonoBehaviour
 	{
 		public Grid grid;
 		public Vector3 offset;

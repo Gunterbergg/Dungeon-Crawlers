@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 namespace DungeonCrawlers.UI
 {
-	public class DialogBoxDisplay : UserView, IClosable, IOutputHandler<TextMessage>
+	public class DialogBoxDisplay : UserView, IClosable, IOutputHandler<TextInfo>
 	{
 		public UserView dialogPrefab;
 		public Transform dialogsContainer;
 		public Button closeButton;
 		public List<UserView> dialogs = new List<UserView>();
 
-		public TextMessage CurrentOutput { get; private set; }
+		public TextInfo CurrentOutput { get; private set; }
 
 		public event Action Closed;
 
@@ -36,9 +36,9 @@ namespace DungeonCrawlers.UI
 			Closed?.Invoke();
 		}
 
-		public void Output(TextMessage output) {
+		public void Output(TextInfo output) {
 			UserView newDialogBox = Instantiate(dialogPrefab, dialogsContainer) as UserView;
-			newDialogBox.GetInterface<IOutputHandler<TextMessage>>()?.Output(output);
+			newDialogBox.GetInterface<IOutputHandler<TextInfo>>()?.Output(output);
 			AddDialog(newDialogBox);
 			CurrentOutput = output;
 			Activate();
@@ -46,7 +46,7 @@ namespace DungeonCrawlers.UI
 
 		public void OutputDefault() {
 			Output(
-				new TextMessage(
+				new TextInfo(
 					LanguagePack.GetString("alert"),
 					LanguagePack.GetString("error")
 				));
@@ -73,6 +73,5 @@ namespace DungeonCrawlers.UI
 			if (dialogs.Count == 0)
 				Close();
 		}
-
 	}
 }

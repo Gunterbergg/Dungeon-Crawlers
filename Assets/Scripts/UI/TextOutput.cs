@@ -7,7 +7,11 @@ namespace DungeonCrawlers.UI
 		public string defaultText = string.Empty;
 
 		public string CurrentOutput { get => GetComponent<Text>().text; set => GetComponent<Text>().text = value; }
-		
+
+		private void OnValidate() {
+			UpdateLabels();
+		}
+
 		public void Clear() {
 			gameObject.GetComponent<Text>().text = string.Empty;
 		}
@@ -25,10 +29,6 @@ namespace DungeonCrawlers.UI
 				defaultText.StartsWith("@") ?
 					LanguagePack.GetString(defaultText.Substring(1)) :
 					defaultText;
-		}
-
-		public void OnValidate() {
-			UpdateLabels();
 		}
 	}
 }

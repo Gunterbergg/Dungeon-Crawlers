@@ -9,12 +9,12 @@ namespace DungeonCrawlers.Systems
 		public UserView roomSelector;
 		public GameObject highlight;
 
-		private void Awake() {
+		protected virtual void Awake() {
 			highlight.SetActive(false);
-			roomSelector.GetInterface<IInputHandler<RoomInfo>>().Input += OnRoomSelected;
+			roomSelector.GetInterface<IInputHandler<RoomData>>().Input += OnRoomSelected;
 		}
 
-		private void OnRoomSelected(RoomInfo selected) {
+		protected void OnRoomSelected(RoomData selected) {
 			highlight.transform.position = selected.Position;
 			highlight.SetActive(true);
 		}

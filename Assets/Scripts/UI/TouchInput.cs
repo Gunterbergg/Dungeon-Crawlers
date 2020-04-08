@@ -33,7 +33,7 @@ namespace DungeonCrawlers.UI
 			StartCoroutine(TouchHandler());
 		}
 
-		private IEnumerator TouchHandler() {
+		protected IEnumerator TouchHandler() {
 			List<Touch> touchesInBounds = new List<Touch>();
 			while (IsHandlingInput) {
 				touchesInBounds.Clear();

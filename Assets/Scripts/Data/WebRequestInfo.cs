@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DungeonCrawlers.Data 
 {
-	[CreateAssetMenu( fileName = "RequestInfo", menuName = "InfoContainer/RequestInfo" )]
-	public class WebRequestInfo : ScriptableObject 
+	[Serializable]
+	public struct WebRequestInfo
 	{
 		public string baseURL;
 		public string resourcePath;

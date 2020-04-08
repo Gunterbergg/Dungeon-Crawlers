@@ -33,6 +33,10 @@ namespace DungeonCrawlers.UI
 				});
 		}
 
+		private void OnValidate() {
+			UpdateLabels();
+		}
+
 		public void UpdateLabels() {
 			input.text = defaultText.StartsWith("@") ? LanguagePack.GetString(defaultText.Substring(1)) : defaultText;
 		}
@@ -52,10 +56,6 @@ namespace DungeonCrawlers.UI
 				yield break;
 			}
 			if (!IsValid()) yield return LanguagePack.GetString("invalid_text");
-		}
-
-		private void OnValidate() {
-			UpdateLabels();
 		}
 	}
 }

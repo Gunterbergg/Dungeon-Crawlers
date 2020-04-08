@@ -8,9 +8,9 @@ namespace DungeonCrawlers.Systems
 		public float speed = 4f;
 		public UserView directionInput;
 
-		private void Awake() => directionInput.GetInterface<IDirectionInput>().Input += Move;
+		protected virtual void Awake() => directionInput.GetInterface<IDirectionInput>().Input += Move;
 
-		private void Move(Vector2 dir) {
+		protected void Move(Vector2 dir) {
 			if (dir.x > 0) GetComponent<SpriteRenderer>().flipX = false; else
 			if (dir.x < 0) GetComponent<SpriteRenderer>().flipX = true;
 			GetComponent<Rigidbody2D>().MovePosition((Vector2)transform.position + (dir * Time.deltaTime * speed));

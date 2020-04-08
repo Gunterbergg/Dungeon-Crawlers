@@ -10,9 +10,9 @@ namespace DungeonCrawlers.UI
         public bool clampInput = true;
         public RectTransform handle;
 
-        private float handleAreaRadius;
-        private Vector3 defaultPosition;
-        private RectTransform handleParent;
+        protected float handleAreaRadius;
+        protected Vector3 defaultPosition;
+        protected RectTransform handleParent;
 
         public event Action<Vector2> Input;
         public event Action<Vector2> InputRelease;
@@ -60,12 +60,12 @@ namespace DungeonCrawlers.UI
             return (handle.position - handleParent.position);
         }
 
-        private Vector2 GetHandlePosClamped(Vector2 pointerPos) {
+        protected Vector2 GetHandlePosClamped(Vector2 pointerPos) {
             Vector2 analogCenter = handleParent.position;
             return analogCenter + Vector2.ClampMagnitude(pointerPos - analogCenter, handleAreaRadius);
         }
-        
-        private IEnumerator OnDirectionInput() {
+
+        protected IEnumerator OnDirectionInput() {
             while (IsHandlingInput) {
                 Input?.Invoke(GetInput());
                 yield return null;

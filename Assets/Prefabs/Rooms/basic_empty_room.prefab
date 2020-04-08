@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8820164175543950321}
   - component: {fileID: 8820164175543950323}
-  - component: {fileID: 8820164175543950320}
   m_Layer: 8
-  m_Name: Room
+  m_Name: basic_empty_room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,19 +43,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18758786e30c4b14194dc3f8a2da0bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomTiles: {fileID: 11400000, guid: 5b499c87af5a32247bc647773feecfc3, type: 2}
+  roomTiles:
+    walls:
+      upperLeftTiles:
+      - {fileID: 6823164040461557933, guid: 807b53aaff9c8c047a12c111eeafbdf1, type: 3}
+      upperRightTiles:
+      - {fileID: 5948399220857077073, guid: 7418efde57a4eb9459975d599c74120e, type: 3}
+      lowerRightTiles:
+      - {fileID: 385225077653731247, guid: 919035fc56538b74799388aa5e5a2403, type: 3}
+      lowerLeftTiles:
+      - {fileID: 1413424125063160816, guid: 3fc5288de31291b429866b3b7ca08802, type: 3}
+      leftTiles:
+      - {fileID: 5170416119797184281, guid: 5691a290589ae264a97353f697dfe6aa, type: 3}
+      - {fileID: 5343326217776865586, guid: 06b08ab34e4852c4d894c86dbfe59314, type: 3}
+      - {fileID: 6448628322719876197, guid: 42975936768d55441a976b9085953e71, type: 3}
+      upperTiles:
+      - {fileID: 2590541481334552531, guid: 2a3c41026f10eef45b58ea1ecbd2d99d, type: 3}
+      - {fileID: 2299448490739566066, guid: 8fe5b5bdc4130d248a062c4a77031f55, type: 3}
+      - {fileID: 2179487716987520526, guid: e32dcb430b041f246ba38d4323a08a7d, type: 3}
+      - {fileID: 6373411115455109568, guid: 71330c03770fe614a9dbd51aca64cc56, type: 3}
+      rightTiles:
+      - {fileID: 6114554776799325786, guid: 73d1557e9623f4c4c8190426c8625a3d, type: 3}
+      - {fileID: 1513019406340712445, guid: caf6cbca168fca44b90abfa4ca3b4666, type: 3}
+      - {fileID: 6714419862691482800, guid: de28d3a0520ee6545a22359cf909a764, type: 3}
+      lowerTiles:
+      - {fileID: 5574089217900855963, guid: e4db8faaa1467a94d91dd1ca5f84aa43, type: 3}
+      - {fileID: 2574548835990204564, guid: 734c899451eec6a4186afb63fc58f580, type: 3}
+      - {fileID: 6266774752087770663, guid: 0dc5e40c84c18d44b8cac6be6dfb5a01, type: 3}
+      - {fileID: 3614282952256646542, guid: b88b1c2b5bb1bf04295ebadb6e8c2360, type: 3}
+    wallSidedFloors:
+      upperLeftTiles:
+      - {fileID: 7940633750063915896, guid: 2df11fbb9aedeb64daed5c28bcb6b3cb, type: 3}
+      upperRightTiles:
+      - {fileID: 2549462564308583084, guid: b78983ca21be3984da30650ec7fdaef6, type: 3}
+      lowerRightTiles:
+      - {fileID: 7071621782547015930, guid: 8cd33de8b822b9e44a42612e7a94f49c, type: 3}
+      lowerLeftTiles:
+      - {fileID: 733096041256095687, guid: 3a4e5592467efa34caa6fe565e6085e6, type: 3}
+      leftTiles:
+      - {fileID: 484120455153549000, guid: 21024b7c2314c494482550320d97b6ac, type: 3}
+      upperTiles:
+      - {fileID: 6384202421531874536, guid: d07ec4f9b50e20c48b6b8e5e4738418b, type: 3}
+      - {fileID: 8522474244990136502, guid: 790eb3c24a305e340a361cad3d51549d, type: 3}
+      rightTiles:
+      - {fileID: 3585080840228486219, guid: 7488aebcf951de74cbece0607ecaf4e9, type: 3}
+      lowerTiles:
+      - {fileID: 8747253265482543174, guid: 2b6e5280e3d8334469b6b7d07e02ab1d, type: 3}
+      - {fileID: 4104750771596855946, guid: 1863d090d6fb5894480bae7568d90b13, type: 3}
+    floors:
+    - {fileID: 9067691662291471781, guid: b594c9080b21f434ea810e1209837ca7, type: 3}
+    - {fileID: 4116392080691695102, guid: 1fabd2941e70288428b13581379efdee, type: 3}
+    - {fileID: 4452865434847292562, guid: 3c16257ec152ed9439ea66e03f7b5829, type: 3}
+    - {fileID: 7841619662818412476, guid: 52a1ad72e820263488298f02c35edf77, type: 3}
+    - {fileID: 1720952573282827402, guid: 24d2b1e202be8cb4396bf7f2397ee9a0, type: 3}
+    - {fileID: 6402045111107182988, guid: 6bd297a205b441245ad374ab59b1ca88, type: 3}
+    - {fileID: 5887959891185527040, guid: a58a9fec67423fc4697fa218df5b2b22, type: 3}
+    - {fileID: 2282373991958008744, guid: ef1eacba23ac0ff4f8bfe6fc038f6a39, type: 3}
+    - {fileID: 7891408861018329049, guid: 6e53af1056762654fab396917505ed20, type: 3}
+    - {fileID: 1881639978813359180, guid: 05d6ae8707a6e2d40899cb1a02516419, type: 3}
+    - {fileID: 6426469077789034163, guid: 18e1286a1f2f61143a73827146abcea5, type: 3}
+    - {fileID: 7617950762634163659, guid: 3d2f7fee5a69ec64ca25d443c3aad329, type: 3}
   roomSize: {x: 16, y: 16}
---- !u!114 &8820164175543950320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8820164175543950318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba6ab9521b17f5449be3af123b981b90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grid: {fileID: 0}
-  offset: {x: 0.5, y: 0.5, z: 0}

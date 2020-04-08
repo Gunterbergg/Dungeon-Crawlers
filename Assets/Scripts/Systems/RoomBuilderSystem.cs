@@ -1,23 +1,23 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using DungeonCrawlers.Data;
+using UnityEngine;
 
 namespace DungeonCrawlers.Systems
 {
 	public class RoomBuilderSystem : MonoBehaviour
 	{
-		public RoomTileInfo roomTiles;
+		public RoomTileSetInfo roomTiles;
 		public Vector2 roomSize;
 
-		private Vector3 roomCenter;
-		private float offset = 0.5f;
+		protected Vector3 roomCenter;
+		protected float offset = 0.5f;
 
 		public Vector3 UpperLeftPos { get; private set; }
 		public Vector3 UpperRightPos { get; private set; }
 		public Vector3 LowerRightPos { get; private set; }
 		public Vector3 LowerLeftPos { get; private set; }
 
-		private void Awake() {
+		protected virtual void Awake() {
 			roomSize = new Vector2(Mathf.Max(4, roomSize.x), Mathf.Max(4, roomSize.y));
 			roomCenter = transform.position;
 
@@ -77,17 +77,17 @@ namespace DungeonCrawlers.Systems
 					roomTiles.floors);
 		}
 
-		private void RectangleFill(Rect rectangle, List<GameObject> tilePoolList) {
+		protected void RectangleFill(Rect rectangle, List<GameObject> tilePoolList) {
 			for (float xPos = rectangle.x; xPos <= (rectangle.x + rectangle.width); xPos++)
 				for (float yPos = rectangle.y; yPos <= (rectangle.y + rectangle.height); yPos++)
 					CreateTile(GetRandomTile(tilePoolList), new Vector3(xPos, yPos));
 		}
 
-		private GameObject GetRandomTile(List<GameObject> tiles) {
+		protected GameObject GetRandomTile(List<GameObject> tiles) {
 			return tiles[Random.Range(0, tiles.Count)];
 		}
 
-		private void CreateTile(GameObject tile, Vector3 pos) {
+		protected void CreateTile(GameObject tile, Vector3 pos) {
 			Instantiate(tile, pos, Quaternion.identity, transform);
 		}
 	}

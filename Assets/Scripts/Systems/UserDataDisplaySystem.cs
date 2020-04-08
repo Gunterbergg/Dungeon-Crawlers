@@ -5,8 +5,9 @@ using UnityEngine;
 
 namespace DungeonCrawlers.Systems
 {
-	public class UserDataDisplaySystem : MonoBehaviour {
-		public UserInfo userData;
+	public class UserDataDisplaySystem : MonoBehaviour 
+	{
+		public UserData userData;
 		public UserView nameView;
 		public UserView levelView;
 		public UserView experienceView;
@@ -21,8 +22,7 @@ namespace DungeonCrawlers.Systems
 
 		protected virtual void OnDestroy() => userData.OnChanged -= Refresh;
 
-		private void Refresh(object sender, EventArgs args) => Refresh();	
-		private void Refresh() {
+		protected void Refresh() {
 			nameView.GetInterface<IOutputHandler<string>>()
 				.Output(userData.Name);
 			levelView.GetInterface<IOutputHandler<string>>()

@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 namespace DungeonCrawlers.UI 
 {
-	public class DialogBox : UserView, IClosable, IOutputHandler<TextMessage>
+	public class DialogBox : UserView, IClosable, IOutputHandler<TextInfo>
 	{
 		public Button closeButton;
 		public Text titleTextBox;
 		public Text messageTextBox;
 
-		private List<TextMessage> dialogQuery = new List<TextMessage>();
-		private bool isDisplayingMessage = false;
+		protected List<TextInfo> dialogQuery = new List<TextInfo>();
+		protected bool isDisplayingMessage = false;
 
-		public TextMessage CurrentOutput { get; private set; }
+		public TextInfo CurrentOutput { get; private set; }
 
 		protected override void Awake() {
 			base.Awake();
@@ -25,7 +25,7 @@ namespace DungeonCrawlers.UI
 
 		public event Action Closed;
 
-		public void Output(TextMessage output) {
+		public void Output(TextInfo output) {
 			dialogQuery.Add(output);
 			if (!isDisplayingMessage) { 
 				NextAlert();
@@ -34,7 +34,7 @@ namespace DungeonCrawlers.UI
 
 		public void OutputDefault() {
 			Output(
-				new TextMessage(
+				new TextInfo(
 					LanguagePack.GetString("alert"),
 					LanguagePack.GetString("error")
 				));

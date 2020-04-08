@@ -1,25 +1,24 @@
-﻿using DungeonCrawlers.Data;
-using Leguar.TotalJSON;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using DungeonCrawlers.Data;
 using UnityEngine;
+using Leguar.TotalJSON;
 
 namespace DungeonCrawlers.Systems
 {
 	public class UserRoomsLoaderSystem : MonoBehaviour
 	{
-		public RoomCollectionInfo loadedRooms;
 		public WebRequestInfo roomRequest;
-		public UserInfo userData;
+		public RoomCollectionData loadedRooms;
+		public UserData userData;
 
-		private void Awake() {
+		protected virtual void Awake() {
 			loadedRooms.LoadedRooms = null;
 			LoadUserRooms(userData.User_id.ToString());
 			userData.OnPropertyChanged += LoadUserRooms;
 		}
 
-		private void OnDestroy() => userData.OnPropertyChanged -= LoadUserRooms;
+		protected virtual void OnDestroy() => userData.OnPropertyChanged -= LoadUserRooms;
 
-		public void LoadUserRooms(object sender, string userId) => LoadUserRooms(userId);
 		public void LoadUserRooms(string userId) {
 			HTTPClient.GetRequest(
 				roomRequest.RequestURL,

@@ -8,8 +8,8 @@ namespace DungeonCrawlers.UI
 	public class TouchDirectionInput : UserView, IDirectionInput, IPointerDownHandler, IPointerUpHandler, IDragHandler
 	{
 		public bool useInvertedInput = true;
-		private Vector2 currentDir = Vector2.zero;
-		private Vector2 pointerDownPos;
+		protected Vector2 currentDir = Vector2.zero;
+		protected Vector2 pointerDownPos;
 
 		public event Action<Vector2> Input;
 		public event Action<Vector2> InputRelease;
@@ -51,7 +51,7 @@ namespace DungeonCrawlers.UI
 			IsHandlingInput = false;
 		}
 
-		private IEnumerator OnDirectionInput() {
+		protected IEnumerator OnDirectionInput() {
 			while (IsHandlingInput) {
 				Input?.Invoke(GetInput());
 				yield return null;

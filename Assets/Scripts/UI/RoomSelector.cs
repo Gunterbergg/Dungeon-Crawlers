@@ -1,16 +1,16 @@
-﻿using DungeonCrawlers.Data;
-using System;
+﻿using System;
+using DungeonCrawlers.Data;
 using UnityEngine;
 
 namespace DungeonCrawlers.UI
 {
-	public class RoomSelector : UserView, IInputHandler<RoomInfo>
+	public class RoomSelector : UserView, IInputHandler<RoomData>
 	{
-		public event Action<RoomInfo> Input;
+		public event Action<RoomData> Input;
 		public UserView touchInput;
-		public RoomCollectionInfo userRooms;
+		public RoomCollectionData userRooms;
 
-		private RoomInfo lastSelected = null;
+		protected RoomData lastSelected = null;
 
 		public bool InputEnabled { get; set; } = true;
 
@@ -22,7 +22,7 @@ namespace DungeonCrawlers.UI
 		protected void OnTouchInput(Touch touch) {
 			if (!InputEnabled) return;
 			Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
-			foreach (RoomInfo room in userRooms) { 
+			foreach (RoomData room in userRooms) { 
 				if (room.OverlapsPoint(touchPos) && room != lastSelected) { 
 					lastSelected = room;
 					Input?.Invoke(room);
