@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using UnityEngine.UI;
+using TMPro;
 
 namespace DungeonCrawlers.UI
 {
 	public class TextInput : UserView, IDataEntry, IInputHandler<string>
 	{
 		public string entryName;
-		public InputField input;
+		public TMP_InputField input;
 		public string defaultText = string.Empty;
 		public string regularExpression = string.Empty;
 
@@ -22,27 +22,26 @@ namespace DungeonCrawlers.UI
 		protected override void Awake() {
 			base.Awake();
 			EntryData = input?.text;
-			input?.onEndEdit.AddListener(
-				(text) => {
-					if (!InputEnabled) {
-						input.text = (string)EntryData;
-					} else {  
-						EntryData = (object)text;
-						Input?.Invoke(text);
-					}
-				});
+			input?.onEndEdit.AddListener((text) => {
+				if (!InputEnabled) {
+					input.text = (string)EntryData;
+				} else {  
+					EntryData = (object)text;
+					Input?.Invoke(text);
+				}
+			});
 		}
 
-		private void OnValidate() {
-			UpdateLabels();
-		}
+		private void OnValidate() => UpdateLabels();
+
+		public bool IsEmpty() => string.IsNullOrEmpty(input.text);
 
 		public void UpdateLabels() {
-			input.text = defaultText.StartsWith("@") ? LanguagePack.GetString(defaultText.Substring(1)) : defaultText;
-		}
-
-		public bool IsEmpty() {
-			return string.IsNullOrEmpty(input.text);
+			TMP_InputField textMesh = gameObject.GetComponent<TMP_InputField>();
+			if (textMesh == null) return;
+			if (defaultText.StartsWith("@"))
+			textMesh.text = LanguagePack.GetString(defaultText.Substring(1));
+			else textMesh.text = defaultText; 
 		}
 
 		public bool IsValid() {

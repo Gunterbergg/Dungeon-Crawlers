@@ -1053,7 +1053,7 @@ namespace Leguar.TotalJSON {
 		internal override object zDeserialize(Type type, string toFieldName, DeserializeSettings deserializeSettings) {
 
 			object obj = Activator.CreateInstance(type);
-
+			
 			if (type.IsGenericType) {
 				if (type.GetGenericTypeDefinition()==typeof(Dictionary<,>)) {
 					Type[] dictTypes = type.GetGenericArguments();
@@ -1063,7 +1063,8 @@ namespace Leguar.TotalJSON {
 					}
 					bool keyIntType = (dictTypes[0]==typeof(int));
 					bool keyLongType = (dictTypes[0]==typeof(long));
-					if (!keyStringType && !keyIntType && !keyLongType) {
+					bool keyEnumType = (dictTypes[0].IsSubclassOf(typeof(Enum)));
+					if (!keyStringType && !keyIntType && !keyLongType && !keyEnumType) {
 						throw (DeserializeException.forDictionaryKeyTypeNotKnown(dictTypes[0],toFieldName));
 					}
 					IDictionary objDict = (IDictionary)(obj);
@@ -1074,6 +1075,8 @@ namespace Leguar.TotalJSON {
 							objDict.Add(int.Parse(stringKey), sValue);
 						} else if (keyLongType) {
 							objDict.Add(long.Parse(stringKey), sValue);
+						} else if (keyEnumType) {
+							objDict.Add(Enum.Parse(dictTypes[0], stringKey), sValue);
 						} else {
 							objDict.Add(stringKey, sValue);
 						}

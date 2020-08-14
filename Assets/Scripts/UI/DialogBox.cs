@@ -5,64 +5,84 @@ using UnityEngine.UI;
 
 namespace DungeonCrawlers.UI 
 {
-	public class DialogBox : UserView, IClosable, IOutputHandler<TextInfo>
+	public class DialogBox : UserView, IClosable, IOutputHandler<TextMessageInfo>, IOutputHandler<string>
 	{
 		public Button closeButton;
-		public Text titleTextBox;
-		public Text messageTextBox;
+		public UserView titleTextView;
+		public UserView messageTextView;
 
-		protected List<TextInfo> dialogQuery = new List<TextInfo>();
-		protected bool isDisplayingMessage = false;
+		protected struct DialogBoxQueryItem {
+			public TextMessageInfo messageInfo;
+			public Action callback;
 
-		public TextInfo CurrentOutput { get; private set; }
-
-		protected override void Awake() {
-			base.Awake();
-			if (closeButton != null) {
-				closeButton.onClick.AddListener(NextAlert);
+			public DialogBoxQueryItem(TextMessageInfo messageInfo, Action callback) {
+				this.messageInfo = messageInfo;
+				this.callback = callback;
 			}
 		}
 
-		public event Action Closed;
+		protected IOutputHandler<string> titleText;
+		protected IOutputHandler<string> messageText;
+		protected List<DialogBoxQueryItem> dialogQuery = new List<DialogBoxQueryItem>();
+		protected bool isDisplayingMessage = false;
 
-		public void Output(TextInfo output) {
-			dialogQuery.Add(output);
-			if (!isDisplayingMessage) { 
+		public TextMessageInfo CurrentOutput { get; private set; }
+		string IOutputHandler<string>.CurrentOutput { get => CurrentOutput.Content; }
+
+		public event Action Closed;
+		
+		protected override void Awake() {
+			base.Awake();
+			HandlersReferenceSetup();
+		}
+
+		public void Output(string output, Action callback = null) => Output(new TextMessageInfo(output), callback);
+
+		public void Output(TextMessageInfo output, Action callback = null) {
+			dialogQuery.Add(new DialogBoxQueryItem(output, callback));
+			if (!isDisplayingMessage) {
+				Activate();
 				NextAlert();
 			}
 		}
 
-		public void OutputDefault() {
-			Output(
-				new TextInfo(
-					LanguagePack.GetString("alert"),
-					LanguagePack.GetString("error")
-				));
+		public void NextAlert() {
+			if (dialogQuery.Count <= 0) {
+				Close();
+				return;
+			}
+
+			DialogBoxQueryItem nextDialog = dialogQuery[0];
+			CurrentOutput = nextDialog.messageInfo;
+			
+			titleText.Output(CurrentOutput.Title);
+			messageText.Output(CurrentOutput.Content);
+			
+			dialogQuery.RemoveAt(0);
+			isDisplayingMessage = true;
+			Activate();
+			nextDialog.callback?.Invoke();			
 		}
 
 		public void Clear() {
-			titleTextBox.text = string.Empty;
-			messageTextBox.text = string.Empty;
-			isDisplayingMessage = false;
+			titleText?.Output(string.Empty);
+			messageText?.Output(string.Empty);
 		}
 
 		public void Close() {
 			DeActivate();
-			Clear();
 			Closed?.Invoke();
+			isDisplayingMessage = false;
+			Clear();
 		}
 
-		public void NextAlert() {
-			if (dialogQuery.Count > 0) {
-				CurrentOutput = dialogQuery[0];
-				titleTextBox.text = CurrentOutput.Title;
-				messageTextBox.text = CurrentOutput.Content;
-				dialogQuery.RemoveAt(0);
-				isDisplayingMessage = true;
-				Activate();
-			} else {
-				Close();
-			}
+		public void OutputDefault() => Output(new TextMessageInfo(LanguagePack.GetString("alert"),LanguagePack.GetString("error")));
+
+		private void HandlersReferenceSetup() {
+			//TODO add logging and exception handling
+			if (titleTextView != null) titleText = titleTextView.GetInterface<IOutputHandler<string>>();
+			if (messageTextView != null) messageText = messageTextView.GetInterface<IOutputHandler<string>>();
+			if (closeButton != null) closeButton.onClick.AddListener(NextAlert);
 		}
 	}
 }

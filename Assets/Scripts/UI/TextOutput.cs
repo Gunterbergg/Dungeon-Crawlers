@@ -1,4 +1,6 @@
 ﻿using UnityEngine.UI;
+using TMPro;
+using System;
 
 namespace DungeonCrawlers.UI
 {
@@ -6,29 +8,23 @@ namespace DungeonCrawlers.UI
 	{
 		public string defaultText = string.Empty;
 
-		public string CurrentOutput { get => GetComponent<Text>().text; set => GetComponent<Text>().text = value; }
+		public string CurrentOutput { get => GetComponent<TextMeshProUGUI>().text; set => Output(value); }
 
-		private void OnValidate() {
-			UpdateLabels();
-		}
+		private void OnValidate() => OutputDefault();
 
-		public void Clear() {
-			gameObject.GetComponent<Text>().text = string.Empty;
-		}
+		public virtual void Clear() => gameObject.GetComponent<TextMeshProUGUI>().text = string.Empty;
 
-		public void Output(string output) {
-			gameObject.GetComponent<Text>().text = LanguagePack.GetString(output);
-		}
+		public virtual void OutputDefault() => Output(defaultText);
 
-		public void OutputDefault() {
-			Output(defaultText);
-		}
+		public virtual void Output(string output, Action callback = null) {
+			TextMeshProUGUI textMesh = gameObject.GetComponent<TextMeshProUGUI>();
+			if (textMesh == null) return;
 
-		public void UpdateLabels() {
-			CurrentOutput = 
-				defaultText.StartsWith("@") ?
-					LanguagePack.GetString(defaultText.Substring(1)) :
-					defaultText;
+			if (output.StartsWith("@"))
+			textMesh.text = LanguagePack.GetString(output.Substring(1)); else
+			textMesh.text = output;
+
+			callback?.Invoke();
 		}
 	}
 }

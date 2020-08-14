@@ -1,5 +1,4 @@
 ﻿using System;
-using DungeonCrawlers.Data;
 using UnityEngine;
 
 namespace DungeonCrawlers.UI

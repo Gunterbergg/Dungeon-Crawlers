@@ -1,84 +1,53 @@
-﻿using System.Collections.Generic;
+﻿using DungeonCrawlers.Data;
 using DungeonCrawlers.UI;
-using DungeonCrawlers.Data;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Events;
 using Leguar.TotalJSON;
 
 namespace DungeonCrawlers.Systems
 {
 	public class UserDataLoaderSystem : MonoBehaviour
 	{
-		public WebRequestInfo userDataRequest;
-		public UserData userData;
-		public UserView credentialsForm;
 		public UserView statusOutputView;
-		public int nextSceneIndex;
+		public UnityEvent onSerialized;
 
-		protected IForm formInput;
-		protected IOutputHandler<TextInfo> outputView;
+		private IOutputHandler<TextMessageInfo> statusOutput;
+		private IClosable closePrompt;
 
 		protected virtual void Awake() {
-			formInput = credentialsForm.GetInterface<IForm>();
-			outputView = statusOutputView.GetInterface<IOutputHandler<TextInfo>>();
-			formInput.Input += LoginRequest;
+			LoaderSetup();
 		}
 
-		protected void LoginRequest(FormInputInfo formData) {
-
-			//Logs any missing form input
-			userDataRequest.requestParams.FindAll((param) => !formData.Entries.ContainsKey(param)).ForEach(
-				(param) => Logger.Register(
-					"Form " + credentialsForm.name + " does not contain the '" + param + "' paramater", debug: true)
-			);
-			userDataRequest.requestHeaders.FindAll((param) => !formData.Entries.ContainsKey(param)).ForEach(
-				(param) => Logger.Register(
-					"Form " + credentialsForm.name + " does not contain the '" + param + "' header", debug: true)
-			);
-
-			//Quits if the form is missing an input
-			if (!formInput.ContainsEntries(userDataRequest.requestParams)) return;
-			if (!formInput.ContainsEntries(userDataRequest.requestHeaders)) return;
-
-			//Display form input errors to user
-			if (!formData.IsValidInput) {
-				foreach (string message in formData.StatusMessages)
-					outputView.Output(new TextInfo(LanguagePack.GetString("error"), message));
+		public void RefreshData() {
+			//TODO add logging and exception handling
+			if (!Session.Instance.links.ContainsKey("userData")) {
+				statusOutput.Output(new TextMessageInfo("@operation_error", "@session_error"));
 				return;
 			}
 
-			//Creates and assign parameters
-			Dictionary<string, string> requestParams = new Dictionary<string, string>();
-			Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
-
-			userDataRequest.requestParams.ForEach((param) => requestParams.Add(param, formData.Entries[param].ToString()));
-			userDataRequest.requestHeaders.ForEach((param) => requestParams.Add(param, formData.Entries[param].ToString()));
-
-			//Sends request and outputs results
-			HTTPClient.GetRequest(
-				userDataRequest.RequestURL, requestParams, requestHeaders, LoginCallback);
-
+			Dictionary<string, string> headers = new Dictionary<string, string>();
+			headers.Add("Authorization", "Bearer " + Session.Instance.token);
+			UnityWebRequestAsyncOperation loadRequest = 
+				HTTPClient.GetRequest(Session.Instance.links["userData"].href, SerializeUserData, headers);
 		}
 
-		protected virtual void LoginCallback(UnityWebRequest webRequest) {
-			
-			JSON loaderUserData = JSON.ParseString(webRequest.downloadHandler.text);
-			userData.Copy(
-				loaderUserData.Deserialize<UserData>( new DeserializeSettings() {
-					RequireAllFieldsArePopulated = false
-				})
-			);
+		private void SerializeUserData(UnityWebRequest request) {
+			if (request.responseCode != 200) {
+				statusOutput.Output(new TextMessageInfo("@operation_error", "@session_error"));
+				return;
+			}
+			Session.Instance.User = 
+				JSON.ParseString(request.downloadHandler.text)
+				.Deserialize<User>(DataUtility.deserializationSettings);
+			onSerialized?.Invoke();
+		}
 
-			string requestResponseData =
-				"Error: " + webRequest.error + "\n" +
-				"Response code:" + webRequest.responseCode + "\n" +
-				"Response: \n" + webRequest.downloadHandler.text;
-			outputView.Output(new TextInfo("Request", requestResponseData));
-			outputView.Output(new TextInfo("Resulting object", userData.ToString()));
-			
-			statusOutputView.GetInterface<IClosable>().Closed += () => {
-				SceneLoader.LoadSceneAsync(nextSceneIndex).allowSceneActivation = true;
-			};
+		private void LoaderSetup() {
+			//TODO add logging and exception handling
+			statusOutput = statusOutputView?.GetInterface<IOutputHandler<TextMessageInfo>>();
+			closePrompt = statusOutputView?.GetInterface<IClosable>();
 		}
 	}
 }

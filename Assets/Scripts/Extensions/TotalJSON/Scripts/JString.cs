@@ -198,6 +198,9 @@ namespace Leguar.TotalJSON {
 				return this.AsString();
 			}
 
+			if (type.IsEnum && !String.IsNullOrEmpty(this.AsString()))
+				return Enum.Parse(type, this.AsString());
+
 			throw (DeserializeException.forNonMatchingType(this,type,toFieldName));
 
 		}

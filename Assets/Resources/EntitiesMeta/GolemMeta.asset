@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b357370563a04c4c9b38bbda43d8082, type: 3}
+  m_Name: GolemMeta
+  m_EditorClassIdentifier: 
+  type: 2
+  displayName: 
+  description: 
+  selectableCard: {fileID: 2622988638455107719, guid: 0aad4245ca337064c80a309d77e1bc49,
+    type: 3}
+  prefabs:
+  - level: 1
+    prefab: {fileID: 7542756093490445865, guid: 109431fc6e0c05947af5884e975f3997,
+      type: 3}
+  - level: 2
+    prefab: {fileID: 7542756093490445865, guid: c78366f5e55e08c4db7f771ce5ed919d,
+      type: 3}
+  - level: 3
+    prefab: {fileID: 7542756093490445865, guid: a7b0fe59fbfd9de46a7936188e8b94eb,
+      type: 3}
+  - level: 4
+    prefab: {fileID: 7542756093490445865, guid: 5eaf0a3bf534a134a9322d7aa5a82310,
+      type: 3}

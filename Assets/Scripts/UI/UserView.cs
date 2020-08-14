@@ -1,11 +1,23 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DungeonCrawlers.UI 
 {
-	[Serializable]
 	public abstract class UserView : MonoBehaviour
 	{
+		public UserView Instance { get; private set; }
+		
+		public static UserView CreateView(GameObject view) {
+			return Instantiate(view, GameObject.FindGameObjectWithTag("Canvas").transform).GetComponent<UserView>();
+		}
+
+		public static UserView GetInstance(GameObject view) {
+			UserView viewComponent = view.GetComponent<UserView>();
+			if (viewComponent.Instance == null) 
+				viewComponent.Instance = CreateView(view);
+			
+			return viewComponent.Instance;
+		}
+
 		protected virtual void Awake() {
 			if (!enabled) DeActivate();
 		}
@@ -22,12 +34,12 @@ namespace DungeonCrawlers.UI
 			Destroy(gameObject);
 		}
 
-		public TypeCast GetInterface<TypeCast>() where TypeCast : class {
+		public virtual TypeCast GetInterface<TypeCast>() where TypeCast : class {
 			TypeCast castObj = this as TypeCast;
 			if (castObj == null)
 				Logger.Register(
 					$"User view '{gameObject.name}' view does not contains '{typeof(TypeCast).Name}' functionality",
-					"ERROR",debug:true);
+					"ERROR", debug:true);
 			return castObj;
 		}
 	}

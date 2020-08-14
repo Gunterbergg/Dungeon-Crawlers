@@ -5,57 +5,63 @@ using UnityEngine.UI;
 
 namespace DungeonCrawlers.UI
 {
-	public class ProgressBar : UserView, IProgressBar
+	public class ProgressBar : UserView, IProgressHandler
 	{
 		public Image progressImage;
-		public float lerptTime = 0.5f;
+		public float lerpAmount = 0.5f;
+		new public bool enabled = true;
 
-		protected float progress = 0;
-		protected Coroutine lerpCoroutine;
+		private Coroutine lerpCoroutine;
 
-		public bool Enabled { get; set; } = true;
-		public float Progress {
-			get => progress;
-			set => Output(value);
+		public bool Enabled { 
+			get => enabled;
+			set {
+				enabled = value;
+				Output(CurrentOutput);
+			}
 		}
-		public float CurrentOutput { get; private set; }
+		public float CurrentOutput { get; set; } = 0f;
+		public float LerpTime { get => lerpAmount; set => lerpAmount = value; }
 
-		public event Action<float> OnValueChanged;
+		public event Action<float> ValueChanged;
+		public event Action Completed;
 
 		protected override void Awake() {
 			base.Awake();
 			progressImage.type = Image.Type.Filled;
+			CurrentOutput = progressImage.fillAmount;
 		}
 
-		public void Clear() {
-			Output(0f);
-		}
+		public virtual void Output(float output, Action callback = null) {
+			CurrentOutput = Mathf.Clamp01(output);
+			if (!Enabled) return;
 
-		public void Output(float output) {
-			if (!Enabled) return; 
-			progress = Mathf.Clamp01(output);
-			CurrentOutput = progress;
 			if (lerpCoroutine != null) StopCoroutine(lerpCoroutine);
-			lerpCoroutine = StartCoroutine(LerpOutput());
+			lerpCoroutine = StartCoroutine(LerpOutput(CurrentOutput, LerpTime, callback));
 		}
 
-		public void OutputDefault() {
-			Clear();
-		}
+		public virtual void OutputDefault() => Output(0f);
 
-		protected IEnumerator LerpOutput() {
+		public virtual void Clear() => OutputDefault();
+
+		protected void RaiseCompletedEvent() => Completed?.Invoke();
+		protected void RaiseValueChangedEvent() => ValueChanged?.Invoke(CurrentOutput);
+
+		protected IEnumerator LerpOutput(float targetValue, float lerpValue, Action callback = null) {
 			float elapsedTime = 0f;
 			float intialValue = progressImage.fillAmount;
-			float lerpTime = this.lerptTime;
-			while (elapsedTime < lerptTime) {
+			while (elapsedTime < lerpValue) {
 				if (Enabled) {
-					progressImage.fillAmount = Mathf.Lerp(intialValue, progress, elapsedTime / lerptTime);
+					progressImage.fillAmount = Mathf.Lerp(intialValue, targetValue, elapsedTime / lerpValue);
 					elapsedTime += Time.deltaTime;
 				}
 				yield return null;
 			}
+			progressImage.fillAmount = targetValue;
 
-			OnValueChanged?.Invoke(progress);
+			callback?.Invoke();
+			if (targetValue == 1) RaiseCompletedEvent();
+			RaiseValueChangedEvent();
 		}
 	}
 }

@@ -22,7 +22,7 @@ namespace Leguar.TotalJSON.Internal {
 					if (key.Equals(debugName)) {
 						return; // Adding same object with same name, all done
 					}
-					content.Remove(key); // Remove previous one so that same object is not in debug twice (but this allows "changing name" of debugged object)
+					content.Remove(key);
 					break;
 				}
 			}

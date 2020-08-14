@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b357370563a04c4c9b38bbda43d8082, type: 3}
+  m_Name: SlimeMeta
+  m_EditorClassIdentifier: 
+  type: 0
+  displayName: 
+  description: 
+  selectableCard: {fileID: 2622988638455107719, guid: d340f482a142fc64d810e43d8c0dd97a,
+    type: 3}
+  prefabs:
+  - level: 1
+    prefab: {fileID: 7542756093490445865, guid: c8f3270459ccbab4ca915bc759fa333f,
+      type: 3}
+  - level: 2
+    prefab: {fileID: 7542756093490445865, guid: 9ec26d60e4449424f92a9a8a023d6a2f,
+      type: 3}
+  - level: 3
+    prefab: {fileID: 7542756093490445865, guid: bf29115cb61a9ee4a8d1b1b38e489acb,
+      type: 3}
+  - level: 4
+    prefab: {fileID: 7542756093490445865, guid: 11c2f081c2f1edb45a15fad98261e693,
+      type: 3}

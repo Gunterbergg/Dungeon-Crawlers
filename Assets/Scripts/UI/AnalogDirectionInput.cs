@@ -7,8 +7,9 @@ namespace DungeonCrawlers.UI
 { 
     public class AnalogDirectionInput : UserView, IDirectionInput, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
-        public bool clampInput = true;
         public RectTransform handle;
+        public bool clampInput = true;
+        public bool showDisabled = false;
 
         protected float handleAreaRadius;
         protected Vector3 defaultPosition;
@@ -29,7 +30,7 @@ namespace DungeonCrawlers.UI
     }
 
         public void OnPointerDown(PointerEventData pointerData) {
-            if (IsHandlingInput || !InputEnabled) return;
+            if (IsHandlingInput) return;
             defaultPosition = handle.localPosition;
             IsHandlingInput = true;
             StartCoroutine(OnDirectionInput());
@@ -66,7 +67,7 @@ namespace DungeonCrawlers.UI
         }
 
         protected IEnumerator OnDirectionInput() {
-            while (IsHandlingInput) {
+            while (IsHandlingInput && InputEnabled) {
                 Input?.Invoke(GetInput());
                 yield return null;
             }

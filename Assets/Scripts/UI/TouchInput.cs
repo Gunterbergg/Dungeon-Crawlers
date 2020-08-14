@@ -8,7 +8,7 @@ namespace DungeonCrawlers.UI
 {
 	public class TouchInput : UserView, IInputHandler<Touch>, IInputHandler<List<Touch>>, IPointerDownHandler
 	{
-		private bool inputEnabled = true;
+		public bool inputEnabled = true;
 
 		public event Action<Touch> OnTouchInput;
 		public event Action<List<Touch>> OnTouchesInput;

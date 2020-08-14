@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b357370563a04c4c9b38bbda43d8082, type: 3}
+  m_Name: SkeletonMeta
+  m_EditorClassIdentifier: 
+  type: 1
+  displayName: 
+  description: 
+  selectableCard: {fileID: 2622988638455107719, guid: eca5367b6f6be934b90d37475f2b5f74,
+    type: 3}
+  prefabs:
+  - level: 1
+    prefab: {fileID: 7542756093490445865, guid: 7b9469d81f1e3ec4c9a58d74feb265f6,
+      type: 3}
+  - level: 2
+    prefab: {fileID: 7542756093490445865, guid: 687403ce98ae01943a65b8dde6607264,
+      type: 3}
+  - level: 3
+    prefab: {fileID: 7542756093490445865, guid: 9ac5568b2f4874d41842fa4cc3642660,
+      type: 3}
+  - level: 4
+    prefab: {fileID: 7542756093490445865, guid: ed85b7821f3239d409b933b0a6351f38,
+      type: 3}

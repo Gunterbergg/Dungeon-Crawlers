@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e7e74fcd5178b4f82c582813a89790, type: 3}
+  m_Name: Session
+  m_EditorClassIdentifier: 
+  tokenType: Bearer
+  token: 761b69db-ace4-49cd-84cb-4550be231e8f
+  created: 2019-03-13T09:45:40Z
+  expiresIn: 60000
+  refreshToken: 761b69db-ace4-49cd-84cb-4550be231e8f
+  user:
+    userId: 0
+    name: Ms.User01
+    email: user01.mail@hotmail.com
+    souls: 10
+    gold: 30
+    gems: 20
+    level: 1
+    currentExp: 100
+    nextLevelExp: 250
+    rooms:
+    - type: 0
+      entities:
+      - type: 0
+        xPos: -1
+        yPos: -1
+      - type: 1
+        xPos: 0
+        yPos: 0
+    entitiesInfo:
+    - type: 0
+      level: 4
+    - type: 1
+      level: 3
+    - type: 2
+      level: 1

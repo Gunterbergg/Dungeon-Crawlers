@@ -7,26 +7,37 @@ namespace DungeonCrawlers
 {
 	public static class HTTPClient  
 	{
-		public static AsyncOperation GetRequest(
+		public static UnityWebRequestAsyncOperation GetRequest(
 			string requestURL,
-			Dictionary<string, string> requestHeaders = null,
-			Dictionary<string, string> requestParams = null,
-			Action<UnityWebRequest> requestHandler = null)
+			Action<UnityWebRequest> requestHandler,
+			Dictionary<string, string> requestHeaders = null)
 		{
-			string url = requestURL + "?";
-			if (requestParams != null)
-				foreach (KeyValuePair<string, string> keyValue in requestParams)
-					url += keyValue.Key + "=" + keyValue.Value + "&";
-			url.Remove(url.Length - 1);
+			UnityWebRequest webRequest = UnityWebRequest.Get(requestURL);
+			return SendWebRequest(webRequest, requestHandler, requestHeaders);
+		}
 
-			UnityWebRequest serverRequest = UnityWebRequest.Get(url);
+		public static UnityWebRequestAsyncOperation PostRequest(
+			string requestURL,
+			WWWForm postData,
+			Action<UnityWebRequest> requestHandler,
+			Dictionary<string, string> requestHeaders = null) 
+		{
+			UnityWebRequest webRequest = UnityWebRequest.Post(requestURL, postData ?? new WWWForm());
+			return SendWebRequest(webRequest, requestHandler, requestHeaders);
+		}
+
+		public static UnityWebRequestAsyncOperation SendWebRequest(
+			UnityWebRequest webRequest,
+			Action<UnityWebRequest> requestHandler,
+			Dictionary<string, string> requestHeaders = null)
+		{
 			if (requestHeaders != null)
 				foreach (KeyValuePair<string, string> keyValue in requestHeaders)
-					serverRequest.SetRequestHeader(keyValue.Key, keyValue.Value);
+					webRequest.SetRequestHeader(keyValue.Key, keyValue.Value);
 
-			UnityWebRequestAsyncOperation requestOperation = serverRequest.SendWebRequest();
-			if (requestHandler != null)
-				requestOperation.completed +=
+			webRequest.chunkedTransfer = false;
+			UnityWebRequestAsyncOperation requestOperation = webRequest.SendWebRequest();
+			if (requestHandler != null) requestOperation.completed +=
 					(operation) => requestHandler(((UnityWebRequestAsyncOperation)operation).webRequest);
 
 			return requestOperation;

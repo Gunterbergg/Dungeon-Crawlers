@@ -10,7 +10,7 @@ namespace DungeonCrawlers.UI
 		public string stringExpression;
 		public UserView inputExpression;
 		public List<UserView> textConfirmation = new List<UserView>();
-
+			
 		public string EntryName { get => entryName; private set => entryName = value; }
 		public object EntryData {
 			get {

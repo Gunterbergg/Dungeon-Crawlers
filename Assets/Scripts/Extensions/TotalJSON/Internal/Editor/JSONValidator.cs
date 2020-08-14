@@ -136,7 +136,6 @@ namespace Leguar.TotalJSON.Internal {
 
 		private object findAndGetJSONOrJArray(string dirtySourceString) {
 
-			// Remove any heading "trash", for example in case that JSON is pasted from Unity Console
 			int jsonStartIndex=dirtySourceString.IndexOf('{');
 			int jArrayStartIndex=dirtySourceString.IndexOf('[');
 
