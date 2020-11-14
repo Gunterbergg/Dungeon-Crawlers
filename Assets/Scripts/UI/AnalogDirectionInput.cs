@@ -17,6 +17,7 @@ namespace DungeonCrawlers.UI
 
         public event Action<Vector2> Input;
         public event Action<Vector2> InputRelease;
+        public event Action<Vector2> InputStart;
 
         public bool IsHandlingInput { get; private set; } = false;
         public bool InputEnabled { get; set; } = true;
@@ -35,6 +36,7 @@ namespace DungeonCrawlers.UI
             IsHandlingInput = true;
             StartCoroutine(OnDirectionInput());
             OnDrag(pointerData);
+            InputStart?.Invoke(GetInput());
         }
 
         public void OnDrag(PointerEventData pointerData) {

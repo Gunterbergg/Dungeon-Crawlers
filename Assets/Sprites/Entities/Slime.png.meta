@@ -1,0 +1,529 @@
+fileFormatVersion: 2
+guid: 8eef5e3942d7c5d4d96d7b94d3673bd8
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: SlimeLentidao_0
+    21300002: SlimeLentidao_1
+    21300004: SlimeLentidao_2
+    21300006: SlimeLentidao_3
+    21300008: SlimeLentidao_4
+    21300010: SlimeLentidao_5
+    21300012: SlimeLentidao_6
+    21300014: SlimeLentidao_7
+    21300016: SlimeLentidao_8
+    21300018: SlimeLentidao_9
+    21300020: SlimeLentidao_10
+    21300022: SlimeLentidao_11
+    21300024: SlimeLentidao_12
+    21300026: SlimeLentidao_13
+    21300028: SlimeLentidao_14
+    21300030: SlimeLentidao_15
+    21300032: SlimeLentidao_16
+    21300034: SlimeLentidao_17
+    21300036: SlimeLentidao_18
+    21300038: SlimeLentidao_19
+    21300040: SlimeLentidao_20
+  externalObjects: {}
+  serializedVersion: 9
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 42
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SlimeLentidao_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 248.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.511822, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3275371777ed95644b8145d8a2c9243e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_1
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 248.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.511822, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8283b0f2a8807e842af0d9429ca3089d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_2
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 248.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.511822, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0dccd15079c68041a4d6fd6ca305f7e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_3
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 248.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.511822, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2047dd816b67094478ad6ec63ad342c0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 166.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.5340751, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cfa20fb0365d2e44a5e2825b92c799d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_5
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 166.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.5340751, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad1b959e1fb30d54d8274f179c8a2252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_6
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 166.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.5340751, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb3ec9777234cf9438dfde575ecff210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_7
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 166.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.54520166, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 302da0c5005cbf44893c1ed8c0f148e1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_8
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 166.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.55632824, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 192357beac0bb0845bf821d6b280eb67
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_9
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 166.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.5674548, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70249b58a5480054daa4540f9c2ce68d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_10
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 166.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.5785814, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d650571a7b842d64d803c59d424637b7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_11
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 166.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.511822, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eee209149740f1542ac9fc7545397304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 84.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.48956886, y: 0.3383686}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f0cb0de6c20c524b8b47143ad160b19
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_13
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 84.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.5006954, y: 0.3383686}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddda575c3be7c914e83d8cb44483d800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_14
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 84.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.52294856, y: 0.3383686}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1785571270a2ec43bb2082330afda02
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_15
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 84.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.5340751, y: 0.3383686}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28372b10e108dfb4ba8b60cbad7aa49a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_16
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 84.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.5340751, y: 0.3383686}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b29556949e6edc41a9a8daded973117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_17
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 84.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.511822, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71de1068eadf65d45911332b1d91ed2f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.48956886, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85a0d78f2ee3d8243bbed35921416376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_19
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 2.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.511822, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71cf92b7e233cfa4eac9058f8e5caef5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlimeLentidao_20
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 2.25
+        width: 89.875
+        height: 82.75
+      alignment: 9
+      pivot: {x: 0.511822, y: 0.36253777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c6065cda4ea2074b8fecadf94da3187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: d205029e6f8a45b4ca400c0c919a7eab
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

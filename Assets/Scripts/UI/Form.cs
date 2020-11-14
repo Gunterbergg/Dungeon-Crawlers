@@ -23,7 +23,7 @@ namespace DungeonCrawlers.UI
 		}
 		public bool InputEnabled { get; set; } = true;
 
-		public event Action<FormInputInfo> Input;
+		public event Action<FormData> Input;
 
 		protected override void Awake() {
 			base.Awake();
@@ -33,7 +33,7 @@ namespace DungeonCrawlers.UI
 		public virtual void Submit() {
 			if (!InputEnabled) return;
 			Input?.Invoke(
-				new FormInputInfo(GetEntries(), GetStatusMessages(), IsValid())
+				new FormData(GetEntries(), GetStatusMessages(), IsValid())
 			);
 		}
 

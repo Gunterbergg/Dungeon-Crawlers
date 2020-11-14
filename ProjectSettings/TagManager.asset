@@ -14,8 +14,8 @@ TagManager:
   - UI
   - 
   - 
-  - Ignore
-  - 
+  - Wall
+  - Hitbox
   - 
   - 
   - 
@@ -39,8 +39,29 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Floor
+    uniqueID: 3553231713
+    locked: 0
+  - name: Carpet
+    uniqueID: 3419791061
+    locked: 0
+  - name: Upper Walls
+    uniqueID: 898900187
+    locked: 0
+  - name: Casting
+    uniqueID: 126657421
+    locked: 0
+  - name: UI
+    uniqueID: 3336194175
+    locked: 0
+  - name: Objects
+    uniqueID: 1362619821
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Walls
+    uniqueID: 2428628315
     locked: 0
   - name: Canvas
     uniqueID: 149050669

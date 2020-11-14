@@ -13,7 +13,7 @@ namespace DungeonCrawlers.UI
 
 		public bool Enabled { get => progressHandler.Enabled; set => progressHandler.Enabled = value; }
 		public float CurrentOutput { get => progressHandler.CurrentOutput; }
-		public float LerpTime { get; set; } = 1f;
+		public float LerpTime { get; set; } = 0f;
 
 		public event Action<float> ValueChanged { 
 			add => progressHandler.ValueChanged += value;
@@ -40,7 +40,7 @@ namespace DungeonCrawlers.UI
 
 		public void OutputDefault() {
 			progressHandler.LerpTime = LerpTime;
-			progressHandler.Output(inverted ? 0f : 1f);
+			progressHandler.Output(inverted ? 1f : 0f);
 		}
 
 		public void Clear() => OutputDefault();

@@ -27,7 +27,7 @@ namespace DungeonCrawlers.Data
 		[SerializeField] private List<Entity> entities;
 		[SerializeField] private List<EntityInfo> entitiesInfo = new List<EntityInfo>();
 		
-		public Dictionary<string, WebRequestInfo> links = new Dictionary<string, WebRequestInfo>();
+		public Dictionary<string, WebRequest> links = new Dictionary<string, WebRequest>();
 
 		public int UserId {
 			get => userId; 

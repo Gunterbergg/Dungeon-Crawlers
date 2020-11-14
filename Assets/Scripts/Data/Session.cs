@@ -14,7 +14,7 @@ namespace DungeonCrawlers.Data
 		public string created;
 		public int expiresIn;
 		public string refreshToken;
-		public Dictionary<string, WebRequestInfo> links = new Dictionary<string, WebRequestInfo>();
+		public Dictionary<string, WebRequest> links = new Dictionary<string, WebRequest>();
 
 		public User user;
 

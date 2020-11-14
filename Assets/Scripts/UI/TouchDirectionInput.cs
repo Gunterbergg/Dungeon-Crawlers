@@ -13,6 +13,7 @@ namespace DungeonCrawlers.UI
 
 		public event Action<Vector2> Input;
 		public event Action<Vector2> InputRelease;
+		public event Action<Vector2> InputStart;
 
 		public bool IsHandlingInput { get; private set; } = false;
 		public bool InputEnabled { get; set; } = true;
@@ -43,6 +44,7 @@ namespace DungeonCrawlers.UI
 			pointerDownPos = eventData.position;
 			IsHandlingInput = true;
 			StartCoroutine(OnDirectionInput());
+			InputStart?.Invoke(GetInput());
 		}
 
 		public void OnPointerUp(PointerEventData eventData) {

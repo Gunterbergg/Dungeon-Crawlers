@@ -1,10 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using DungeonCrawlers.Data;
 using UnityEngine.UI;
 
 namespace DungeonCrawlers.UI 
 {
+	public struct TextMessageInfo
+	{
+		public TextMessageInfo(string content)
+		{
+			Title = LanguagePack.GetString("alert");
+			Content = content;
+		}
+
+		public TextMessageInfo(string title, string message)
+		{
+			Title = title;
+			Content = message;
+		}
+
+		public string Title { get; }
+		public string Content { get; }
+	}
+
 	public class DialogBox : UserView, IClosable, IOutputHandler<TextMessageInfo>, IOutputHandler<string>
 	{
 		public Button closeButton;
