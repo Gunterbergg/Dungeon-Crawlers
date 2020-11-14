@@ -19,6 +19,7 @@ namespace DungeonCrawlers.Systems
 
 		IDirectionInput directionInput;
 		IProgressHandler cooldownOutput;
+		Animator playerAnimator;
 
 		private float lastSlashTime = 0f;
 
@@ -38,8 +39,9 @@ namespace DungeonCrawlers.Systems
 
 		public void Slash(Vector2 dir)
 		{
-			//TODO add logging and exception handling
+			//TODO add logging and exception 
 			if (Time.time < lastSlashTime + swordCooldown) return;
+			playerAnimator.SetTrigger("attack");
 			float angle = DataUtility.GetAngle(dir);
 			Instantiate(
 				swordSlashPrefab,
@@ -72,6 +74,7 @@ namespace DungeonCrawlers.Systems
 			directionInput.Input += SlashPreview;
 			directionInput.InputRelease += DisableSlashPreview;
 			directionInput.InputRelease += Slash;
+			playerAnimator = player.GetComponent<Animator>();
 		}
 	}
 }
