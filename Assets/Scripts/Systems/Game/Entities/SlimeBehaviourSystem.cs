@@ -1,8 +1,7 @@
-﻿using DungeonCrawlers.Data;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
-namespace DungeonCrawlers.Systems
+namespace DungeonCrawlers
 {
 	public class SlimeBehaviourSystem : MonoBehaviour
 	{
@@ -12,6 +11,7 @@ namespace DungeonCrawlers.Systems
 		public float jumpCooldown = 2f;
 		public float maxJumpDistance = 2f;
 		public float randomDelayGap = 0.4f;
+		public int gooJumpsGap = 2;
 
 		public GameObject jumpHitboxPrefab;
 		public GameObject jumpGooPrefab;
@@ -20,6 +20,7 @@ namespace DungeonCrawlers.Systems
 		private Animator entityAnimator;
 		private SpriteRenderer entityRenderer;
 		private float lastJumpTime = 0;
+		private int gooJumpCount = 0;
 
 		private Coroutine currentBehaviour;
 
@@ -46,16 +47,19 @@ namespace DungeonCrawlers.Systems
 			Vector2 originalPos = transform.position;
 			Vector2 deltaPos = Vector2.ClampMagnitude((Vector2)enemyTarget.transform.position - originalPos, maxJumpDistance);
 			entityRenderer.flipX = deltaPos.x >= 0 ? false : true;
+			Instantiate(jumpHitboxPrefab, transform);
 			yield return new WaitForSeconds(jumpDelay);
 
 			Vector2 targetPos = originalPos + deltaPos;
-			Instantiate(jumpHitboxPrefab, transform);
 			for (float currJumpTime = 0f; currJumpTime <= 1f; currJumpTime += Time.deltaTime / jumpSpeed)
 			{
 				entityRigidbody.MovePosition(Vector2.Lerp(originalPos, targetPos, currJumpTime));
 				yield return null;
 			}
-			Instantiate(jumpGooPrefab, targetPos, Quaternion.identity);
+			if (++gooJumpCount >= gooJumpsGap) {
+				Instantiate(jumpGooPrefab, targetPos, Quaternion.identity);
+				gooJumpCount = 0;
+			}
 			entityAnimator.SetBool("jumping", false);
 			lastJumpTime = Time.time - Random.Range(0, randomDelayGap);
 			currentBehaviour = null;

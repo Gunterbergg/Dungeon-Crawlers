@@ -10,10 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7625344253771802146}
   - component: {fileID: 7625344253771802151}
-  - component: {fileID: 7625344253771802150}
-  - component: {fileID: 7625344253771802149}
   - component: {fileID: 7625344253771802148}
   - component: {fileID: 7625344253771802147}
+  - component: {fileID: 2590089897274360381}
   m_Layer: 9
   m_Name: slow_hitbox
   m_TagString: Untagged
@@ -48,38 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 1
-  hitInfo:
-    damages: []
-    effects: {fileID: 7625344253771802150}
-    pullForceOffset: {x: 0, y: 0}
-    pullForce: {x: 0, y: 0}
+  damage: 0
+  applyStatus:
+  - {fileID: 2590089897274360381}
   collided: []
---- !u!114 &7625344253771802150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7625344253771802145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ec5c13e76f426d479e13811d1c261f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  components:
-  - {fileID: 7625344253771802149}
---- !u!114 &7625344253771802149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7625344253771802145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa8c948a721f11b4e9603281dea9c4c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7625344253771802148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayTime: 0
   activeTime: 0
-  collisionDelay: 0.15
+  collisionDelay: 0.2
 --- !u!60 &7625344253771802147
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -131,6 +102,20 @@ PolygonCollider2D:
       - {x: 0.58579075, y: -0.16427962}
       - {x: 0.56120616, y: 0.02951976}
       - {x: 0.47262985, y: 0.14872044}
+--- !u!114 &2590089897274360381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7625344253771802145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ac204b37f489c44ab539a8f5ebf1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.2
+  speedModifier: 0.5
 --- !u!1 &7625344255063417401
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,7 +128,7 @@ GameObject:
   - component: {fileID: 7625344255063417402}
   - component: {fileID: 7625344255063417404}
   m_Layer: 9
-  m_Name: slime_goo_attack
+  m_Name: slime_jump_goo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

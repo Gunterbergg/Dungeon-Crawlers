@@ -23,7 +23,12 @@ namespace DungeonCrawlers.Systems
 		protected void Move(Vector2 dir)
 		{
 			if (!player.isAlive) return;
-			playerRigidbody.MovePosition((Vector2)transform.position + (dir * Time.deltaTime * speed));
+			
+			float appliedSpeedModifier = 1f;
+			SlowStatus slow = player.GetAccumulatedStatus<SlowStatus>();
+			if (slow != null) appliedSpeedModifier = slow.speedModifier;
+
+			playerRigidbody.MovePosition((Vector2)transform.position + (dir * Time.deltaTime * speed * appliedSpeedModifier));
 			player.movementDirection = dir.normalized;
 			if (dir.x > 0) playerRenderer.flipX = false;
 			if (dir.x < 0) playerRenderer.flipX = true;

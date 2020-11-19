@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using DungeonCrawlers.Data;
 using DungeonCrawlers.UI;
 using System.Collections;
 
-namespace DungeonCrawlers.Systems
+namespace DungeonCrawlers
 {
     public class PlayerHealthSystem : MonoBehaviour
     {
@@ -22,10 +21,13 @@ namespace DungeonCrawlers.Systems
             DisplayHealth();
         }
 
-        private void OnHit(HurtboxComponent hurtbox, HitboxComponent hitbox)
+        private void OnHit(HitboxComponent hitbox)
         {
             if (hitbox.team == player.team) return;
-            if (hitbox.hitboxDamage.GetTotalDamage() <= 0) return;
+            foreach (Status applyStatus in hitbox.GetStatus()) StartCoroutine(ApplyStatus(applyStatus));
+
+            if (hitbox.GetTotalDamage() <= 0) return;
+
             playerAnimator.SetTrigger("hit");
             player.healthPoints = Mathf.Max(0, player.healthPoints - 1);
             playerAnimator.SetBool("alive", player.healthPoints > 0);
@@ -36,7 +38,7 @@ namespace DungeonCrawlers.Systems
         {
             healthOutput = healthOutputView.GetInterface<IOutputHandler<int>>();
             playerAnimator = player.GetComponent<Animator>();
-            player.hurtboxes.ForEach<HurtboxComponent>((hurtbox) => hurtbox.Hit += OnHit);
+            player.Hit += OnHit;
         }
 
         public void DisplayHealth()
@@ -51,6 +53,16 @@ namespace DungeonCrawlers.Systems
             healthOutputView.Activate();
             yield return new WaitForSeconds(time);
             healthOutputView.DeActivate();
+        }
+
+        private IEnumerator ApplyStatus(Status status)
+        {
+            player.activeStatus.Add(status);
+            while (status.duration > 0) {
+                status.duration -= Time.deltaTime;
+                yield return null; 
+            }
+            player.activeStatus.Remove(status);
         }
     }
 }

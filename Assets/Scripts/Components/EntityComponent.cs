@@ -1,4 +1,6 @@
-﻿namespace DungeonCrawlers.Data
+﻿using DungeonCrawlers.Data;
+
+namespace DungeonCrawlers
 {
 	public class EntityComponent : ObjectComponent
 	{

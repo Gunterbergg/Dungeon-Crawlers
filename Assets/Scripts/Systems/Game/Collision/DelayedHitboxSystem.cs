@@ -1,18 +1,17 @@
-﻿using DungeonCrawlers.Data;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DungeonCrawlers.Systems
+namespace DungeonCrawlers
 {
 	public class DelayedHitboxSystem : MonoBehaviour
 	{
 		public float delayTime;
 		public float activeTime;
 		public float collisionDelay = 0.15f;
-		
+
 		private HitboxComponent hitbox;
-		private List<HurtboxComponent> alredyCollided = new List<HurtboxComponent>();
+		private List<ObjectComponent> alredyCollided = new List<ObjectComponent>();
 
 		protected virtual void Awake() {
 			HitboxReferenceSetup();
@@ -30,28 +29,24 @@ namespace DungeonCrawlers.Systems
 		private IEnumerator ActivateHitbox() {
 			SetHitboxComponentsState(false);
 			if (delayTime != 0f) yield return new WaitForSeconds(delayTime);
-			
+
 			SetHitboxComponentsState(true);
 			if (activeTime == 0) yield break;
-			
+
 			yield return new WaitForSeconds(activeTime);
 			Destroy(gameObject);
 		}
 
 		private void HandleCollision(Collider2D collider) {
-			HurtboxComponent hurtbox = collider.GetComponent<HurtboxComponent>();
-			if (hurtbox == null) {
-				hitbox.RaiseHitEvent(collider.gameObject);
-				return;
-			}
-			if (alredyCollided.Contains(hurtbox)) return;
-		
-			hitbox.collided.Add(hurtbox);
-			hitbox.RaiseHitEvent(hurtbox);
-			hurtbox.RaiseDamagedEvent(hitbox);
+			ObjectComponent hitObject = collider.GetComponent<ObjectComponent>();
+			if (hitObject == null || alredyCollided.Contains(hitObject)) return;
 
-			alredyCollided.Add(hurtbox);
-			StartCoroutine(RemoveCollided(hurtbox));
+			hitbox.collided.Add(hitObject);
+			hitbox.RaiseHitEvent(hitObject);
+			hitObject.RaiseDamagedEvent(hitbox);
+
+			alredyCollided.Add(hitObject);
+			StartCoroutine(RemoveCollided(hitObject));
 		}
 
 		private void SetHitboxComponentsState(bool state) {
@@ -61,11 +56,11 @@ namespace DungeonCrawlers.Systems
 				renderer.enabled = state;
 		}
 
-		private IEnumerator RemoveCollided(HurtboxComponent hurtbox) {
+		private IEnumerator RemoveCollided(ObjectComponent hitObject) {
 			yield return new WaitForSeconds(collisionDelay);
 			if (hitbox == null) yield break;
-			alredyCollided.Remove(hurtbox);
-			hitbox.collided.Remove(hurtbox);
+			alredyCollided.Remove(hitObject);
+			hitbox.collided.Remove(hitObject);
 		}
 	}
 }

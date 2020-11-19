@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DungeonCrawlers.Data
+namespace DungeonCrawlers
 {
 	public class ComponentCollection : MonoBehaviour, IList<MonoBehaviour>
 	{

@@ -1,9 +1,8 @@
 ﻿using System.Collections;
-using DungeonCrawlers.Data;
 using DungeonCrawlers.UI;
 using UnityEngine;
 
-namespace DungeonCrawlers.Systems
+namespace DungeonCrawlers
 {
 	public class EntityHealthSystem : MonoBehaviour
 	{
@@ -21,9 +20,9 @@ namespace DungeonCrawlers.Systems
 			DisplayHealth();
 		}
 
-		public void ApplyDamage(HurtboxComponent hurtbox, HitboxComponent hitbox) {
+		public void OnHit(HitboxComponent hitbox) {
 			if (hitbox.team == entity.team) return;
-			float totalDamage = hitbox.hitboxDamage.GetTotalDamage();
+			float totalDamage = hitbox.GetTotalDamage();
 			entity.currentHealth -= totalDamage;
 			entityAnimator?.SetTrigger("hit");
 			DisplayHealth();
@@ -47,20 +46,13 @@ namespace DungeonCrawlers.Systems
 			healthBarView.DeActivate();
 		}
 
-		private void SubscribeHitEvent(ComponentCollection collection) {
-			collection.ForEach<HurtboxComponent>(
-				(hurtbox) => hurtbox.Hit += ApplyDamage);
-		}
-
 		private void ComponentsSetup() {
-			entity.hurtboxes.CollectionChanged += SubscribeHitEvent;
-			SubscribeHitEvent(entity.hurtboxes);
+			entity.Hit += OnHit;
 			entityAnimator = entity.GetComponent<Animator>();
 			healthBarView.DeActivate();
 		}
 
 		private void HandlersReferenceSetup() {
-			//TODO add logging and exception handlng
 			if (healthBarView == null) return;
 			healthBar = healthBarView.GetInterface<IProgressHandler>();
 		}

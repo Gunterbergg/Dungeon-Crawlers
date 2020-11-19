@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DungeonCrawlers.Data
+namespace DungeonCrawlers
 {
     public class PlayerComponent : ObjectComponent
     {

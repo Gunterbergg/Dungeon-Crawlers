@@ -224,9 +224,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 0
-  hitboxDamage:
-    damages:
-    - damageType: 0
-      damage: 10
-    effects: {fileID: 0}
+  damage: 10
   collided: []

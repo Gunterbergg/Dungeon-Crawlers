@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DungeonCrawlers.Data
+namespace DungeonCrawlers
 {
-	[Serializable]
+	/*[Serializable]
 	public enum DamageType
 	{
 		All, Heat, Cold, Electric, Acid
@@ -40,9 +40,7 @@ namespace DungeonCrawlers.Data
 	[Serializable]
 	public struct HitboxDamage
 	{
-		public List<Damage> damages;
-		public ComponentCollection effects;
-
+		//public List<Damage> damages;
 		public static HitboxDamage operator +(HitboxDamage boxCollisionA, HitboxDamage boxCollisionB)
 		{
 			boxCollisionA.AddDamages(boxCollisionB.damages);
@@ -84,33 +82,37 @@ namespace DungeonCrawlers.Data
 			}
 			set => damages.Add(value);
 		}
-	}
+	}*/
 
 	public class HitboxComponent : MonoBehaviour
 	{
 		public Team team;
-		public HitboxDamage hitboxDamage;
-
-		public List<HurtboxComponent> collided = new List<HurtboxComponent>();
+		public float damage;
+		public List<StatusComponent> applyStatus = new List<StatusComponent>();
+		public List<ObjectComponent> collided = new List<ObjectComponent>();
 
 		public event Action<HitboxComponent> OnHit;
-		public event Action<HitboxComponent, object> OnHitObject;
-		public event Action<HitboxComponent, HurtboxComponent> OnHitHurtbox;
+		public event Action<HitboxComponent, ObjectComponent> OnHitHurtbox;
 
-		private void OnDestroy() {
+		public float GetTotalDamage() => damage;
+
+		public IEnumerable<Status> GetStatus()
+		{
+			foreach (StatusComponent statusComponent in applyStatus) {
+				yield return statusComponent.Status;
+			}
+		}
+
+		private void OnDestroy()
+		{
 			OnHit = null;
-			OnHitObject = null;
 			OnHitHurtbox = null;
 		}
 
-		public void RaiseHitEvent(object hitObject) {
+		public void RaiseHitEvent(ObjectComponent hitObject) 
+		{
 			OnHit?.Invoke(this);
-			OnHitObject?.Invoke(this, hitObject);
-		}
-
-		public void RaiseHitEvent(HurtboxComponent hurtBox) {
-			OnHit?.Invoke(this);
-			OnHitHurtbox?.Invoke(this, hurtBox);
+			OnHitHurtbox?.Invoke(this, hitObject);
 		}
 	}
 }
