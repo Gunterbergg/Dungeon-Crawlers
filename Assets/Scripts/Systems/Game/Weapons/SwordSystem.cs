@@ -46,7 +46,7 @@ namespace DungeonCrawlers.Systems
 
 		public void Slash(Vector2 dir)
 		{
-			//TODO add logging and exception 
+			if (!player.isAlive) return;
 			if (Time.time < lastSlashTime + swordCooldown) return;
 			playerAnimator.SetTrigger("attack");
 			float angle = DataUtility.GetAngle(dir);
@@ -62,6 +62,7 @@ namespace DungeonCrawlers.Systems
 
 		public void SlashPreview(Vector2 dir)
 		{
+			if (!player.isAlive) return;
 			if (dir.x > 0) playerRenderer.flipX = false;
 			if (dir.x < 0) playerRenderer.flipX = true;
 			float angle = DataUtility.GetAngle(dir);
@@ -80,6 +81,7 @@ namespace DungeonCrawlers.Systems
 
 		private void EnableSlashPreview()
 		{
+			if (!player.isAlive) return;
 			swordCastPreview.GetComponent<SpriteRenderer>().enabled = true;
 			sword.GetComponent<SpriteRenderer>().enabled = true;
 		}
