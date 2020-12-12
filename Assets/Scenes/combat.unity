@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 58580437}
   - component: {fileID: 58580438}
   m_Layer: 0
-  m_Name: slime_health_system
+  m_Name: slime_health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +139,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1455191532}
   m_Father: {fileID: 1337669709}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -158,6 +159,36 @@ MonoBehaviour:
   entity: {fileID: 1337669707}
   healthBarView: {fileID: 3148421917628873453}
   healthDisplayTime: 4
+--- !u!1 &61757187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 61757188}
+  m_Layer: 0
+  m_Name: skeleton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &61757188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61757187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.22087765, y: 0.7194079, z: 0.14198972}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &82520705
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,7 +363,7 @@ GameObject:
   - component: {fileID: 392446716}
   - component: {fileID: 392446717}
   m_Layer: 0
-  m_Name: warrior_health_system
+  m_Name: warrior_health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -351,7 +382,7 @@ Transform:
   m_Children:
   - {fileID: 1049263965}
   m_Father: {fileID: 1773689382}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &392446717
 MonoBehaviour:
@@ -507,7 +538,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &752086182
 GameObject:
@@ -698,7 +729,7 @@ GameObject:
   - component: {fileID: 1034860354}
   - component: {fileID: 1034860355}
   m_Layer: 0
-  m_Name: DamageOutput
+  m_Name: damage_float_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -753,7 +784,7 @@ GameObject:
   - component: {fileID: 1049263967}
   - component: {fileID: 1049263966}
   m_Layer: 0
-  m_Name: player_health_canvas
+  m_Name: health_canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1099,7 +1130,7 @@ GameObject:
   - component: {fileID: 1303132242}
   - component: {fileID: 1303132243}
   m_Layer: 0
-  m_Name: warrior_movement_system
+  m_Name: warrior_movement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1115,9 +1146,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1774417457}
   m_Father: {fileID: 1773689382}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1303132243
 MonoBehaviour:
@@ -1259,7 +1291,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 58580437}
-  - {fileID: 1455191532}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1333,7 +1364,7 @@ GameObject:
   - component: {fileID: 1455191534}
   - component: {fileID: 1455191533}
   m_Layer: 0
-  m_Name: slime_canvas
+  m_Name: health_canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1352,8 +1383,8 @@ RectTransform:
   m_Children:
   - {fileID: 3148421917628873451}
   - {fileID: 1034860354}
-  m_Father: {fileID: 1337669709}
-  m_RootOrder: 1
+  m_Father: {fileID: 58580437}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1521,7 +1552,7 @@ GameObject:
   - component: {fileID: 1708392493}
   - component: {fileID: 1708392492}
   m_Layer: 0
-  m_Name: analog
+  m_Name: timed_analog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1735,7 +1766,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1774417457}
   - {fileID: 392446716}
   - {fileID: 1303132242}
   - {fileID: 1935123432}
@@ -1781,7 +1811,7 @@ GameObject:
   - component: {fileID: 1774417459}
   - component: {fileID: 1774417458}
   m_Layer: 0
-  m_Name: warrior_canvas
+  m_Name: movement_canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1799,7 +1829,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1298083952}
-  m_Father: {fileID: 1773689382}
+  m_Father: {fileID: 1303132242}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2068,7 +2098,7 @@ Transform:
   - {fileID: 1098779993}
   - {fileID: 873098713}
   m_Father: {fileID: 1773689382}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1935123433
 MonoBehaviour:
@@ -2266,75 +2296,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1001 &1471576737648283828
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3114140280122936045, guid: 3666aa60ec6687545b6847d6eaa3b656,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.96
-      objectReference: {fileID: 0}
-    - target: {fileID: 3114140280122936045, guid: 3666aa60ec6687545b6847d6eaa3b656,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3114140280122936045, guid: 3666aa60ec6687545b6847d6eaa3b656,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3114140280122936045, guid: 3666aa60ec6687545b6847d6eaa3b656,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3114140280122936045, guid: 3666aa60ec6687545b6847d6eaa3b656,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3114140280122936045, guid: 3666aa60ec6687545b6847d6eaa3b656,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3114140280122936045, guid: 3666aa60ec6687545b6847d6eaa3b656,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3114140280122936045, guid: 3666aa60ec6687545b6847d6eaa3b656,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3114140280122936045, guid: 3666aa60ec6687545b6847d6eaa3b656,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3114140280122936045, guid: 3666aa60ec6687545b6847d6eaa3b656,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3114140280122936045, guid: 3666aa60ec6687545b6847d6eaa3b656,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7530854721533881753, guid: 3666aa60ec6687545b6847d6eaa3b656,
-        type: 3}
-      propertyPath: m_Name
-      value: sword_hitbox
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3666aa60ec6687545b6847d6eaa3b656, type: 3}
 --- !u!95 &1855978665295775413
 Animator:
   serializedVersion: 3
@@ -2461,7 +2422,7 @@ GameObject:
   - component: {fileID: 3148421917628873450}
   - component: {fileID: 3148421917628873453}
   m_Layer: 5
-  m_Name: HealthBar
+  m_Name: health_bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2923,7 +2884,7 @@ GameObject:
   - component: {fileID: 9170581520932094513}
   - component: {fileID: 1855978665295775413}
   m_Layer: 0
-  m_Name: animated_3
+  m_Name: heart_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2962,7 +2923,7 @@ GameObject:
   - component: {fileID: 9170581521478398189}
   - component: {fileID: 1855978665808557161}
   m_Layer: 0
-  m_Name: animated_2
+  m_Name: heart_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3071,7 +3032,7 @@ GameObject:
   - component: {fileID: 9170581522001317509}
   - component: {fileID: 1855978666373515777}
   m_Layer: 0
-  m_Name: animated_1
+  m_Name: heart_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
