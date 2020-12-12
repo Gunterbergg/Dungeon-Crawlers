@@ -1,17 +1,21 @@
 fileFormatVersion: 2
-guid: 837016b62bc35324fbcebdfbf9426f3b
+guid: eac9924e5d1290e44a58b1bb9790834e
 TextureImporter:
   fileIDToRecycleName:
-    21300000: "Cora\xE7\xE3o_0"
-    21300002: "Cora\xE7\xE3o_1"
-    21300004: "Cora\xE7\xE3o_2"
-    21300006: "Cora\xE7\xE3o_3"
+    21300000: direction_arrow_0
+    21300002: direction_arrow_1
+    21300004: direction_arrow_2
+    21300006: direction_arrow_3
+    21300008: direction_arrow_4
+    21300010: direction_arrow_5
+    21300012: direction_arrow_6
+    21300014: direction_arrow_7
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
-    sRGBTexture: 0
+    sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -77,81 +81,161 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Cora\xE7\xE3o_0"
+      name: direction_arrow_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 12
-        height: 10
+        x: 3
+        y: 3
+        width: 18
+        height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbd2e7bd159dd7a46a00ff429fce1529
+      spriteID: 1046846cb47cbb948ad054cc294dcb5c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Cora\xE7\xE3o_1"
+      name: direction_arrow_1
       rect:
         serializedVersion: 2
-        x: 13
+        x: 24
         y: 0
-        width: 12
-        height: 10
+        width: 24
+        height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2938e049900df0c4a85289293832bf0a
+      spriteID: 5697e107b7fc22c43ae37510cce121c3
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Cora\xE7\xE3o_2"
+      name: direction_arrow_2
       rect:
         serializedVersion: 2
-        x: 26
+        x: 48
         y: 0
-        width: 12
-        height: 10
+        width: 24
+        height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8a5fdbc4a322aa419b39155725e5ee6
+      spriteID: 9b9adf979e4f73c48a196cd323c51766
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Cora\xE7\xE3o_3"
+      name: direction_arrow_3
       rect:
         serializedVersion: 2
-        x: 39
+        x: 72
         y: 0
-        width: 12
-        height: 10
+        width: 24
+        height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c5dea6574129f64c8ce7099fc64bde0
+      spriteID: 287c421f165b9184aa2e0a71a9f9b571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: direction_arrow_4
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c66ed3656f0cfd4292803d88b32279b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: direction_arrow_5
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf000188f371f64449d5304e1cd42892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: direction_arrow_6
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d8c1a8af63a702479c1c3cd695f148e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: direction_arrow_7
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: faf4227ecf5fae84aaaa60b1677aa22c
       vertices: []
       indices: 
       edges: []
@@ -159,7 +243,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 794d9bac053e1b04ea6f37cc5c8936e9
+    spriteID: 09ff4fb8db7c19d4fbc8a9377a9e4fcb
     vertices: []
     indices: 
     edges: []

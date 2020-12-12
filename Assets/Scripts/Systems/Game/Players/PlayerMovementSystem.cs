@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using DungeonCrawlers.UI;
-using DungeonCrawlers.Data;
 
 namespace DungeonCrawlers.Systems
 {
@@ -25,7 +24,7 @@ namespace DungeonCrawlers.Systems
 			if (!player.isAlive) return;
 			
 			float appliedSpeedModifier = 1f;
-			SlowStatus slow = player.GetAccumulatedStatus<SlowStatus>();
+			SlowStatus slow = player.GetStatus<SlowStatus>();
 			if (slow != null) appliedSpeedModifier = slow.speedModifier;
 
 			playerRigidbody.MovePosition((Vector2)transform.position + (dir * Time.deltaTime * speed * appliedSpeedModifier));

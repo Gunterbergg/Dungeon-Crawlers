@@ -1,12 +1,10 @@
 fileFormatVersion: 2
-guid: 13a5d8c56d99e24428022765b6853cb3
+guid: fb0b11e3d3266df46a4e1f2cd311428e
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Sword Slash_0
-    21300002: Sword Slash_1
-    21300004: Sword Slash_2
-    21300006: Sword Slash_3
-    21300008: Sword Slash_4
+    21300000: sword_hitbox_0
+    21300002: sword_hitbox_1
+    21300004: sword_hitbox_2
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -74,127 +72,65 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sword Slash_0
+      name: sword_hitbox_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 85
-        height: 69
-      alignment: 9
-      pivot: {x: 0.5882353, y: 0.20289855}
+        width: 54
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 621514e723507bc4c91df94efc42e8d6
+      spriteID: 1d1cafbd20670c7409fafeff71b97455
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sword Slash_1
+      name: sword_hitbox_1
       rect:
         serializedVersion: 2
-        x: 85
+        x: 54
         y: 0
-        width: 85
-        height: 69
-      alignment: 9
-      pivot: {x: 0.5882353, y: 0.20289855}
+        width: 54
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29f126bfe93195044884e57bbea11899
+      spriteID: 5c2a750c09b8ab546b633262265ef5d6
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sword Slash_2
+      name: sword_hitbox_2
       rect:
         serializedVersion: 2
-        x: 170
+        x: 108
         y: 0
-        width: 85
-        height: 69
-      alignment: 9
-      pivot: {x: 0.5882353, y: 0.20289855}
+        width: 54
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c747491d7b4c324a81e7495d622faa8
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sword Slash_3
-      rect:
-        serializedVersion: 2
-        x: 255
-        y: 0
-        width: 85
-        height: 69
-      alignment: 9
-      pivot: {x: 0.5882353, y: 0.20289855}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 86eeb128f120a1d4b8e8ff171439cafe
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sword Slash_4
-      rect:
-        serializedVersion: 2
-        x: 340
-        y: 0
-        width: 85
-        height: 69
-      alignment: 9
-      pivot: {x: 0.5874677, y: 0.20293048}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 21e64d2f4558fad4fb386b0f09876f7f
+      spriteID: 3331ff1e7279a404786b5bfef86aeffa
       vertices: []
       indices: 
       edges: []
@@ -202,7 +138,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: f6bfb95eba776574495abc722fba5237
+    spriteID: afbcb2e107389f643bbd507ef49d7a85
     vertices: []
     indices: 
     edges: []

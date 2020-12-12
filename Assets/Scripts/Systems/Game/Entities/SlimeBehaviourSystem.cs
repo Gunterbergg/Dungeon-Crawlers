@@ -22,30 +22,35 @@ namespace DungeonCrawlers
 		private float lastJumpTime = 0;
 		private int gooJumpCount = 0;
 
-		private Coroutine currentBehaviour;
+		private bool isJumping = false;
 
 		private GameObject enemyTarget;
 
 		protected virtual void Awake() => ReferencesSetup();
 
-		protected virtual void Update() => StartCoroutine(JumpBehaviour());
+		protected virtual void Start() => StartCoroutine(JumpBehaviour());
 
 		protected virtual IEnumerator JumpBehaviour()
 		{
-			if (enemyTarget == null) 
-				if (!FindEnemy()) yield break;
-			
-			if (!entity.behaviourEnabled) yield break;
-
-			if (Time.time >= lastJumpTime + jumpCooldown)
-				if (currentBehaviour == null) currentBehaviour = StartCoroutine(Jump());
+			while (true) {
+				if (!entity.behaviourEnabled) yield break;
+				
+				if (enemyTarget == null)
+					while (!FindEnemy()) yield return null;
+				
+				if (Time.time >= lastJumpTime + jumpCooldown) {
+					do { yield return Jump(); } while (isJumping);
+				}
+				yield return null;
+			}
 		}
 
 		private IEnumerator Jump()
 		{
+			isJumping = true;
 			entityAnimator.SetBool("jumping", true);
 			Vector2 originalPos = transform.position;
-			Vector2 deltaPos = Vector2.ClampMagnitude((Vector2)enemyTarget.transform.position - originalPos, maxJumpDistance);
+			Vector2 deltaPos = ((Vector2)enemyTarget.transform.position - originalPos).normalized * maxJumpDistance;
 			entityRenderer.flipX = deltaPos.x >= 0 ? false : true;
 			Instantiate(jumpHitboxPrefab, transform);
 			yield return new WaitForSeconds(jumpDelay);
@@ -62,7 +67,7 @@ namespace DungeonCrawlers
 			}
 			entityAnimator.SetBool("jumping", false);
 			lastJumpTime = Time.time - Random.Range(0, randomDelayGap);
-			currentBehaviour = null;
+			isJumping = false;
 		}
 
 		private bool FindEnemy()

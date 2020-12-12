@@ -30,7 +30,7 @@ namespace DungeonCrawlers
 
 		public Action<HitboxComponent> Hit;
 
-		public T GetAccumulatedStatus<T>() where T : Status
+		public T GetStatus<T>() where T : Status
 		{
 			T resultStatus = null;
 			foreach (Status status in activeStatus) {
