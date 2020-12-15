@@ -34,10 +34,8 @@ namespace DungeonCrawlers
 
 			healthBar?.Output(entity.currentHealth / entity.baseHealth);			
 
-			if (entity.currentHealth <= 0f) { 
+			if (entity.currentHealth <= 0f)
 				entityAnimator?.SetBool("alive", true);
-				Destroy(entity.gameObject, 1.5f);
-			}
 		}
 
 		private IEnumerator EnableHealthbar(float time) {

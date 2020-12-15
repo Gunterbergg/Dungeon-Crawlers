@@ -28,7 +28,7 @@ namespace DungeonCrawlers
 
 		//public List<DamageResistanceInfo> resistances;
 
-		public Action<HitboxComponent> Hit;
+		public event Action<HitboxComponent> Hit;
 
 		public T GetStatus<T>() where T : Status
 		{

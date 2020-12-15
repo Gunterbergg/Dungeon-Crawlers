@@ -28,16 +28,15 @@ namespace DungeonCrawlers
 
 		protected virtual void Awake() => ReferencesSetup();
 
-		protected virtual void Start() => StartCoroutine(JumpBehaviour());
+		protected virtual void Start() => StartCoroutine(HostileBehaviour());
 
-		protected virtual IEnumerator JumpBehaviour()
-		{
+		protected virtual IEnumerator HostileBehaviour() {
 			while (true) {
-				if (!entity.behaviourEnabled) yield break;
+				if (!entity.behaviourEnabled) { yield return null; continue; }
 				
 				if (enemyTarget == null)
-					while (!FindEnemy()) yield return null;
-				
+					while (!FindEnemy()) { yield return null; continue; }
+
 				if (Time.time >= lastJumpTime + jumpCooldown) {
 					do { yield return Jump(); } while (isJumping);
 				}
@@ -56,8 +55,7 @@ namespace DungeonCrawlers
 			yield return new WaitForSeconds(jumpDelay);
 
 			Vector2 targetPos = originalPos + deltaPos;
-			for (float currJumpTime = 0f; currJumpTime <= 1f; currJumpTime += Time.deltaTime / jumpSpeed)
-			{
+			for (float currJumpTime = 0f; currJumpTime <= 1f; currJumpTime += Time.deltaTime / jumpSpeed) {
 				entityRigidbody.MovePosition(Vector2.Lerp(originalPos, targetPos, currJumpTime));
 				yield return null;
 			}
