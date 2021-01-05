@@ -38,8 +38,8 @@ namespace DungeonCrawlers
                     entityAnimator.SetBool("moving", false);
                     while (!FindEnemy()) { yield return null; continue; }                
                 }
-                if (isStunned) { yield return null; continue; }
-                if (Vector3.Distance(transform.position, enemyTarget.transform.position) > attackRange) {
+                while (Vector3.Distance(transform.position, enemyTarget.transform.position) > attackRange) {
+                    if (isStunned) { yield return null; continue; }
                     entityAnimator.SetBool("moving", true);
                     Move();
                     yield return null;

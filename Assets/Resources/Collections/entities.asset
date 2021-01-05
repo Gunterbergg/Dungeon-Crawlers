@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 217900b157a98164494d5a2a41f7b78c, type: 3}
-  m_Name: EntityMetaCollection
+  m_Name: entities
   m_EditorClassIdentifier: 
   defaultEntityMeta: {fileID: 11400000, guid: 86226a14a14e03041a4b91bbae4e1623, type: 2}
   entitiesMeta:

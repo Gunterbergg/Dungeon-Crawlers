@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1c61dbc15026fc4785314eba06fe31b, type: 3}
-  m_Name: BasicMeta
+  m_Name: room
   m_EditorClassIdentifier: 
   type: 0
   name: Basic
