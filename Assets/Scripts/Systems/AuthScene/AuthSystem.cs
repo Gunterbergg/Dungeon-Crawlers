@@ -34,14 +34,14 @@ namespace DungeonCrawlers.Systems
 			WWWForm postData = new WWWForm();
 			postData.AddField("email", formData.Entries["email"].ToString());
 			postData.AddField("passw", formData.Entries["passw"].ToString());
-			HTTPClient.PostRequest(createSessionRequest.href, postData, LoginCallback);
+			HTTPClient.PostRequest(createSessionRequest.Url, postData, LoginCallback);
 		}
 
 		protected virtual void LoginCallback(UnityWebRequest webRequest) {
 			if (webRequest.responseCode != 200 && webRequest.responseCode != 201) {
 				TextMessageInfo statusOutput = new TextMessageInfo(
-					LanguagePack.GetString("operation_error"),
-					LanguagePack.GetString("login_failed"));
+					LanguagePack.GetString(webRequest.responseCode.ToString()),
+					LanguagePack.GetString(webRequest.downloadHandler.text));
 				statusDisplay.Output(statusOutput);
 				return;
 			}
@@ -56,7 +56,6 @@ namespace DungeonCrawlers.Systems
 			}
 
 			isPerformingRequest = false;
-			OnAuth.Invoke();
 		}
 
 		private void HandleResponse(string response) {
@@ -66,8 +65,8 @@ namespace DungeonCrawlers.Systems
 				Session.Instance.tokenType = jsonResponse.GetString("tokenType");
 				Session.Instance.token = jsonResponse.GetString("token");
 				Session.Instance.expiresIn = jsonResponse.GetInt("expiresIn");
-				Session.Instance.created = jsonResponse.GetString("created");
-				Session.Instance.refreshToken = jsonResponse.GetString("refreshToken");
+				//Session.Instance.created = jsonResponse.GetString("created");
+				//Session.Instance.refreshToken = jsonResponse.GetString("refreshToken");
 
 				JSON links = jsonResponse.GetJSON("links");
 				foreach (string linkKey in links.Keys)
@@ -78,6 +77,7 @@ namespace DungeonCrawlers.Systems
 			catch (JValueTypeException wrongTypeException) { throw new Exception("unexpected_response_error_2"); }
 			catch (DeserializeException wrongMappingException) { throw new Exception("unexpected_response_error_3"); }*/
 			catch (Exception e) { throw new Exception("unknow_error: " + e.Message); }
+			OnAuth.Invoke();
 		}
 
 		private void HandlersReferenceSetup() {

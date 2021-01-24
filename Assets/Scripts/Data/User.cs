@@ -16,12 +16,12 @@ namespace DungeonCrawlers.Data
 	{
 		[SerializeField] private int userId;
 		[SerializeField] private string name;
-		[SerializeField] private string email;
+		[SerializeField] private string chosenGod;
 		[SerializeField] private int souls;
 		[SerializeField] private int gold;
 		[SerializeField] private int gems;
-		[SerializeField] private int level;
 		[SerializeField] private int currentExp;
+		[SerializeField] private int level;
 		[SerializeField] private int nextLevelExp;
 		[SerializeField] private RoomType roomType;
 		[SerializeField] private List<Entity> entities;
@@ -41,13 +41,6 @@ namespace DungeonCrawlers.Data
 			set {
 				name = value;
 				RaiseChangedEvent("Name");
-			}
-		}
-		public string Email {
-			get => email;
-			set {
-				email = value;
-				RaiseChangedEvent("Email");
 			}
 		}
 		public int Souls {

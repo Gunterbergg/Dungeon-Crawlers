@@ -11,9 +11,9 @@ namespace DungeonCrawlers.Data
 
 		public string tokenType = "Bearer";
 		public string token;
-		public string created;
+		//public string created;
 		public int expiresIn;
-		public string refreshToken;
+		//public string refreshToken;
 		public Dictionary<string, WebRequest> links = new Dictionary<string, WebRequest>();
 
 		public User user;

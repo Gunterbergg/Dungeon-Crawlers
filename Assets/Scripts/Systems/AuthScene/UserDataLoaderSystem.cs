@@ -14,7 +14,7 @@ namespace DungeonCrawlers.Systems
 		public UnityEvent onSerialized;
 
 		private IOutputHandler<TextMessageInfo> statusOutput;
-		private IClosable closePrompt;
+		//private IClosable closePrompt;
 
 		protected virtual void Awake() {
 			LoaderSetup();
@@ -22,18 +22,20 @@ namespace DungeonCrawlers.Systems
 
 		public void RefreshData() {
 			//TODO add logging and exception handling
+			Debug.Log("called");
 			if (!Session.Instance.links.ContainsKey("userData")) {
 				statusOutput.Output(new TextMessageInfo("@operation_error", "@session_error"));
 				return;
 			}
-
+			Debug.Log(Session.Instance.links["userData"].Url);
 			Dictionary<string, string> headers = new Dictionary<string, string>();
 			headers.Add("Authorization", "Bearer " + Session.Instance.token);
 			UnityWebRequestAsyncOperation loadRequest = 
-				HTTPClient.GetRequest(Session.Instance.links["userData"].href, SerializeUserData, headers);
+				HTTPClient.GetRequest(Session.Instance.links["userData"].Url, SerializeUserData, headers);
 		}
 
 		private void SerializeUserData(UnityWebRequest request) {
+			Debug.Log("Serialize");
 			if (request.responseCode != 200) {
 				statusOutput.Output(new TextMessageInfo("@operation_error", "@session_error"));
 				return;
@@ -47,7 +49,7 @@ namespace DungeonCrawlers.Systems
 		private void LoaderSetup() {
 			//TODO add logging and exception handling
 			statusOutput = statusOutputView?.GetInterface<IOutputHandler<TextMessageInfo>>();
-			closePrompt = statusOutputView?.GetInterface<IClosable>();
+			//closePrompt = statusOutputView?.GetInterface<IClosable>();
 		}
 	}
 }

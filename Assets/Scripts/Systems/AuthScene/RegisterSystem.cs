@@ -1,5 +1,4 @@
 ﻿using DungeonCrawlers.UI;
-using DungeonCrawlers.Data;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -24,9 +23,11 @@ namespace DungeonCrawlers.Systems
 				return;
 			}
 			WWWForm postData = new WWWForm();
-			postData.AddField("email", formData.Entries["email"].ToString());
+			postData.AddField("name", formData.Entries["usern"].ToString());
 			postData.AddField("passw", formData.Entries["passw"].ToString());
-			HTTPClient.PostRequest(userRegistrationRequest.href, postData, AccountCreationRequestCallback);
+			postData.AddField("email", formData.Entries["email"].ToString());
+			postData.AddField("god", "NICHOLLAS");
+			HTTPClient.PostRequest(userRegistrationRequest.Url, postData, AccountCreationRequestCallback);
 		}
 
 		protected virtual void AccountCreationRequestCallback(UnityWebRequest webRequest) {

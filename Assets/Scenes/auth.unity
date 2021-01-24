@@ -9564,9 +9564,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b8d98f11ad304419a4cf38cf104e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  createSessionRequest:
-    href: https://f1c8633b-2074-41a9-886d-e06fac768a6b.mock.pstmn.io/users/login
-    method: POST
+  createSessionRequest: {fileID: 11400000, guid: b564002dec104a4438d03da9ae1a7f5f,
+    type: 2}
   credentialsFormView: {fileID: 1088386787}
   statusDisplayView: {fileID: 2127886195}
   OnAuth:
@@ -10104,9 +10103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6087e734664184a458a7f3ee463f28ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userRegistrationRequest:
-    href: https://f1c8633b-2074-41a9-886d-e06fac768a6b.mock.pstmn.io/users/create-account
-    method: POST
+  userRegistrationRequest: {fileID: 11400000, guid: 45204c51cdf559342b2daa742bfeb104,
+    type: 2}
   credentialsFormView: {fileID: 8533681764963191996}
   statusDisplayView: {fileID: 2127886195}
 --- !u!4 &1485890663

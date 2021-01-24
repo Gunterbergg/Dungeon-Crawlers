@@ -1,12 +1,15 @@
-﻿using System;
+﻿using UnityEngine;
 
-namespace DungeonCrawlers.Data 
+namespace DungeonCrawlers
 {
-	//TODO transform in scriptable object
-	[Serializable]
-	public struct WebRequest
+	[CreateAssetMenu(fileName="WebRequest",menuName="DungeonCrawlers/WebRequest")]
+	public class WebRequest : ScriptableObject
 	{
+		public const string HOST = "localhost:3000";
+
 		public string href;
 		public string method;
+		
+		public string Url { get => HOST + href; }
 	}
 }
