@@ -14,28 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tokenType: Bearer
   token: 761b69db-ace4-49cd-84cb-4550be231e8f
-  created: 2019-03-13T09:45:40Z
   expiresIn: 60000
-  refreshToken: 761b69db-ace4-49cd-84cb-4550be231e8f
   user:
     userId: 0
-    name: Ms.User01
-    email: user01.mail@hotmail.com
-    souls: 10
-    gold: 30
+    name: Yanzinho21
+    chosenGod: 
+    souls: 245
+    gold: 325
     gems: 20
-    level: 1
     currentExp: 100
+    level: 3
     nextLevelExp: 250
-    rooms:
+    roomType: 0
+    entities:
     - type: 0
-      entities:
-      - type: 0
-        xPos: -1
-        yPos: -1
-      - type: 1
-        xPos: 0
-        yPos: 0
+      xPos: -2
+      yPos: 1
+    - type: 1
+      xPos: 0
+      yPos: 3
+    - type: 0
+      xPos: 2
+      yPos: 2
     entitiesInfo:
     - type: 0
       level: 4

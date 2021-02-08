@@ -33,6 +33,7 @@ namespace DungeonCrawlers
         {
             while (true) {
                 if (!entity.behaviourEnabled) { yield return null; continue; }
+                if (entity.currentHealth <= 0) yield break;
                 
                 if (enemyTarget == null) {
                     entityAnimator.SetBool("moving", false);

@@ -29,13 +29,16 @@ namespace DungeonCrawlers
 		}
 
 		public void DisplayHealth() {
+
+			if (entity.currentHealth <= 0f) {
+				entityAnimator?.SetBool("alive", false);
+				return;
+			}
+
 			if (displayHealthCoroutine != null) StopCoroutine(displayHealthCoroutine);
 			displayHealthCoroutine = StartCoroutine(EnableHealthbar(healthDisplayTime));
 
 			healthBar?.Output(entity.currentHealth / entity.baseHealth);			
-
-			if (entity.currentHealth <= 0f)
-				entityAnimator?.SetBool("alive", true);
 		}
 
 		private IEnumerator EnableHealthbar(float time) {

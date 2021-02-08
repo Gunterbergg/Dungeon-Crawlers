@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b03b02c9bbfe7cc4f9983e7e8bae3762, type: 3}
-  m_Name: CreateAccount
+  m_Script: {fileID: 11500000, guid: d1c61dbc15026fc4785314eba06fe31b, type: 3}
+  m_Name: room_basic
   m_EditorClassIdentifier: 
-  href: /users/create-account
-  method: POST
+  type: 0
+  name: Basic
+  prefab: {fileID: 8309230566967108030, guid: 0322a15e31f0b3748ba6eda82a09b30a, type: 3}
+  selectablePrefab: {fileID: 0}

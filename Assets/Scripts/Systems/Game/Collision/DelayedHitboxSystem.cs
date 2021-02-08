@@ -39,7 +39,9 @@ namespace DungeonCrawlers
 
 		private void HandleCollision(Collider2D collider) {
 			ObjectComponent hitObject = collider.GetComponent<ObjectComponent>();
-			if (hitObject == null || alredyCollided.Contains(hitObject)) return;
+			if (hitObject == null) return;
+			if (hitObject.team == hitbox.team) return;
+			if (alredyCollided.Contains(hitObject)) return;
 
 			hitbox.collided.Add(hitObject);
 			hitbox.RaiseHitEvent(hitObject);

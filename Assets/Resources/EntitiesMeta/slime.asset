@@ -15,18 +15,18 @@ MonoBehaviour:
   type: 0
   displayName: 
   description: 
-  selectablePrefab: {fileID: 2622988638455107719, guid: d340f482a142fc64d810e43d8c0dd97a,
+  selectablePrefab: {fileID: 8325954864237579405, guid: d777d8099e3c7484182b14e727ae44ca,
     type: 3}
   prefabs:
   - level: 1
-    prefab: {fileID: 7542756093490445865, guid: c8f3270459ccbab4ca915bc759fa333f,
+    prefab: {fileID: 8325954864237579405, guid: d777d8099e3c7484182b14e727ae44ca,
       type: 3}
   - level: 2
-    prefab: {fileID: 7542756093490445865, guid: 9ec26d60e4449424f92a9a8a023d6a2f,
+    prefab: {fileID: 8325954864237579405, guid: d777d8099e3c7484182b14e727ae44ca,
       type: 3}
   - level: 3
-    prefab: {fileID: 7542756093490445865, guid: bf29115cb61a9ee4a8d1b1b38e489acb,
+    prefab: {fileID: 8325954864237579405, guid: d777d8099e3c7484182b14e727ae44ca,
       type: 3}
   - level: 4
-    prefab: {fileID: 7542756093490445865, guid: 11c2f081c2f1edb45a15fad98261e693,
+    prefab: {fileID: 8325954864237579405, guid: d777d8099e3c7484182b14e727ae44ca,
       type: 3}

@@ -33,7 +33,8 @@ namespace DungeonCrawlers
 		protected virtual IEnumerator HostileBehaviour() {
 			while (true) {
 				if (!entity.behaviourEnabled) { yield return null; continue; }
-				
+				if (entity.currentHealth <= 0) yield break;
+
 				if (enemyTarget == null)
 					while (!FindEnemy()) { yield return null; continue; }
 

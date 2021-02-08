@@ -10,7 +10,7 @@ namespace DungeonCrawlers
 		[Serializable]
 		public enum SceneIndex
 		{
-			AuthScene = 0, MainScene = 1, CombatScene = 2
+			AuthScene = 0, MainScene = 1, CombatScene = 2, PreCombatScene = 3
 		}
 
 		public static int CurrentSceneIndex { get => SceneManager.GetActiveScene().buildIndex; }

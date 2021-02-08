@@ -4,7 +4,7 @@ namespace DungeonCrawlers.Systems
 {
 	public class SceneChangeSystem : MonoBehaviour
 	{
-		private static AsyncOperation currentOperation;
+		private AsyncOperation currentOperation;
 
 		public SceneLoader.SceneIndex scene = SceneLoader.SceneIndex.MainScene;
 		
